@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrativo</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="loading"></div>
+    <div class="login">
+        <h1>teste login</h1>
+        <button id="login-btn">entrar</button>
+        <span id="unauthorized">você não está autorizado a logar</span>
+    </div>
+    <div class="container">
+        <h1>login feito :D</h1><button id="logout-btn">sair</button>
+    </div>
+    <script type="module">
+        import { API_URL } from "./../../assets/config.js";
+        const loading = document.querySelector(".loading")
+        const login = document.querySelector(".login")
+        const container = document.querySelector(".container")
+        const unauthorized = document.querySelector("#unauthorized")
+        
+        const loginBtn = document.querySelector("#login-btn")
+        const logoutBtn = document.querySelector("#logout-btn")
+
+        loading.style.display = "none"
+        container.style.display = "none"
+        unauthorized.style.display = "none"
+
+        loginBtn.onclick = () => {
+            window.location.href = `${API_URL}/auth/login`
+        }
+
+        logoutBtn.onclick = async () => {
+            loading.style.display = "flex"
+            await fetch(`${API_URL}/auth/logout`, {method: "POST", credentials: "include"})
+            loading.style.display = "none"
+            container.style.display = "none"
+            login.style.display = "block"
+        }
+
+        const teste = await fetch(`${API_URL}/auth/profile`, {
+            credentials: "include"
+        })
+
+        if(teste.ok) {
+            container.style.display = "block"
+            login.style.display = "none"
+        }
+
+        const url = new URL(window.location.href);
+
+        if(url.searchParams.get("error") === "unauthorized") {
+            unauthorized.style.display = "block"
+        }
+    </script>
+</body>
+</html>
