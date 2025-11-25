@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrativo</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="style/login.css">
-    <link rel="stylesheet" href="style/admin.css">
 </head>
 <body>
     <div class="loading"></div>
@@ -22,54 +21,10 @@
             <span id="unauthorized">você não está autorizado a acessar <br>a área administrativa</span>
         </div>
     </div>
-    <div class="admin_container">
-        <div class="top_bar">
-            <img src="../../assets/imgs/logo-cinza.png" alt="">
-            <div class="user-btn">
-                <span class="material-symbols-outlined">account_circle</span>
-            </div>
-        </div>
-        <h1>login feito :D</h1><button id="logout-btn">sair</button>
-    </div>
     <script type="module">
-        import { API_URL } from "./../../assets/config.js";
-        const loading = document.querySelector(".loading")
-        const login = document.querySelector(".login")
-        const admin_container = document.querySelector(".admin_container")
-        const unauthorized = document.querySelector("#unauthorized")
-        
-        const loginBtn = document.querySelector("#login_btn")
-        const logoutBtn = document.querySelector("#logout-btn")
+        import { initLogin } from './scripts/login.js';
 
-        loading.style.display = "none"
-        admin_container.style.display = "none"
-        unauthorized.style.display = "none"
-
-        loginBtn.onclick = () => {
-            window.location.href = `${API_URL}/auth/login`
-        }
-
-        logoutBtn.onclick = async () => {
-            loading.style.display = "flex"
-            await fetch(`${API_URL}/auth/logout`, {method: "POST", credentials: "include"})
-            loading.style.display = "none"
-            location.reload();
-        }
-
-        const teste = await fetch(`${API_URL}/auth/profile`, {
-            credentials: "include"
-        })
-
-        if(teste.ok) {
-            admin_container.style.display = "block"
-            login.style.display = "none"
-        }
-
-        const url = new URL(window.location.href);
-
-        if(url.searchParams.get("error") === "unauthorized") {
-            unauthorized.style.display = "block"
-        }
+        initLogin();
     </script>
 </body>
 </html>
