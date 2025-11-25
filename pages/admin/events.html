@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrativo - Cursos</title>
+    <title>Administrativo - Notícias</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="style/admin.css">
-    <link rel="stylesheet" href="style/courses.css">
+    <link rel="stylesheet" href="style/events.css">
 </head>
 <body>
     <div class="admin_container">
@@ -27,7 +27,7 @@
                 </div>
                 <hr>
                 <div class="published">
-                    <h1>Cursos publicados</h1>
+                    <h1>Eventos publicados</h1>
                     <div class="published_list list"></div>
                 </div>
             </div>
@@ -36,29 +36,15 @@
     </div>
     <script type="module">
         import { initMenu } from './scripts/menu.js';
-        import { initCourses } from './scripts/courses.js';
 
         const menu_items = [
-            {icon: "book_ribbon", label: "Cursos", file: "courses.html", active: true}, 
+            {icon: "book_ribbon", label: "Cursos", file: "courses.html"}, 
             {icon: "news", label: "Notícias", file: "news.html"},
-            {icon: "event", label: "Eventos", file: "events.html"},
+            {icon: "event", label: "Eventos", file: "events.html", active: true},
             {icon: "diversity_3", label: "Biografia", file: "biography.html"}
         ]
 
         initMenu(menu_items);
-
-        const draft_list = [
-            "Língua Inglesa",
-            "IA - Tecnologia de Prompt"
-        ]
-
-        const published_list = [
-            "Língua Inglesa",
-            "IA - Tecnologia de Prompt",
-            "Proparação ITA",
-        ]
-
-        initCourses(draft_list, published_list)
     </script>
 </body>
 </html>

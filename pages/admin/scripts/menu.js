@@ -4,31 +4,28 @@ function initMenu(items) {
     const ul = document.createElement("ul")
     ul.classList.add("menu")
 
-    const icons = [
-        ["book_ribbon", "Cursos"], 
-        ["news", "Notícias"], 
-        ["event", "Eventos"], 
-        ["diversity_3", "Biografia"]
-    ]
-
     items.forEach(e => {
         const li = document.createElement("li")
         li.classList.add("menu_item")
 
         const btn = document.createElement("button")
         btn.classList.add("menu-item_btn")
-        e[2] != undefined ? btn.classList.add("active") : undefined
+        e.active != undefined ? btn.classList.add("active") : undefined
         
         const span = document.createElement("span")
         span.classList.add("material-symbols-outlined")
         span.classList.add("menu-item_icon")
 
-        span.textContent = e[0]
+        span.textContent = e.icon
 
         btn.appendChild(span)
-        btn.appendChild(document.createTextNode(e[1]))
+        btn.appendChild(document.createTextNode(e.label))
         li.appendChild(btn)
         ul.appendChild(li)
+
+        btn.onclick = () => {
+            window.location = e.file
+        }
     })
     
     sidebar_menu.appendChild(ul)
