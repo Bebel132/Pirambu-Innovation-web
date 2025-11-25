@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrativo - Notícias</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style/admin.css">
+    <link rel="stylesheet" href="style/news.css">
+</head>
+<body>
+    <div class="admin_container">
+        <div class="top_bar">
+            <img src="../../assets/imgs/logo-cinza.png" alt="">
+            <div class="user-btn">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+        </div>
+        <div class="admin_content">
+            <nav class="sidebar_menu">
+            </nav>
+            <div class="admin-content_container">
+                <div class="drafts">
+                    <h1>Rascunhos</h1>
+                    <div class="drafts_list list"></div>
+                </div>
+                <hr>
+                <div class="published">
+                    <h1>Notícias publicadas</h1>
+                    <div class="published_list list"></div>
+                </div>
+            </div>
+        </div>
+        <button class="newButton">+</button>
+    </div>
+    <script type="module">
+        import { initMenu } from './scripts/menu.js';
+        import { initNews } from './scripts/news.js';
+
+        const menu_items = [
+            {icon: "book_ribbon", label: "Cursos", file: "courses.html"}, 
+            {icon: "news", label: "Notícias", file: "news.html", active: true},
+            {icon: "event", label: "Eventos", file: "events.html"},
+            {icon: "diversity_3", label: "Biografia", file: "biography.html"}
+        ]
+
+        initMenu(menu_items);
+
+        const draft_list = [
+            {
+                title: "Exposição Chico da Silva. Pirambu Innovation, Emaus e MIS.",
+                description: "Durante o encontro, os representantes do BNB conheceram de perto os projetos desenvolvidos pelo Pirambu Innovation."
+            },
+        ]
+
+        const published_list = [
+            {
+                title: "Exposição Chico da Silva. Pirambu Innovation, Emaus e MIS.",
+                description: "Durante o encontro, os representantes do BNB conheceram de perto os projetos desenvolvidos pelo Pirambu Innovation."
+            },
+            {
+                title: "Exposição Chico da Silva. Pirambu Innovation, Emaus e MIS.",
+                description: "Durante o encontro, os representantes do BNB conheceram de perto os projetos desenvolvidos pelo Pirambu Innovation."
+            },
+            {
+                title: "Exposição Chico da Silva. Pirambu Innovation, Emaus e MIS.",
+                description: "Durante o encontro, os representantes do BNB conheceram de perto os projetos desenvolvidos pelo Pirambu Innovation."
+            },
+        ]
+
+        initNews(draft_list, published_list)
+    </script>
+</body>
+</html>
