@@ -29,3 +29,47 @@
 .drafts, .published {
     margin-left: 20px;
 }
+
+/* form */
+
+.top_form {
+    display: flex;
+}
+
+.top-right_form {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title-input {
+    display: flex;
+    flex-direction: column;
+}
+
+#title {
+    width: 420px;
+}
+
+.date_inputs {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.date_inputs span {
+    font-size: 18px;
+}
+
+input[type=date] {
+    width: 188px;
+}
+
+.custom-btn {
+    margin: 0;
+}
+
+.description-input {
+    margin-top: 30px;
+}
