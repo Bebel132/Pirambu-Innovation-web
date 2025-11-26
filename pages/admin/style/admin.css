@@ -116,9 +116,9 @@ body {
     margin: 20px 0;
 }
 
-/* newContent */
+/* contentForm */
 
-.newContent {
+.contentForm {
     display: none;
     margin: 40px 0 0 20px;
 }
@@ -163,13 +163,13 @@ body {
     background-color: var(--color-red);
 }
 
-#back {
+.back {
     background-color: var(--color-gray);
 }
 
 /* form */
 
-.newContent {
+.contentForm {
     padding-bottom: 60px;
 }
 
@@ -206,6 +206,11 @@ form span, form label {
     font-size: 150px;
 }
 
+.custom-file_preview {
+    width: 420px;
+    height: 240px;
+}
+
 #file {
     display: none;
 }
@@ -220,4 +225,5 @@ form span, form label {
     background-color: #D9D9D945;
     border: none;
     margin-top: 10px;
+    padding: 15px;
 }
