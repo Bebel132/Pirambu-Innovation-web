@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
     <link rel="stylesheet" href="style/admin.css">
     <link rel="stylesheet" href="style/courses.css">
 </head>
+
 <body>
+    <div class="loading" style="display: none;"></div>
     <div class="admin_container">
         <div class="top_bar">
             <img src="../../assets/imgs/logo-cinza.png" alt="">
@@ -31,10 +34,10 @@
                     <div class="published_list list"></div>
                 </div>
             </div>
-            <div class="admin-newContent_container newContent">
-                <h1>Adicionar curso</h1>
+            <div class="admin-contentForm_container contentForm">
+                <h1 class="admin-contentForm_title"></h1>
                 <div class="btns">
-                    <button id="back">
+                    <button class="back">
                         <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
                     </button>
                     <button id="delete">
@@ -44,13 +47,16 @@
                         Continuar <span class="material-symbols-outlined">trending_flat</span>
                     </button>
                 </div>
-                <form action="">
+                <form class="form" action="">
                     <div class="top_form">
                         <label for="file" class="custom-btn">
                             <span class="material-symbols-outlined">
                                 add_photo_alternate
                             </span>
                             Adicionar imagem
+                        </label>
+                        <label for="file" class="custom-img_container">
+                            <img src="" alt="" class="custom-file_preview">
                         </label>
                         <input type="file" name="file" id="file">
                         <div class="top-right_form">
@@ -61,9 +67,9 @@
                             <div class="date">
                                 <label>Duração</label>
                                 <div class="date_inputs">
-                                    <input type="date" name="" id="start">
+                                    <input type="date" name="start_date" id="start">
                                     <span>à</span>
-                                    <input type="date" name="" id="end">
+                                    <input type="date" name="end_date" id="end">
                                 </div>
                             </div>
                         </div>
@@ -74,35 +80,46 @@
                     </div>
                 </form>
             </div>
+            <div class="admin-previewContent_container previewContent">
+                <h1>Pré-visualização</h1>
+                <div class="btns">
+                    <button class="back">
+                        <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
+                    </button>
+                    <button id="edit">
+                        <span class="material-symbols-outlined">edit</span> Editar
+                    </button>
+                    <button id="publish">
+                        <span class="material-symbols-outlined">publish</span> Publicar
+                    </button>
+                </div>
+                <div class="preview">
+                    <img src="" alt="" class="previewImg">
+                    <div class="preview-texts">
+                        <h1 class="preview-title"></h1>
+                        <span class="preview-dates"></span>
+                        <p class="preview-description"></p>
+                    </div>
+                </div>
+            </div>
         </div>
         <button class="newButton">+</button>
     </div>
-    <script src="scripts/admin.js"></script>
     <script type="module">
         import { initMenu } from './scripts/menu.js';
-        import { initCourses } from './scripts/courses.js';
+        import { renderCourses } from './scripts/courses.js';
 
         const menu_items = [
-            {icon: "book_ribbon", label: "Cursos", file: "courses.html", active: true}, 
-            {icon: "news", label: "Notícias", file: "news.html"},
-            {icon: "event", label: "Eventos", file: "events.html"},
-            {icon: "diversity_3", label: "Biografia", file: "biography.html"}
+            { icon: "book_ribbon", label: "Cursos", file: "courses.html", active: true },
+            { icon: "news", label: "Notícias", file: "news.html" },
+            { icon: "event", label: "Eventos", file: "events.html" },
+            { icon: "diversity_3", label: "Biografia", file: "biography.html" }
         ]
 
         initMenu(menu_items);
 
-        const draft_list = [
-            "Língua Inglesa",
-            "IA - Tecnologia de Prompt"
-        ]
-
-        const published_list = [
-            "Língua Inglesa",
-            "IA - Tecnologia de Prompt",
-            "Proparação ITA",
-        ]
-
-        initCourses(draft_list, published_list)
+        renderCourses()
     </script>
 </body>
+
 </html>

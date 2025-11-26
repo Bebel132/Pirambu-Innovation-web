@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="style/admin.css">
     <link rel="stylesheet" href="style/news.css">
 </head>
+
 <body>
     <div class="admin_container">
         <div class="top_bar">
@@ -31,10 +33,10 @@
                     <div class="published_list list"></div>
                 </div>
             </div>
-            <div class="admin-newContent_container newContent">
+            <div class="admin-contentForm_container contentForm">
                 <h1>Nova notícia</h1>
                 <div class="btns">
-                    <button id="back">
+                    <button class="back">
                         <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
                     </button>
                     <button id="delete">
@@ -71,10 +73,10 @@
         import { initNews } from './scripts/news.js';
 
         const menu_items = [
-            {icon: "book_ribbon", label: "Cursos", file: "courses.html"}, 
-            {icon: "news", label: "Notícias", file: "news.html", active: true},
-            {icon: "event", label: "Eventos", file: "events.html"},
-            {icon: "diversity_3", label: "Biografia", file: "biography.html"}
+            { icon: "book_ribbon", label: "Cursos", file: "courses.html" },
+            { icon: "news", label: "Notícias", file: "news.html", active: true },
+            { icon: "event", label: "Eventos", file: "events.html" },
+            { icon: "diversity_3", label: "Biografia", file: "biography.html" }
         ]
 
         initMenu(menu_items);
@@ -104,4 +106,5 @@
         initNews(draft_list, published_list)
     </script>
 </body>
+
 </html>
