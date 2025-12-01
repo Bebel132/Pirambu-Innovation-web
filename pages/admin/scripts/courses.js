@@ -147,6 +147,7 @@ async function renderEvents() {
                 file_preview.src = objectURL
 
                 document.querySelector(".custom-btn").style.display = "none"
+                file_preview.style.display = "block"
             }
         } else {
             file_preview.style.display = "none"
@@ -160,17 +161,21 @@ async function renderEvents() {
     }
 
     document.querySelector("#save").onclick = async () => {
-        const form = document.querySelector(".form")
+        let form = document.querySelector(".form")
 
         const formData = new FormData(form);
         formData.delete("file")
-
         
-
         if(selected_course == null) {
-            await api("courses", {
+            await api("courses/", {
                 method: "POST",
-                data: formData
+                data: {
+                    title: formData.get("title"),
+                    description: formData.get("description"),
+                    start_date: formData.get("start_date"),
+                    end_date: formData.get("end_date"),
+                    is_draft: true
+                }
             }).then(async res => {
                 selected_course = res.data
                 const file = document.querySelector("#file").files[0]
@@ -187,7 +192,13 @@ async function renderEvents() {
             selected_course.is_draft ?  formData.append("is_draft", "true") : formData.append("is_draft", "false")
             await api(`courses/${selected_course.id}`, {
                 method: "PUT",
-                data: formData
+                data: {
+                    title: formData.get("title"),
+                    description: formData.get("description"),
+                    start_date: formData.get("start_date"),
+                    end_date: formData.get("end_date"),
+                    is_draft: formData.get("is_draft") === "true" ? true : false
+                }
             })
         }
 
@@ -198,6 +209,7 @@ async function renderEvents() {
         sideBarMenu.style.display = "block"
 
         selected_course = null
+
         renderCourses()
     }
 
