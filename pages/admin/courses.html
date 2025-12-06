@@ -7,8 +7,8 @@
     <title>Administrativo - Cursos</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="style/admin.css">
     <link rel="stylesheet" href="style/courses.css">
+    <link rel="stylesheet" href="style/admin.css">
 </head>
 
 <body>
@@ -40,10 +40,10 @@
                     <button class="back">
                         <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
                     </button>
-                    <button id="delete">
+                    <button class="delete openDeleteModal">
                         <span class="material-symbols-outlined">delete</span> Excluir
                     </button>
-                    <button id="save">
+                    <button class="save openSaveModal">
                         Continuar <span class="material-symbols-outlined">trending_flat</span>
                     </button>
                 </div>
@@ -102,9 +102,44 @@
                     </div>
                 </div>
             </div>
+            <div class="modal" id="delete-modal" style="display: none;">
+                <div class="modal-container">
+                    <h1>Você tem certeza que deseja excluir o curso?</h1>
+                    <span>A publicação será adicionada a lixeira onde permanecerá por 30 dias.</span>
+                    <div class="btns">
+                        <button class="delete" id="delete">
+                            <span class="material-symbols-outlined">delete</span> Excluir
+                        </button>
+                        <button class="back" id="delete-back">
+                            <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="trash-modal" style="display: none;">
+                <div class="modal-container">
+                    <span class="material-symbols-outlined">delete</span>
+                    <h1>Publicação movida para a lixeira!</h1>
+                </div>
+            </div>
+            <div class="modal" id="save-modal" style="display: none;">
+                <div class="modal-container">
+                    <h1>Deseja salvar como rascunho?</h1>
+                    <div class="btns">
+                        <button class="save" id="save">
+                            Salvar
+                        </button>
+                        <button class="back" id="save-back">
+                            <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         <button class="newButton">+</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="module">
         import { initMenu } from './scripts/menu.js';
         import { renderCourses } from './scripts/courses.js';
@@ -113,12 +148,13 @@
             { icon: "book_ribbon", label: "Cursos", file: "courses.html", active: true },
             { icon: "news", label: "Notícias", file: "news.html" },
             { icon: "event", label: "Eventos", file: "events.html" },
-            { icon: "diversity_3", label: "Biografia", file: "biography.html" }
+            { icon: "diversity_3", label: "Biografia", file: "biography.html" },
+            { icon: "delete", label: "Lixeira", file: "trash.html"}
         ]
 
         initMenu(menu_items);
 
-        renderCourses()
+        renderCourses();
     </script>
 </body>
 
