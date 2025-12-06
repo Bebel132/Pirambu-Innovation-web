@@ -225,6 +225,9 @@ function showFormScreen() {
     contentForm.style.display = "block";
     previewContent.style.display = "none";
     sideBarMenu.style.display = "block";
+
+    const desc = document.querySelector("#description");
+    selected_course != null ? desc.addEventListener("input", () => autoResize(desc)) : desc.style.height = "";
 }
 
 function showDeleteModal() {
