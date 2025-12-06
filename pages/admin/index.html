@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrativo</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style/login.css">
+</head>
+<body>
+    <div class="loading"></div>
+    <div class="login">
+        <div class="banner">
+            <img src="../../assets/imgs/logo-branca.png" alt="">
+        </div>
+        <div class="login_container">
+            <h1>Login</h1>
+            <span>Acesse com a sua conta Google</span>
+            <button id="login_btn">entrar</button>
+            <span id="unauthorized">você não está autorizado a acessar <br>a área administrativa</span>
+        </div>
+    </div>
+    <script type="module">
+        import { initLogin } from './scripts/login.js';
+
+        initLogin();
+    </script>
+</body>
+</html>
