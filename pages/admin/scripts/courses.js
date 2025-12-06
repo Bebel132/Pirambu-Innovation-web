@@ -1,284 +1,349 @@
 import { api } from '../../../assets/apiHelper.js';
 
 let selected_course = null;
-const content = document.querySelector(".content")
-const contentForm = document.querySelector(".contentForm")
-const previewContent = document.querySelector(".previewContent")
-const newBtn = document.querySelector(".newButton")
-const backBtn = document.querySelectorAll(".back")
-const file_preview = document.querySelector(".previewImg")
-const customBtn = document.querySelector(".custom-btn")
-const form = document.querySelector(".form")
-const sideBarMenu = document.querySelector(".sidebar_menu")
-const form_title = document.querySelector(".admin-contentForm_title")
 
-async function renderCourses() {
-    let draft_list = []
-    let published_list = []
-    
-    await api('courses').then(res => res.data.forEach(course => course.is_draft ? draft_list.push(course) : published_list.push(course)));
+function autoResize(el) {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }
 
-    const draft_container = document.querySelector(".drafts_list")
-    const published_container = document.querySelector(".published_list")
-    draft_container.innerHTML = ""
-    published_container.innerHTML = ""
-    
-    draft_list.forEach(async e => {
-        const draft = document.createElement("div")
-        draft.classList.add("draft_item")
-        draft.classList.add("item")
-        
-        const span = document.createElement("span")
-        span.append(document.createTextNode(e.title))
-        
-        draft.append(span)
-        draft.dataset.data = JSON.stringify(e)
+// Elementos da UI
+const content = document.querySelector(".content");
+const contentForm = document.querySelector(".contentForm");
+const previewContent = document.querySelector(".previewContent");
+const newBtn = document.querySelector(".newButton");
+const backBtn = document.querySelectorAll(".back");
+const file_preview = document.querySelector(".previewImg");
+const customBtn = document.querySelector(".custom-btn");
+const form = document.querySelector(".form");
+const sideBarMenu = document.querySelector(".sidebar_menu");
+const form_title = document.querySelector(".admin-contentForm_title");
+const saveModal = document.querySelector("#save-modal");
+const deleteModal = document.querySelector("#delete-modal");
+const trashModal = document.querySelector("#trash-modal");
 
-        if(e.hasFile) {
-            const res = await api(`courses/${e.id}/file`)
-            if (res.ok) {
-                const blob = res.data
-                const objectURL = URL.createObjectURL(blob)
-                draft.style.backgroundImage = `url(${objectURL})`
-            }
-        } else {
-            draft.style.backgroundColor = `var(--color-gray)`
-        }
+/* ============================================================
+   1. FUNÇÃO: RENDERIZA LISTA DE CURSOS (RASCUNHOS + PUBLICADOS)
+   ============================================================ */
+async function renderCourseLists() {
+    let drafts = [];
+    let published = [];
 
-        draft_container.appendChild(draft)
-    })
+    const response = await api('courses');
 
-    published_list.forEach(async e => {
-        const published = document.createElement("div")
-        published.classList.add("published_item")
-        published.classList.add("item")
-        
-        const span = document.createElement("span")
-        span.append(document.createTextNode(e.title))
+    response.data.forEach(course => {
+        course.is_draft ? drafts.push(course) : published.push(course);
+    });
 
-        published.append(span)
-        published.dataset.data = JSON.stringify(e)
-
-        if(e.hasFile) {
-            const res = await api(`courses/${e.id}/file`)
-            if (res.ok) {
-                const blob = res.data
-                const objectURL = URL.createObjectURL(blob)
-                published.style.backgroundImage = `url(${objectURL})`
-            }
-        } else {
-            published.style.backgroundColor = `var(--color-gray)`
-        }
-
-        published_container.appendChild(published)
-    })
-
-    renderEvents()
+    await renderCourseListUI(drafts, ".drafts_list", "draft_item");
+    await renderCourseListUI(published, ".published_list", "published_item");
 }
 
-async function renderEvents() {
-    selected_course = null
-    document.addEventListener("click", async (event) => {
-        const item = event.target.closest(".item")
-        if (!item) return
-        
-        selected_course = JSON.parse(item.dataset.data)
+/* ============================================================
+   2. FUNÇÃO: GERAR UI PARA UMA LISTA ESPECÍFICA
+   ============================================================ */
+async function renderCourseListUI(list, containerSelector, className) {
+    const container = document.querySelector(containerSelector);
+    container.innerHTML = "";
 
-        if(selected_course.is_draft) {
-            document.querySelector("#edit").style.display = "flex"
-        }
+    for (const course of list) {
+        const item = document.createElement("div");
+        item.classList.add(className, "item");
+        item.dataset.data = JSON.stringify(course);
 
-        if(!selected_course.is_draft) {
-            document.querySelector("#publish").style.display = "none"
-            document.querySelector("#edit").style.display = "flex"
-        } else {
-            document.querySelector("#publish").style.display = "flex"
-        }
-        
-        content.style.display = "none"
-        newBtn.style.display = "none"
-        previewContent.style.display = "block"
-        sideBarMenu.style.display = "none"
-        
-        const preview_title = document.querySelector(".preview-title")
-        const preview_date = document.querySelector(".preview-dates")
-        const preview_description = document.querySelector(".preview-description")
-        
-        preview_title.textContent = selected_course.title
-        preview_date.textContent = `${new Date(selected_course.start_date).toLocaleDateString()} à ${new Date(selected_course.end_date).toLocaleDateString()}`
-        preview_description.textContent = selected_course.description
+        const titleSpan = document.createElement("span");
+        titleSpan.append(course.title);
+        item.append(titleSpan);
 
-        file_preview.src = ""
-        if (selected_course.hasFile) {
-            const res = await api(`courses/${selected_course.id}/file`)
-
+        if (course.hasFile) {
+            const res = await api(`courses/${course.id}/file`);
             if (res.ok) {
-                const blob = res.data
-                
-                const objectURL = URL.createObjectURL(blob)
-                
-                file_preview.src = objectURL
-            }
-        }
-    })
-
-    document.querySelector("#edit").onclick = async () => {
-        contentForm.style.display = "block"
-        newBtn.style.display = "none"
-        previewContent.style.display = "none"
-        sideBarMenu.style.display = "block"
-
-        const title_input = document.querySelector("#title")
-        const start_date_input = document.querySelector("#start")
-        const end_date_input = document.querySelector("#end")
-        const description_input = document.querySelector("#description")
-        const file_preview = document.querySelector(".custom-file_preview")
-
-        form_title.textContent = "Editar curso"
-
-        if (selected_course.hasFile) {
-            const res = await api(`courses/${selected_course.id}/file`)
-
-            if (res.ok) {
-                const blob = res.data
-
-                const objectURL = URL.createObjectURL(blob)
-
-                file_preview.src = objectURL
-
-                document.querySelector(".custom-btn").style.display = "none"
-                file_preview.style.display = "block"
+                const blob = res.data;
+                item.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
             }
         } else {
-            file_preview.style.display = "none"
-            document.querySelector(".custom-btn").style.display = "flex"
+            item.style.backgroundColor = `var(--color-gray)`;
         }
 
-        title_input.value = selected_course.title
-        start_date_input.value = selected_course.start_date.split("T")[0]
-        end_date_input.value = selected_course.end_date.split("T")[0]
-        description_input.value = selected_course.description
+        container.appendChild(item);
     }
+}
 
-    document.querySelector("#save").onclick = async () => {
-        let form = document.querySelector(".form")
+/* ============================================================
+   3. FUNÇÃO: RENDERIZA O PREVIEW DO CURSO SELECIONADO
+   ============================================================ */
+   
+function renderMarkdown(mdText) {
+    // Configurações básicas do marked
+    marked.setOptions({
+        breaks: true,     // converte quebras de linha simples em <br>
+        gfm: true         // GitHub Flavored Markdown (tabelas, listas de tarefas, etc.)
+    });
 
-        const formData = new FormData(form);
-        formData.delete("file")
-        
-        if(selected_course == null) {
-            await api("courses/", {
-                method: "POST",
-                data: {
-                    title: formData.get("title"),
-                    description: formData.get("description"),
-                    start_date: formData.get("start_date"),
-                    end_date: formData.get("end_date"),
-                    is_draft: true
-                }
-            }).then(async res => {
-                selected_course = res.data
-                const file = document.querySelector("#file").files[0]
-                if (file) {
-                    const formData = new FormData()
-                    formData.append("file", file)
-                    await api(`courses/${selected_course.id}/upload`, {
-                        method: "POST",
-                        body: formData
-                    })
-                }
-            })
-        } else {
-            selected_course.is_draft ?  formData.append("is_draft", "true") : formData.append("is_draft", "false")
-            await api(`courses/${selected_course.id}`, {
-                method: "PUT",
-                data: {
-                    title: formData.get("title"),
-                    description: formData.get("description"),
-                    start_date: formData.get("start_date"),
-                    end_date: formData.get("end_date"),
-                    is_draft: formData.get("is_draft") === "true" ? true : false
-                }
-            })
+    // Converte para HTML
+    const rawHtml = marked.parse(mdText || "");
+
+    // Sanitiza o HTML (Remove scripts, eventos, etc.)
+    const safeHtml = DOMPurify.sanitize(rawHtml, {
+        ADD_ATTR: ['target', 'rel', 'title'],
+    });
+
+    return safeHtml;
+}
+
+async function renderPreview(course) {
+    const preview_title = document.querySelector(".preview-title");
+    const preview_date = document.querySelector(".preview-dates");
+    const preview_description = document.querySelector(".preview-description");
+
+    preview_title.textContent = course.title;
+    preview_date.textContent = 
+        `${new Date(course.start_date).toLocaleDateString()} à ${new Date(course.end_date).toLocaleDateString()}`;
+
+    preview_description.innerHTML = renderMarkdown(course.description);
+
+    file_preview.src = "";
+
+    if (course.hasFile) {
+        const res = await api(`courses/${course.id}/file`);
+        if (res.ok) {
+            file_preview.src = URL.createObjectURL(res.data);
         }
-
-        contentForm.style.display = "none"
-        previewContent.style.display = "none"
-        content.style.display = "block"
-        newBtn.style.display = "block"
-        sideBarMenu.style.display = "block"
-
-        selected_course = null
-
-        renderCourses()
     }
+}
+
+/* ============================================================
+   4. FUNÇÃO: ABRIR TELA DE EDIÇÃO COM DADOS
+   ============================================================ */
+async function openEditForm(course) {
+    form_title.textContent = "Editar curso";
+
+    document.querySelector("#title").value = course.title;
+    document.querySelector("#start").value = course.start_date.split("T")[0];
+    document.querySelector("#end").value = course.end_date.split("T")[0];
+    const desc = document.querySelector("#description")
+    desc.value = course.description;
+    desc.addEventListener("input", () => autoResize(desc));
+    
+    const filePrev = document.querySelector(".custom-file_preview");
+    
+    if (course.hasFile) {
+        const res = await api(`courses/${course.id}/file`);
+        if (res.ok) {
+            filePrev.src = URL.createObjectURL(res.data);
+            filePrev.style.display = "block";
+            customBtn.style.display = "none";
+        }
+    } else {
+        filePrev.style.display = "none";
+        customBtn.style.display = "flex";
+    }
+    
+    showFormScreen();
+    setTimeout(() => autoResize(desc), 0);
+}
+
+/* ============================================================
+   5. FUNÇÃO: SALVAR CURSO (NOVO OU EDITADO)
+   ============================================================ */
+async function saveCourse() {
+    const formData = new FormData(form);
+    formData.delete("file");
+
+    if (!selected_course) {
+        // Criar novo
+        const res = await api("courses/", {
+            method: "POST",
+            data: {
+                title: formData.get("title"),
+                description: formData.get("description"),
+                start_date: formData.get("start_date"),
+                end_date: formData.get("end_date"),
+                is_draft: true
+            }
+        });
+
+        selected_course = res.data;
+
+        await uploadFileIfExists(selected_course.id);
+    } else {
+        // Atualizar existente
+        await api(`courses/${selected_course.id}`, {
+            method: "PUT",
+            data: {
+                title: formData.get("title"),
+                description: formData.get("description"),
+                start_date: formData.get("start_date"),
+                end_date: formData.get("end_date"),
+                is_draft: selected_course.is_draft
+            }
+        });
+    }
+    
+    resetToListScreen();
+    hideSaveModal();
+}
+
+/* ============================================================
+   6. FUNÇÃO: UPLOAD DE ARQUIVO
+   ============================================================ */
+async function uploadFileIfExists(courseId) {
+    const file = document.querySelector("#file").files[0];
+
+    if (!file) return;
+
+    const fd = new FormData();
+    fd.append("file", file);
+
+    await api(`courses/${courseId}/upload`, {
+        method: "POST",
+        body: fd
+    });
+}
+
+/* ============================================================
+   7. FUNÇÃO: CONTROLE DAS TELAS (UI)
+   ============================================================ */
+function showListScreen() {
+    content.style.display = "block";
+    newBtn.style.display = "block";
+    previewContent.style.display = "none";
+    contentForm.style.display = "none";
+    sideBarMenu.style.display = "block";
+}
+
+function showPreviewScreen() {
+    content.style.display = "none";
+    newBtn.style.display = "none";
+    previewContent.style.display = "block";
+    sideBarMenu.style.display = "none";
+}
+
+function showFormScreen() {
+    content.style.display = "none";
+    newBtn.style.display = "none";
+    contentForm.style.display = "block";
+    previewContent.style.display = "none";
+    sideBarMenu.style.display = "block";
+}
+
+function showDeleteModal() {
+    deleteModal.style.display = "flex";
+}
+
+function showSaveModal() {
+    saveModal.style.display = "flex";
+}
+
+function showTrashModal() {
+    trashModal.style.display = "flex";
+}
+
+function hideDeleteModal() {
+    deleteModal.style.display = "none";
+}
+
+function hideSaveModal() {
+    saveModal.style.display = "none";
+}
+
+function hideTrashModal() {
+    trashModal.style.display = "none";
+}
+
+function resetToListScreen() {
+    selected_course = null;
+    form.reset();
+    showListScreen();
+    renderCourses();
+}
+
+/* ============================================================
+   8. FUNÇÃO: REGISTRAR EVENTOS
+   ============================================================ */
+function registerEvents() {
+
+    document.addEventListener("click", async event => {
+        const item = event.target.closest(".item");
+        if (!item) return;
+
+        selected_course = JSON.parse(item.dataset.data);
+
+        // Botões
+        document.querySelector("#publish").style.display =
+            selected_course.is_draft ? "flex" : "none";
+
+        document.querySelector("#edit").style.display = "flex";
+
+        await renderPreview(selected_course);
+        showPreviewScreen();
+    });
+
+    document.querySelector("#edit").onclick = () => openEditForm(selected_course);
+
+    document.querySelector(".openSaveModal").onclick = () => showSaveModal();
+
+    document.querySelector("#save").onclick = async () => await saveCourse();
+
+    document.querySelector(".openDeleteModal").onclick = () => showDeleteModal();
 
     document.querySelector("#delete").onclick = async () => {
-        await api(`courses/${selected_course.id}`, {
-            method: "DELETE",
-        })
-
-        content.style.display = "block"
-        newBtn.style.display = "block"
-        contentForm.style.display = "none"
-        sideBarMenu.style.display = "block"
-
-        selected_course = null
-        renderCourses()
+        await api(`courses/deactivate/${selected_course.id}`, { method: "POST" });
+        hideDeleteModal();
+        showTrashModal();
+        setTimeout(() => {
+            hideDeleteModal();
+            hideTrashModal();
+            resetToListScreen();
+        }, 1500)
     }
-
+    
     document.querySelector("#publish").onclick = async () => {
-        await api(`courses/publish/${selected_course.id}`, {
-            method: "POST",
-        })
-
-        content.style.display = "block"
-        newBtn.style.display = "block"
-        previewContent.style.display = "none"
-        sideBarMenu.style.display = "block"
-        
-        selected_course = null
-        renderCourses()
-    }
+        await api(`courses/publish/${selected_course.id}`, { method: "POST" });
+        resetToListScreen();
+    };
 
     document.querySelector("#file").onchange = async e => {
-        const file = e.target.files[0]
-        const file_preview = document.querySelector(".custom-file_preview")
-        document.querySelector(".custom-btn").style.display = "none"
-        file_preview.style.display = "block"
-        file_preview.src = URL.createObjectURL(file)
-
-        const formData = new FormData()
-        formData.append("file", file)
-
-        await api(`courses/${selected_course.id}/upload`, {
-            method: "POST",
-            body: formData
-        })
-    }
+        const file = e.target.files[0];
+        const preview = document.querySelector(".custom-file_preview");
+        
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        customBtn.style.display = "none";
+        
+        await uploadFileIfExists(selected_course.id);
+    };
     
     newBtn.onclick = () => {
-        content.style.display = "none"
-        newBtn.style.display = "none"
-        contentForm.style.display = "block"
-        previewContent.style.display = "none"
-        customBtn.style.display = "flex"
-        document.querySelector(".custom-file_preview").style.display = "none"
-        form_title.textContent = "Adicionar curso"
-        form.reset()
-    }
+        selected_course = null;
+        form.reset();
+        customBtn.style.display = "flex";
+        document.querySelector(".custom-file_preview").style.display = "none";
+        form_title.textContent = "Adicionar curso";
+        showFormScreen();
+    };
     
-    backBtn.forEach(btn => btn.onclick = () => {
-        content.style.display = "block"
-        newBtn.style.display = "block"
-        contentForm.style.display = "none"
-        previewContent.style.display = "none"
-        customBtn.style.display = "none"
-        form.reset()
-        sideBarMenu.style.display = "block"
-        
-        renderCourses()
-    })
+    backBtn.forEach(btn =>
+        btn.onclick = () => resetToListScreen()
+    );
+
+    document.querySelector("#delete-back").onclick = e => {
+        e.preventDefault()
+        hideDeleteModal()
+    };
+    
+    document.querySelector("#save-back").onclick = e => {
+        e.preventDefault()
+        hideSaveModal()
+    };
 }
 
-export { renderCourses }
+/* ============================================================
+   9. FUNÇÃO PRINCIPAL DE RENDERIZAÇÃO
+   ============================================================ */
+async function renderCourses() {
+    await renderCourseLists();
+    registerEvents();
+}
+
+export { renderCourses };
