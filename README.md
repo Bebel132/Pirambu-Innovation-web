@@ -2,8 +2,8 @@
 
 FrontEnd do Pirambu Innovation, desenvolvido com **HTML, CSS e JavaScript**.  
 
-[Página do visitante](https://pirambuweb-testes.netlify.app/)
-[Painel administrativo](https://pirambuweb-testes.netlify.app/pages/admin)
+[Página do visitante](https://pirambuweb.netlify.app/)
+[Painel administrativo](https://pirambuweb.netlify.app/pages/admin)
 
 ## Rodando localmente
 
