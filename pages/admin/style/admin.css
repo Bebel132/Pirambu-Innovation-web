@@ -120,6 +120,11 @@ body {
     margin-left: 20px;
 }
 
+.list {
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
 /* contentForm */
 
 .contentForm {

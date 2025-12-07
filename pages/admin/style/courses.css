@@ -1,36 +1,3 @@
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 40px 0;
-}
-
-.item {
-    width: 200px;
-    height: 180px;
-    position: relative;
-    /* background-color: var(--color-gray); */
-    background-position: center;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: .1s;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-blend-mode: darken;
-}
-
-.item span {
-    position: absolute;
-    bottom: 0;
-    margin: 10px 10px;
-    color: #fff;
-}
-
-.item:hover {
-    transform: scale(1.02);
-    box-shadow: 1px 1px 10px #cccccc;
-    filter: blur(0);
-}
-
 /* form */
 
 .top_form {
