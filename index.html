@@ -4,11 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pirambu Innovation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="loading"></div>
-    <h1>API carregou :D</h1>
-    <script type="module" src="assets/teste_api.js"></script>
+    <div class="header">
+        <img src="assets/imgs/logo-cinza.png" alt="logo">
+    </div>
+    <div class="bottomMenu">
+        <ul>
+            <li class="menu-item active">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">newsmode</span>
+                Novidades
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">book_ribbon</span>
+                Cursos
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">handshake</span>
+                Apoie
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">diversity_3</span>
+                Sobre nós
+            </li>
+        </ul>
+    </div>
+    <section class="courses-section">
+        <div class="courses-container">
+            <h1>Cursos</h1>
+            <ul class="courses-list list"></ul>
+        </div>
+    </section>
+    <section class="events-section">
+        <div class="events-container">
+            <h1>Eventos</h1>
+            <ul class="events-list list">
+                <li class="events_list-item item">
+                    <span>Caminhos para o Futuro – BNB no Pirambu Innovation</span>
+                </li>
+                <li class="events_list-item item">
+                    <span>Caminhos para o Futuro – BNB no Pirambu Innovation</span>
+                </li>
+                <li class="events_list-item item">
+                    <span>Caminhos para o Futuro – BNB no Pirambu Innovation</span>
+                </li>
+                <li class="events_list-item item">
+                    <span>Caminhos para o Futuro – BNB no Pirambu Innovation</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="news-section">
+
+    </section>
+    <section class="supportUs-section">
+        <div class="supportUs-container">
+            <h1>Nos apoie</h1>
+            <div class="text">
+                <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
+                <button><img src="assets/imgs/logo-zap.svg" alt=""> Whatsapp</button>
+            </div>
+        </div>
+    </section>
+    <section class="aboutUs-section">
+        <h1>Sobre nós</h1>
+        <div class="aboutUs-container">
+            <img src="assets/imgs/logo-branca.png" alt="logo" class="logo">
+            <p>O Pirambu Innovation mantém a mesma saga do Pirambu Digital, o compromisso da oportunidade ao jovem, a oportunidade que faz a diferença em suas vidas. A diferença que reduz as desigualdades.</p>
+            <button>Saiba mais</button>
+        </div>
+    </section>
+    <section class="contacts-section">
+        <div class="contacts-container">
+            <h1>Contatos</h1>
+            <ul>
+                <li>
+                    <p>@pirambuinnovation.oficial</p>
+                </li>
+                <li>
+                    <p>(85) 99705-4321</p>
+                </li>
+                <li>
+                    <p>Rua N Sra das Graças 1097,<br> Cristo Redentor (Pirambu), <br>Fortaleza/CE</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <script type="module">
+        import { initHome } from './script.js';
+
+        initHome()
+    </script>
 </body>
 </html>

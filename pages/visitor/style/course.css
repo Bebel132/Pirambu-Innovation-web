@@ -1,0 +1,52 @@
+.header {
+    cursor: pointer;
+}
+
+.course-container {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-img {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    border: 1px solid #4B4B4D2E;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    padding: 10px;
+    margin-bottom: 100px;
+}
+
+.content span {
+    color: #00000059;
+    margin-top: -10px;
+}
+
+.content * {
+    margin: revert;
+    padding: revert;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+
+}
+
+.content > table, tr, td, th {
+    border: 1px solid #000;
+}
+
+.content > pre, code {
+    background-color: #4B4B4D2E;
+    padding: 15px;
+}
+
+.content code {    
+    white-space: pre-wrap;
+    word-break: normal;
+    overflow-wrap: anywhere;
+}

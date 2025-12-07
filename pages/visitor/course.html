@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirambu Innovation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style/course.css">
+</head>
+<body>
+    <div class="loading"></div>
+    <div class="header">
+        <a href="../../index.html">
+            <img src="../../assets/imgs/logo-cinza.png" alt="logo">
+        </a>
+    </div>
+    <div class="bottomMenu">
+        <ul>
+            <li class="menu-item active">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">newsmode</span>
+                Novidades
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">book_ribbon</span>
+                Cursos
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">handshake</span>
+                Apoie
+            </li>
+            <li class="menu-item">
+                <span class="material-symbols-outlined">diversity_3</span>
+                Sobre nós
+            </li>
+        </ul>
+    </div>
+    <section class="course-section">
+        <div class="course-container">
+            <h1>Detalhes do curso</h1>
+            <img src="" alt="" class="course-img">
+            <!-- img -->
+             <div class="content"></div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <script type="module">
+        import { api } from './../../assets/apiHelper.js';
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        function renderMarkdown(mdText) {
+            marked.setOptions({
+                breaks: true, 
+                gfm: true
+            });
+
+            const rawHtml = marked.parse(mdText || "");
+
+            const safeHtml = DOMPurify.sanitize(rawHtml, {
+                ADD_ATTR: ['target', 'rel', 'title'],
+            });
+
+            return safeHtml;
+        }
+
+        if (!id) {
+            window.location.href = '/';
+        } else {
+            const { data: course } = await api(`courses/${id}`);
+
+            if (course.hasFile) {
+            const res = await api(`courses/${course.id}/file`);
+                if (res.ok) {
+                    const blob = res.data;
+                    const url = URL.createObjectURL(blob);
+                    document.querySelector('.course-img').src = url;
+                }
+            }
+
+            const h2 = document.createElement("h1");
+            h2.textContent = course.title;
+            const date = document.createElement("span");
+            date.textContent = new Date(course.start_date).toLocaleDateString() + " à " + new Date(course.end_date).toLocaleDateString();
+            const desc = document.createElement("div");
+
+            const container = document.querySelector(".content");
+
+            container.appendChild(h2)
+            container.appendChild(date)
+            container.appendChild(desc)
+
+            desc.innerHTML = renderMarkdown(course.description);
+        }
+    </script>
+</body>
+</html>
