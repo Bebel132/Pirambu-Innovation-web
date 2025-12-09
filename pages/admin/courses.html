@@ -35,16 +35,16 @@
                 </div>
             </div>
             <div class="admin-contentForm_container contentForm">
-                <h1 class="admin-contentForm_title"></h1>
+                <div class="contentForm_title-container">
+                    <span class="material-symbols-outlined back">chevron_left</span>
+                    <h1 class="contentForm-title"></h1>
+                </div>
                 <div class="btns">
-                    <button class="back">
-                        <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
+                    <button class="saveBtn">
+                        <span class="material-symbols-outlined">save_as</span> Salvar rascunho
                     </button>
-                    <button class="delete openDeleteModal">
-                        <span class="material-symbols-outlined">delete</span> Excluir
-                    </button>
-                    <button class="save openSaveModal">
-                        Continuar <span class="material-symbols-outlined">trending_flat</span>
+                    <button id="previewBtn">
+                        Pré-visualização <span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_right_alt</span></span>
                     </button>
                 </div>
                 <form class="form" action="">
@@ -81,12 +81,9 @@
                 </form>
             </div>
             <div class="admin-previewContent_container previewContent">
-                <h1>Pré-visualização</h1>
+                <h1><span class="material-symbols-outlined back">chevron_left</span> Pré-visualização</h1>
                 <div class="btns">
-                    <button class="back">
-                        <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
-                    </button>
-                    <button id="edit">
+                    <button id="editBtn">
                         <span class="material-symbols-outlined">edit</span> Editar
                     </button>
                     <button id="publish">
@@ -102,36 +99,14 @@
                     </div>
                 </div>
             </div>
-            <div class="modal" id="delete-modal" style="display: none;">
+            <div class="modal" id="confirmation-modal" style="display: none;">
                 <div class="modal-container">
-                    <h1>Você tem certeza que deseja excluir o curso?</h1>
-                    <span>A publicação será adicionada a lixeira onde permanecerá por 30 dias.</span>
+                    <h1>Deseja sair sem salvar?</h1>
                     <div class="btns">
-                        <button class="delete" id="delete">
-                            <span class="material-symbols-outlined">delete</span> Excluir
+                        <button class="saveBtn">
+                            <span class="material-symbols-outlined">save_as</span> Salvar rascunho
                         </button>
-                        <button class="back" id="delete-back">
-                            <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal" id="trash-modal" style="display: none;">
-                <div class="modal-container">
-                    <span class="material-symbols-outlined">delete</span>
-                    <h1>Publicação movida para a lixeira!</h1>
-                </div>
-            </div>
-            <div class="modal" id="save-modal" style="display: none;">
-                <div class="modal-container">
-                    <h1>Deseja salvar como rascunho?</h1>
-                    <div class="btns">
-                        <button class="save" id="save">
-                            Salvar
-                        </button>
-                        <button class="back" id="save-back">
-                            <span class="material-symbols-outlined">keyboard_backspace</span> Voltar
-                        </button>
+                        <button id="dontSave">Não salvar</button>
                     </div>
                 </div>
             </div>

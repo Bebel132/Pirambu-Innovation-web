@@ -129,14 +129,13 @@ body {
 
 .contentForm {
     display: none;
-    margin: 40px 0 0 20px;
+    margin: 40px 0 0 40px;
 }
 
 .btns {
-    width: 916px;
     margin: 50px 0 40px 0;
     display: flex;
-    justify-content: space-between;
+    gap: 30px;
 }
 
 .btns button {
@@ -144,8 +143,11 @@ body {
     height: 61px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
     box-shadow: 0px 4px 4px 0px #00000040;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     border-radius: 25px;
     border: none;
@@ -158,28 +160,37 @@ body {
 }
 
 .btns button span {
-    margin: 0 30px;
-    font-size: 40px;
+    font-size: 38px;
 }
 
-.save {
-    display: flex;
-    justify-content: end;
+.saveBtn, #editBtn, #previewBtn {
     background-color: var(--color-green);
 }
 
-.delete {
+#dontSave {
     background-color: var(--color-red);
 }
 
 .back {
-    background-color: var(--color-gray);
+    font-size: 38px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.back:hover {
+    transform: scale(1.1);
 }
 
 /* form */
 
 .contentForm {
     padding-bottom: 60px;
+}
+
+.contentForm_title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 form input {
@@ -304,4 +315,71 @@ form span, form label {
 #trash-modal .modal-container span {
     font-size: 100px;
     color: #4B4B4D;
+}
+
+
+/* preview */
+
+.previewContent {
+    display: none;
+    width: 100%;
+}
+
+.previewContent > h1 {
+    height: 120px;
+    width: 100%;
+    background-color: var(--color-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #988E58;
+}
+
+.previewContent > h1 > span {
+    left: 50px;
+    position: absolute;
+}
+
+.previewContent .btns {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+    gap: 20px;
+}
+
+.preview {
+    width: 916px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.previewImg {
+    margin: 0 auto;
+}
+
+.preview-texts {
+    margin: 20px 0 50px 0;
+    border: 1px solid #4B4B4D2E;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.preview-title {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.preview-dates {
+    font-size: 24px;
+    color: #00000059;
+}
+
+#publish {
+    background-color: var(--color-green);
 }
