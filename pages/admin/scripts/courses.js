@@ -2,12 +2,12 @@ import { api } from '../../../assets/apiHelper.js';
 
 let selected_course = null;
 
+// resize do textarea
 function autoResize(el) {
     el.style.height = "auto";
     el.style.height = el.scrollHeight + "px";
-  }
+}
 
-// Elementos da UI
 const content = document.querySelector(".content");
 const contentForm = document.querySelector(".contentForm");
 const previewContent = document.querySelector(".previewContent");
@@ -17,14 +17,62 @@ const file_preview = document.querySelector(".previewImg");
 const customBtn = document.querySelector(".custom-btn");
 const form = document.querySelector(".form");
 const sideBarMenu = document.querySelector(".sidebar_menu");
-const form_title = document.querySelector(".admin-contentForm_title");
-const saveModal = document.querySelector("#save-modal");
-const deleteModal = document.querySelector("#delete-modal");
-const trashModal = document.querySelector("#trash-modal");
+const form_title = document.querySelector(".contentForm-title");
 
-/* ============================================================
-   1. FUNÇÃO: RENDERIZA LISTA DE CURSOS (RASCUNHOS + PUBLICADOS)
-   ============================================================ */
+const confirmationModal = document.querySelector("#confirmation-modal")
+
+// controle de navegação entre as telas
+const screenStack = [];
+let currentScreen = null;
+
+function pushScreen(screenName) {
+    if (currentScreen) screenStack.push(currentScreen);
+    currentScreen = screenName;
+}
+
+function popScreen() {
+    const prev = screenStack.pop();
+    currentScreen = prev || "LIST";
+    return prev;
+}
+
+function goBack() {
+    const previous = popScreen();
+
+    switch (previous) {
+        case "FORM":
+            showFormScreen();
+            break;
+
+        case "PREVIEW":
+            showPreviewScreen(
+                selected_course ||
+                lastTransientPreview.course ||
+                { title: "", description: "" }
+            );
+            break;
+
+        case "LIST":
+            if(selected_course == null) {
+                confirmationModal.style.display = "flex"
+            } else {
+                showListScreen();
+            }
+            break;
+
+        default:
+            selected_course = null;
+            form.reset();
+            showListScreen();
+            renderCourseLists();
+            break;
+    }
+}
+
+const lastTransientPreview = { course: null };
+
+// funções das telas
+/* ----- */
 async function renderCourseLists() {
     let drafts = [];
     let published = [];
@@ -39,9 +87,6 @@ async function renderCourseLists() {
     await renderCourseListUI(published, ".published_list", "published_item");
 }
 
-/* ============================================================
-   2. FUNÇÃO: GERAR UI PARA UMA LISTA ESPECÍFICA
-   ============================================================ */
 async function renderCourseListUI(list, containerSelector, className) {
     const container = document.querySelector(containerSelector);
     container.innerHTML = "";
@@ -52,7 +97,7 @@ async function renderCourseListUI(list, containerSelector, className) {
         item.dataset.data = JSON.stringify(course);
 
         const titleSpan = document.createElement("span");
-        titleSpan.append(course.title);
+        titleSpan.append(course.title || "(Sem título)");
         item.append(titleSpan);
 
         if (course.hasFile) {
@@ -60,6 +105,8 @@ async function renderCourseListUI(list, containerSelector, className) {
             if (res.ok) {
                 const blob = res.data;
                 item.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
+            } else {
+                item.style.backgroundColor = `var(--color-gray)`;
             }
         } else {
             item.style.backgroundColor = `var(--color-gray)`;
@@ -69,25 +116,13 @@ async function renderCourseListUI(list, containerSelector, className) {
     }
 }
 
-/* ============================================================
-   3. FUNÇÃO: RENDERIZA O PREVIEW DO CURSO SELECIONADO
-   ============================================================ */
-   
 function renderMarkdown(mdText) {
-    // Configurações básicas do marked
-    marked.setOptions({
-        breaks: true,     // converte quebras de linha simples em <br>
-        gfm: true         // GitHub Flavored Markdown (tabelas, listas de tarefas, etc.)
-    });
+    marked.setOptions({ breaks: true, gfm: true });
 
-    // Converte para HTML
     const rawHtml = marked.parse(mdText || "");
-
-    // Sanitiza o HTML (Remove scripts, eventos, etc.)
     const safeHtml = DOMPurify.sanitize(rawHtml, {
         ADD_ATTR: ['target', 'rel', 'title'],
     });
-
     return safeHtml;
 }
 
@@ -96,39 +131,88 @@ async function renderPreview(course) {
     const preview_date = document.querySelector(".preview-dates");
     const preview_description = document.querySelector(".preview-description");
 
-    preview_title.textContent = course.title;
-    preview_date.textContent = 
-        `${new Date(course.start_date).toLocaleDateString()} à ${new Date(course.end_date).toLocaleDateString()}`;
+    preview_title.textContent = course.title || "";
+    try {
+        const s = course.start_date ? new Date(course.start_date).toLocaleDateString() : "";
+        const e = course.end_date ? new Date(course.end_date).toLocaleDateString() : "";
+        preview_date.textContent = (s && e) ? `${s} à ${e}` : "";
+    } catch { preview_date.textContent = ""; }
 
-    preview_description.innerHTML = renderMarkdown(course.description);
-
+    preview_description.innerHTML = renderMarkdown(course.description || "");
     file_preview.src = "";
 
-    if (course.hasFile) {
+    if (course.hasFile && course.id) {
         const res = await api(`courses/${course.id}/file`);
-        if (res.ok) {
-            file_preview.src = URL.createObjectURL(res.data);
-        }
+        if (res.ok) file_preview.src = URL.createObjectURL(res.data);
     }
 }
 
-/* ============================================================
-   4. FUNÇÃO: ABRIR TELA DE EDIÇÃO COM DADOS
-   ============================================================ */
-async function openEditForm(course) {
-    form_title.textContent = "Editar curso";
+async function showPreviewScreen(course) {
+    if (!course.id) {
+        lastTransientPreview.course = course;
+    }
 
-    document.querySelector("#title").value = course.title;
-    document.querySelector("#start").value = course.start_date.split("T")[0];
-    document.querySelector("#end").value = course.end_date.split("T")[0];
-    const desc = document.querySelector("#description")
-    desc.value = course.description;
-    desc.addEventListener("input", () => autoResize(desc));
+    console.log(course)
+
+    await renderPreview(course);
+
+    content.style.display = "none";
+    contentForm.style.display = "none";
+    newBtn.style.display = "none";
+    previewContent.style.display = "block";
+    sideBarMenu.style.display = "none";
+
+    const publishBtn = document.querySelector("#publish");
+    const editBtn = document.querySelector("#editBtn");
+
+    if (course.active && course.is_draft) {
+        publishBtn.style.display = "flex";
+        editBtn.style.display = "flex";
+    }
+    else if(course.active == undefined) {
+        publishBtn.style.display = "flex";
+        editBtn.style.display = "none";
+    } else {
+        publishBtn.style.display = "none";
+        editBtn.style.display = "flex";
+    };
+
+}
+
+function showListScreen() {
+    currentScreen = "LIST";
+    screenStack.length = 0;
+
+    selected_course = null;
+    confirmationModal.style.display = "none";
+
+    content.style.display = "block";
+    newBtn.style.display = "block";
+    previewContent.style.display = "none";
+    contentForm.style.display = "none";
+    sideBarMenu.style.display = "block";
+}
+
+async function openEditForm(course) {
+    if (course) selected_course = course;
+
+    form_title.textContent = selected_course?.is_draft
+        ? "Editar rascunho"
+        : "Editar curso";
+
+    document.querySelector("#title").value = selected_course?.title || "";
+    document.querySelector("#start").value =
+        selected_course?.start_date?.split("T")[0] || "";
+    document.querySelector("#end").value =
+        selected_course?.end_date?.split("T")[0] || "";
+
+    const desc = document.querySelector("#description");
+    desc.value = selected_course?.description || "";
     
     const filePrev = document.querySelector(".custom-file_preview");
     
-    if (course.hasFile) {
-        const res = await api(`courses/${course.id}/file`);
+    if (selected_course?.hasFile && selected_course.id) {
+        const res = await api(`courses/${selected_course.id}/file`);
         if (res.ok) {
             filePrev.src = URL.createObjectURL(res.data);
             filePrev.style.display = "block";
@@ -139,19 +223,29 @@ async function openEditForm(course) {
         customBtn.style.display = "flex";
     }
     
+    pushScreen("FORM");
     showFormScreen();
+    desc.addEventListener("input", () => autoResize(desc));
     setTimeout(() => autoResize(desc), 0);
 }
 
-/* ============================================================
-   5. FUNÇÃO: SALVAR CURSO (NOVO OU EDITADO)
-   ============================================================ */
+function showFormScreen() {
+    content.style.display = "none";
+    newBtn.style.display = "none";
+    contentForm.style.display = "block";
+    previewContent.style.display = "none";
+    sideBarMenu.style.display = "block";
+}
+
+/* ----- */
+
+// funções que chamam a api
+/* ----- */
 async function saveCourse() {
     const formData = new FormData(form);
     formData.delete("file");
 
     if (!selected_course) {
-        // Criar novo
         const res = await api("courses/", {
             method: "POST",
             data: {
@@ -164,10 +258,8 @@ async function saveCourse() {
         });
 
         selected_course = res.data;
-
         await uploadFileIfExists(selected_course.id);
     } else {
-        // Atualizar existente
         await api(`courses/${selected_course.id}`, {
             method: "PUT",
             data: {
@@ -175,22 +267,25 @@ async function saveCourse() {
                 description: formData.get("description"),
                 start_date: formData.get("start_date"),
                 end_date: formData.get("end_date"),
-                is_draft: selected_course.is_draft
+                is_draft: true
             }
         });
     }
-    
-    resetToListScreen();
-    hideSaveModal();
+
+    confirmationModal.style.display = "none"
+    lastTransientPreview.course = null;
+    selected_course = null;
+    form.reset();
+    showListScreen();
+    await renderCourseLists();
 }
 
-/* ============================================================
-   6. FUNÇÃO: UPLOAD DE ARQUIVO
-   ============================================================ */
 async function uploadFileIfExists(courseId) {
-    const file = document.querySelector("#file").files[0];
-
+    const fileInput = document.querySelector("#file");
+    if (!fileInput) return;
+    const file = fileInput.files[0];
     if (!file) return;
+    if (!courseId) return;
 
     const fd = new FormData();
     fd.append("file", file);
@@ -200,151 +295,135 @@ async function uploadFileIfExists(courseId) {
         body: fd
     });
 }
+/* ----- */
 
-/* ============================================================
-   7. FUNÇÃO: CONTROLE DAS TELAS (UI)
-   ============================================================ */
-function showListScreen() {
-    content.style.display = "block";
-    newBtn.style.display = "block";
-    previewContent.style.display = "none";
-    contentForm.style.display = "none";
-    sideBarMenu.style.display = "block";
-}
-
-function showPreviewScreen() {
-    content.style.display = "none";
-    newBtn.style.display = "none";
-    previewContent.style.display = "block";
-    sideBarMenu.style.display = "none";
-}
-
-function showFormScreen() {
-    content.style.display = "none";
-    newBtn.style.display = "none";
-    contentForm.style.display = "block";
-    previewContent.style.display = "none";
-    sideBarMenu.style.display = "block";
-
-    const desc = document.querySelector("#description");
-    selected_course != null ? desc.addEventListener("input", () => autoResize(desc)) : desc.style.height = "";
-}
-
-function showDeleteModal() {
-    deleteModal.style.display = "flex";
-}
-
-function showSaveModal() {
-    saveModal.style.display = "flex";
-}
-
-function showTrashModal() {
-    trashModal.style.display = "flex";
-}
-
-function hideDeleteModal() {
-    deleteModal.style.display = "none";
-}
-
-function hideSaveModal() {
-    saveModal.style.display = "none";
-}
-
-function hideTrashModal() {
-    trashModal.style.display = "none";
-}
-
-function resetToListScreen() {
-    selected_course = null;
-    form.reset();
-    showListScreen();
-    renderCourses();
-}
-
-/* ============================================================
-   8. FUNÇÃO: REGISTRAR EVENTOS
-   ============================================================ */
+// registro de eventos
 function registerEvents() {
-
+    /* abrir preview de item */
     document.addEventListener("click", async event => {
         const item = event.target.closest(".item");
         if (!item) return;
 
         selected_course = JSON.parse(item.dataset.data);
 
-        // Botões
-        document.querySelector("#publish").style.display =
-            selected_course.is_draft ? "flex" : "none";
-
-        document.querySelector("#edit").style.display = "flex";
-
-        await renderPreview(selected_course);
-        showPreviewScreen();
+        pushScreen("PREVIEW");
+        await showPreviewScreen(selected_course);
     });
 
-    document.querySelector("#edit").onclick = () => openEditForm(selected_course);
-
-    document.querySelector(".openSaveModal").onclick = () => showSaveModal();
-
-    document.querySelector("#save").onclick = async () => await saveCourse();
-
-    document.querySelector(".openDeleteModal").onclick = () => showDeleteModal();
-
-    document.querySelector("#delete").onclick = async () => {
-        await api(`courses/deactivate/${selected_course.id}`, { method: "POST" });
-        hideDeleteModal();
-        showTrashModal();
-        setTimeout(() => {
-            hideDeleteModal();
-            hideTrashModal();
-            resetToListScreen();
-        }, 1500)
+    /* botão editar na preview */
+    const editBtn = document.querySelector("#editBtn");
+    if (editBtn) {
+        editBtn.onclick = async () => {
+            await openEditForm(selected_course);
+        };
     }
-    
-    document.querySelector("#publish").onclick = async () => {
-        await api(`courses/publish/${selected_course.id}`, { method: "POST" });
-        resetToListScreen();
-    };
 
-    document.querySelector("#file").onchange = async e => {
-        const file = e.target.files[0];
-        const preview = document.querySelector(".custom-file_preview");
-        
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = "block";
-        customBtn.style.display = "none";
-        
-        await uploadFileIfExists(selected_course.id);
-    };
-    
-    newBtn.onclick = () => {
-        selected_course = null;
-        form.reset();
-        customBtn.style.display = "flex";
-        document.querySelector(".custom-file_preview").style.display = "none";
-        form_title.textContent = "Adicionar curso";
-        showFormScreen();
-    };
-    
-    backBtn.forEach(btn =>
-        btn.onclick = () => resetToListScreen()
-    );
+    /* salvar */
+    const saveBtn = document.querySelectorAll(".saveBtn");
+    if (saveBtn) saveBtn.forEach(btn => btn.onclick = async () => await saveCourse());
 
-    document.querySelector("#delete-back").onclick = e => {
-        e.preventDefault()
-        hideDeleteModal()
-    };
-    
-    document.querySelector("#save-back").onclick = e => {
-        e.preventDefault()
-        hideSaveModal()
-    };
+    /* preview do formulário - novo registro */
+    const previewBtn = document.querySelector("#previewBtn");
+    if (previewBtn) {
+        previewBtn.onclick = () => {
+            const formData = new FormData(form);
+
+            const new_course = {
+                title: formData.get("title"),
+                description: formData.get("description"),
+                start_date: formData.get("start_date"),
+                end_date: formData.get("end_date"),
+                is_draft: true,
+                hasFile: false
+            };
+
+            lastTransientPreview.course = new_course;
+
+            pushScreen("PREVIEW");
+            showPreviewScreen(new_course);
+        };
+    }
+
+    /* deletar curso */
+    const deleteBtn = document.querySelector("#delete");
+    if (deleteBtn) {
+        deleteBtn.onclick = async () => {
+            if (!selected_course?.id) return;
+
+            await api(`courses/deactivate/${selected_course.id}`, {
+                method: "POST"
+            });
+
+            setTimeout(() => {
+                selected_course = null;
+                form.reset();
+                showListScreen();
+                renderCourseLists();
+            }, 1500);
+        };
+    }
+
+    /* publicar */
+    const publishBtn = document.querySelector("#publish");
+    if (publishBtn) {
+        publishBtn.onclick = async () => {
+            if (!selected_course?.id) return;
+            await api(`courses/publish/${selected_course.id}`, { method: "POST" });
+
+            selected_course = null;
+            form.reset();
+            showListScreen();
+            renderCourseLists();
+        };
+    }
+
+    /* upload de arquivo */
+    const fileInput = document.querySelector("#file");
+    if (fileInput) {
+        fileInput.onchange = async e => {
+            const file = e.target.files[0];
+            const preview = document.querySelector(".custom-file_preview");
+
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = "block";
+                customBtn.style.display = "none";
+
+                if (selected_course && selected_course.id) {
+                    await uploadFileIfExists(selected_course.id);
+                }
+            }
+        };
+    }
+
+    /* botão Novo */
+    if (newBtn) {
+        newBtn.onclick = () => {
+            selected_course = null;
+            form.reset();
+
+            customBtn.style.display = "flex";
+            document.querySelector(".custom-file_preview").style.display = "none";
+
+            form_title.textContent = "Adicionar curso";
+
+            pushScreen("FORM");
+            showFormScreen();
+        };
+    }
+
+    /* botões voltar */
+    backBtn.forEach(btn => {
+        btn.onclick = () => goBack();
+    });
+
+    const dontSaveBtn = document.querySelector("#dontSave");
+    dontSaveBtn.onclick = () => showListScreen();
 }
 
-/* ============================================================
-   9. FUNÇÃO PRINCIPAL DE RENDERIZAÇÃO
-   ============================================================ */
 async function renderCourses() {
+    currentScreen = "LIST";
+    showListScreen();
     await renderCourseLists();
     registerEvents();
 }
