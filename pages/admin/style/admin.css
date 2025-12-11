@@ -33,6 +33,12 @@ body {
     right: 0;
     padding: 0 50px 0 25px;
     border-left: 1px solid #000;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.user-btn:hover {
+    color: var(--main-color);
 }
 
 .user-btn span {
@@ -99,6 +105,11 @@ body {
     cursor: default;
 }
 
+.activeProfile {
+    color: var(--main-color);
+    cursor: default;
+}
+
 .menu-item_icon {
     font-size: 35px;
     margin: 0 20px;
@@ -123,6 +134,32 @@ body {
 .list {
     flex-wrap: wrap;
     margin: 40px 0;
+}
+
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#imagemDePerfil {
+    margin: 20px 0;
+}
+
+#email {
+    margin: 5px 0;
+}
+
+#logout {
+    margin-top: 20px;
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#logout:hover {
+    background-color: #d0d0d0;
 }
 
 /* contentForm */
