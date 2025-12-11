@@ -1,7 +1,8 @@
 function initMenu(items) {
     const sidebar_menu = document.querySelector(".sidebar_menu")
-
+    const userBtn = document.querySelector(".user-btn")
     const ul = document.createElement("ul")
+    
     ul.classList.add("menu")
 
     items.forEach(e => {
@@ -29,6 +30,8 @@ function initMenu(items) {
     })
     
     sidebar_menu.appendChild(ul)
+
+    userBtn.onclick = () => window.location = "user.html"
 }
 
 export { initMenu }

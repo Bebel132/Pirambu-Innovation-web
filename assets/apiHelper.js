@@ -35,6 +35,10 @@ export async function api(
   try {
     const response = await fetch(url, config);
 
+    if (response.status === 401 && window.location.href.includes("pages/admin")) {
+      window.location.href = "index.html"
+    }
+    
     const contentType = response.headers.get("Content-Type") || "";
 
     let parsed;
