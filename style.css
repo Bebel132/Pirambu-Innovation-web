@@ -68,6 +68,10 @@ body {
     width: 132px;
 }
 
+#navbar{
+    display: none;
+}
+
 .bottomMenu {
     position: fixed;
     bottom: 0;
