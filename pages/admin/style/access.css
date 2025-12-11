@@ -1,0 +1,61 @@
+
+
+/* access page */
+
+.access-container {
+    position: relative;
+}
+
+#access-list {
+    margin: 15px 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#access-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+#access-list li span {
+    cursor: pointer;
+}
+
+#access-list input {
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    transition: .2s;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+.btnCancel {
+    margin-right: -20px;
+}
+
+.deleteBtn, .btnCancel {
+    background-color: var(--color-red);
+}
+
+.btnSave {
+    background-color: var(--color-green);
+}
+
+#newAccess {
+    width: 140px;
+    position: absolute;
+    right: 0;
+    margin-top: -30px;
+    background-color: var(--main-color);
+    color: #fff;
+}

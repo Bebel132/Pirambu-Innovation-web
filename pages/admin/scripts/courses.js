@@ -78,7 +78,6 @@ async function renderCourseLists() {
     let published = [];
 
     const response = await api('courses/');
-    console.log(response)
     response.data.forEach(course => {
         course.is_draft ? drafts.push(course) : published.push(course);
     });
