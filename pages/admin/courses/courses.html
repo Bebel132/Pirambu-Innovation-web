@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrativo - Cursos</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="style/courses.css">
-    <link rel="stylesheet" href="style/admin.css">
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="courses.css">
+    <link rel="stylesheet" href="../style/admin.css">
 </head>
 
 <body>
     <div class="loading" style="display: none;"></div>
     <div class="admin_container">
         <div class="top_bar">
-            <img src="../../assets/imgs/logo-cinza.png" alt="">
+            <img src="../../../assets/imgs/logo-cinza.png" alt="">
             <div class="user-btn">
                 <span class="material-symbols-outlined">account_circle</span>
             </div>
@@ -44,7 +44,8 @@
                         <span class="material-symbols-outlined">save_as</span> Salvar rascunho
                     </button>
                     <button id="previewBtn">
-                        Pré-visualização <span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_right_alt</span></span>
+                        Pré-visualização <span class="material-symbols-outlined"><span
+                                class="material-symbols-outlined">arrow_right_alt</span></span>
                     </button>
                 </div>
                 <form class="form" action="">
@@ -116,16 +117,16 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="module">
-        import { initMenu } from './scripts/menu.js';
-        import { renderCourses } from './scripts/courses.js';
+        import { initMenu } from './../scripts/menu.js';
+        import { renderCourses } from './courses.js';
 
         const menu_items = [
-            { icon: "book_ribbon", label: "Cursos", file: "courses.html", active: true },
-            { icon: "news", label: "Notícias", file: "news.html" },
-            { icon: "event", label: "Eventos", file: "events.html" },
-            { icon: "diversity_3", label: "Biografia", file: "biography.html" },
-            { icon: "lock_open", label: "Acessos", file: "access.html" },
-            { icon: "delete", label: "Lixeira", file: "trash.html"}
+            { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html", active: true },
+            { icon: "news", label: "Notícias", file: "../news/news.html" },
+            { icon: "event", label: "Eventos", file: "../events/events.html" },
+            { icon: "diversity_3", label: "Biografia", file: "../biography/biography.html" },
+            { icon: "lock_open", label: "Acessos", file: "../access/access.html" },
+            { icon: "delete", label: "Lixeira", file: "../trash/trash.html" }
         ]
 
         initMenu(menu_items);

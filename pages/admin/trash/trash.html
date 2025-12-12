@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrativo - Cursos</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../style/admin.css">
+</head>
+
+<body>
+    <div class="loading" style="display: none;"></div>
+    <div class="admin_container">
+        <div class="top_bar">
+            <img src="../../../assets/imgs/logo-cinza.png" alt="">
+            <div class="user-btn">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+        </div>
+        <div class="admin_content">
+            <nav class="sidebar_menu">
+            </nav>
+            <div class="admin-content_container content trash-container">
+                <!-- <div class="trash">
+                    <h1>Lixeira</h1>
+                    <div class="list"></div>
+                </div> -->
+                
+                <div class="underConstruction">
+                    <span class="material-symbols-outlined">construction</span>
+                    <h2>Ainda estamos construindo essa tela!</h2>
+                    <p>volte depois</p>
+                </div>
+            </div>
+            <!-- <div class="coursesTrash admin-content_container trash" style="display: none;">
+                <h1>Cursos</h1>
+                <div class="coursesList"></div>
+            </div> -->
+        </div>
+    </div>
+    <script type="module">
+        import { initMenu } from './../scripts/menu.js';
+        import { renderTrashList } from './trash.js';
+
+        const menu_items = [
+            { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html" },
+            { icon: "news", label: "Notícias", file: "../news/news.html" },
+            { icon: "event", label: "Eventos", file: "../events/events.html" },
+            { icon: "diversity_3", label: "Biografia", file: "../biography/biography.html" },
+            { icon: "lock_open", label: "Acessos", file: "../access/access.html" },
+            { icon: "delete", label: "Lixeira", file: "../trash/trash.html", active: true }
+        ]
+
+        initMenu(menu_items);
+
+        renderTrashList()
+    </script>
+</body>
+
+</html>

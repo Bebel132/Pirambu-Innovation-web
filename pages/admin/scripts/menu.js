@@ -31,7 +31,7 @@ function initMenu(items) {
     
     sidebar_menu.appendChild(ul)
 
-    userBtn.onclick = () => window.location = "user.html"
+    userBtn.onclick = () => window.location = "../user/user.html"
 }
 
 export { initMenu }
