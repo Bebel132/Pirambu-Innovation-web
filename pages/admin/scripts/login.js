@@ -27,7 +27,7 @@ async function initLogin() {
         })
 
         if(teste.ok) {
-            window.location = "courses.html"
+            window.location = "./courses/../courses/courses.html"
         }
 
         const url = new URL(window.location.href);
