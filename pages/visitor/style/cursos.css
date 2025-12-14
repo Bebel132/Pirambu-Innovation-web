@@ -1,0 +1,262 @@
+/* ===============================
+   RESET E BASE
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-gray: #4B4B4D;
+    --color-blue: #1295C7;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* ===============================
+   NOVO LOADING
+================================ */
+
+.loader-inner {
+  width: 100px;
+  height: 60px;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+}
+.loader{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+}
+.loader-inner p{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 110px;
+    font-weight: bold;
+    font-size: 14px;
+    color:black
+}
+.loader-line-wrap {
+  animation: spin 2000ms cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+  width: 100px;
+  height: 50px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transform-origin: 50% 100%;
+}
+
+.loader-line {
+  border: 4px solid transparent;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  position: absolute;
+  inset: 0;
+}
+
+.loader-line-wrap:nth-child(1) {
+  animation-delay: -50ms;
+}
+
+.loader-line-wrap:nth-child(2) {
+  animation-delay: -100ms;
+}
+
+.loader-line-wrap:nth-child(3) {
+  animation-delay: -150ms;
+}
+
+.loader-line-wrap:nth-child(4) {
+  animation-delay: -200ms;
+}
+
+.loader-line-wrap:nth-child(5) {
+  animation-delay: -250ms;
+}
+
+.loader-line-wrap:nth-child(1) .loader-line {
+  border-color: #eb4747;
+  height: 90px;
+  width: 90px;
+  top: 7px;
+}
+
+.loader-line-wrap:nth-child(2) .loader-line {
+  border-color: #ebeb47;
+  height: 76px;
+  width: 76px;
+  top: 14px;
+}
+
+.loader-line-wrap:nth-child(3) .loader-line {
+  border-color: #47eb47;
+  height: 62px;
+  width: 62px;
+  top: 21px;
+}
+
+.loader-line-wrap:nth-child(4) .loader-line {
+  border-color: #47ebeb;
+  height: 48px;
+  width: 48px;
+  top: 28px;
+}
+
+.loader-line-wrap:nth-child(5) .loader-line {
+  border-color: #4747eb;
+  height: 34px;
+  width: 34px;
+  top: 35px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes dots {
+    0%   { content: "Carregando a api"; }
+    25%  { content: "Carregando a api."; }
+    50%  { content: "Carregando a api.."; }
+    75%  { content: "Carregando a api..."; }
+    100% { content: "Carregando a api"; }
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.header {
+    height: 76px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: -1px 2px 19.3px rgba(0,0,0,0.25);
+}
+
+.header img {
+    width: 132px;
+}
+
+/* ===============================
+   NAVBAR INFERIOR
+================================ */
+
+.bottomMenu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 100000;
+}
+
+.bottomMenu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.bottomMenu a {
+    text-decoration: none;
+}
+
+.bottomMenu li {
+    padding: 10px;
+    font-size: 12px;
+    color: var(--color-gray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottomMenu span {
+    font-size: 38px;
+}
+
+/* Botão central (Cursos) */
+.bottomMenu a:nth-child(3) li {
+    background-color: var(--color-blue);
+    width: 78px;
+    border-radius: 100%;
+    position: relative;
+    bottom: 10px;
+    color: #fff;
+}
+/* ===============================
+   CURSOS
+================================ */
+
+.courses-section {
+    padding: 20px;
+    padding-bottom: 130px; /* espaço navbar */
+}
+
+.courses-section h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* GRID IGUAL À IMAGEM */
+.courses-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    list-style: none;
+}
+
+/* ===============================
+   CARD DE CURSO
+================================ */
+
+.item {
+    height: 140px;
+    border-radius: 14px;
+    background-color: #E0E0E0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    position: relative;
+    cursor: pointer;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* REMOVE overlay escuro */
+.item::before {
+    display: none;
+}
+
+/* TÍTULO */
+.item span {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.2;
+}
+
+/* Hover leve */
+.item:hover {
+    transform: translateY(-2px);
+}

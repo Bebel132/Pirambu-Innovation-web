@@ -1,40 +1,50 @@
 import { api } from './assets/apiHelper.js';
 
 async function initHome() {
-    await api("teste").then(() => {
-        document.querySelector(".loading").style.display = "none"
-    })
+    // Loading inicial
+    await api("teste");
+    const loading = document.querySelector(".loader");
+    if (loading) loading.style.display = "none";
 
-    const { data: courses } = await api("courses/published");
+    // Busca cursos publicados
+    const response = await api("courses/published");
+    const courses = response?.data || [];
+
     const coursesListContainer = document.querySelector(".courses-list");
+    if (!coursesListContainer) return;
 
-    courses.forEach(async course => {
-        const item = document.createElement("div");
-        item.classList.add("courses_list-item");
-        item.classList.add("item");
+    // Limpa container (segurança)
+    coursesListContainer.innerHTML = "";
 
+    for (const course of courses) {
+        const item = document.createElement("li");
+        item.classList.add("courses_list-item", "item");
+
+        // Título
         const titleSpan = document.createElement("span");
-        titleSpan.append(course.title);
-        item.append(titleSpan);
+        titleSpan.textContent = course.title;
+        item.appendChild(titleSpan);
 
+        // Imagem do curso (se existir)
         if (course.hasFile) {
             const res = await api(`courses/${course.id}/file`);
-            if (res.ok) {
-                const blob = res.data;
-                item.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
+            if (res?.ok && res.data) {
+                const blobUrl = URL.createObjectURL(res.data);
+                item.style.backgroundImage = `url(${blobUrl})`;
             }
         } else {
-            item.style.backgroundColor = `var(--color-gray)`;
+            item.style.backgroundColor = "var(--color-gray)";
         }
 
-        coursesListContainer.appendChild(item);
-
-        item.onclick = () => {
+        // Clique → página do curso
+        item.addEventListener("click", () => {
             const url = new URL('/pages/visitor/course.html', window.location.origin);
             url.searchParams.set('id', course.id);
-            window.location.href = url.toString()
-        }
-    })
+            window.location.href = url.toString();
+        });
+
+        coursesListContainer.appendChild(item);
+    }
 }
 
-export { initHome }
+export { initHome };

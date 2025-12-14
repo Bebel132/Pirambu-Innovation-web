@@ -4,7 +4,9 @@ export async function api(
   endpoint,
   { method = "GET", data = null, params = null, headers = {}, ...customConfig } = {}
 ) {
-  document.querySelector(".loading").style.display = "flex"
+  const loading = document.querySelector(".loader");
+  if (loading) loading.style.display = "flex";
+
   const config = {
     method,
     credentials: "include",
@@ -14,7 +16,7 @@ export async function api(
     ...customConfig
   };
 
-  // Monta URL
+  // Monta URL corretamente
   let url = `${API_URL.replace(/\/+$/, "")}/${endpoint.replace(/^\/+/, "")}`;
 
   if (params) {
@@ -35,12 +37,13 @@ export async function api(
   try {
     const response = await fetch(url, config);
 
+    // Redireciona se não autorizado (admin)
     if (response.status === 401 && window.location.href.includes("pages/admin")) {
-      window.location.href = "index.html"
+      window.location.href = "index.html";
+      return;
     }
-    
-    const contentType = response.headers.get("Content-Type") || "";
 
+    const contentType = response.headers.get("Content-Type") || "";
     let parsed;
 
     if (
@@ -54,26 +57,19 @@ export async function api(
       parsed = await response.text();
     }
 
-    if (!response.ok) {
-      return {
-        ok: false,
-        status: response.status,
-        data: parsed
-      };
-    }
-
-    document.querySelector(".loading").style.display = "none"
-
     return {
-      ok: true,
+      ok: response.ok,
       status: response.status,
       data: parsed
     };
+
   } catch (error) {
     return {
       ok: false,
       status: 0,
       data: { error: "Network error", details: error.message }
     };
+  } finally {
+    if (loading) loading.style.display = "none";
   }
 }
