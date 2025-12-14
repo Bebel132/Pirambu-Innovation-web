@@ -10,9 +10,32 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <body>
-    <div class="loading"></div>
-    <div class="header">
-        <img src="assets/imgs/logo-cinza.png" alt="logo">
+<div class="loader">
+      <div class="loader-inner">
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <p>Carregando</p>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <img src="assets/imgs/logo-cinza.png" alt="Pirambu Innovation" />
+      <span class="material-symbols-outlined">search</span>
+    </header>
         <nav id="navbar">
             <ul id="nav_list">
                 <li class="nav-item active">
@@ -36,26 +59,32 @@
     </div>
     <div class="bottomMenu">
         <ul>
+            <a href="">
             <li class="menu-item active">
                 <span class="material-symbols-outlined">home</span>
                 Home
             </li>
-            <li class="menu-item">
+            </a>
+            <a href=""><li class="menu-item">
                 <span class="material-symbols-outlined">newsmode</span>
                 Novidades
-            </li>
+            </li></a>
+            <a href="pages/visitor/cursos.html">
             <li class="menu-item">
                 <span class="material-symbols-outlined">book_ribbon</span>
                 Cursos
             </li>
-            <li class="menu-item">
+            </a>
+            <a href=""><li class="menu-item">
                 <span class="material-symbols-outlined">handshake</span>
                 Apoie
             </li>
-            <li class="menu-item">
+            </a>
+            <a href=""><li class="menu-item">
                 <span class="material-symbols-outlined">diversity_3</span>
                 Sobre nós
             </li>
+            </a>
         </ul>
     </div>
     <section class="courses-section">
