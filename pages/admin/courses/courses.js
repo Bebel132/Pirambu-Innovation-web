@@ -18,8 +18,9 @@ const customBtn = document.querySelector(".custom-btn");
 const form = document.querySelector(".form");
 const sideBarMenu = document.querySelector(".sidebar_menu");
 const form_title = document.querySelector(".contentForm-title");
-
-const confirmationModal = document.querySelector("#confirmation-modal")
+const saveBtn = document.querySelectorAll(".saveBtn");
+const confirmationModal = document.querySelector("#confirmation-modal");
+const deleteModal = document.querySelector("#delete-modal");
 
 // controle de navegação entre as telas
 const screenStack = [];
@@ -99,6 +100,24 @@ async function renderCourseListUI(list, containerSelector, className) {
         titleSpan.append(course.title || "(Sem título)");
         item.append(titleSpan);
 
+        const dots = document.createElement("span");
+        dots.classList.add("material-symbols-outlined");
+        dots.textContent = "more_horiz";
+        item.append(dots);
+
+        const div = document.createElement("div");
+        div.classList.add("item-actions");
+
+        const editButton = document.createElement("button");
+        editButton.innerHTML = '<span class="material-symbols-outlined">edit</span> Editar';
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span> Excluir';
+
+        div.appendChild(editButton);
+        div.appendChild(deleteButton);
+        item.append(div);
+
         if (course.hasFile) {
             const res = await api(`courses/${course.id}/file`);
             if (res.ok) {
@@ -112,8 +131,48 @@ async function renderCourseListUI(list, containerSelector, className) {
         }
 
         container.appendChild(item);
+
+        dots.onclick = e => {
+            e.stopPropagation();
+            div.style.display = "flex";
+        }
+
+        editButton.onclick = async e => {
+            e.stopPropagation();
+            div.style.display = "none";
+
+            selected_course = JSON.parse(item.dataset.data);
+
+            pushScreen("PREVIEW");
+            await showPreviewScreen(selected_course);
+        }
+
+        deleteButton.onclick = () => {
+            deleteModal.style.display = "flex";
+            selected_course = JSON.parse(item.dataset.data);
+        }
     }
 }
+
+function closeAllActionMenus() {
+  document.querySelectorAll('.item-actions').forEach(el => {
+    el.style.display = 'none';
+  });
+}
+
+document.addEventListener('click', (e) => {
+  const isInActions = e.target.closest('.item-actions');
+  const isDots = e.target.closest('.material-symbols-outlined');
+  if (!isInActions && !isDots) {
+    closeAllActionMenus();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAllActionMenus();
+  }
+});
 
 function renderMarkdown(mdText) {
     marked.setOptions({ breaks: true, gfm: true });
@@ -195,9 +254,16 @@ function showListScreen() {
 async function openEditForm(course) {
     if (course) selected_course = course;
 
-    form_title.textContent = selected_course?.is_draft
-        ? "Editar rascunho"
-        : "Editar curso";
+    if(selected_course?.is_draft) {
+        form_title.textContent = "Editar rascunho";
+        saveBtn[0].children[1].innerHTML = "";
+        saveBtn[0].children[1].textContent += "Salvar rascunho";
+    } else {
+        console.log("Oi")
+        form_title.textContent = "Editar curso";
+        saveBtn[0].children[1].innerHTML = "";
+        saveBtn[0].children[1].textContent += "Salvar";
+    }
 
     document.querySelector("#title").value = selected_course?.title || "";
     document.querySelector("#start").value =
@@ -223,17 +289,21 @@ async function openEditForm(course) {
     }
     
     pushScreen("FORM");
-    showFormScreen();
+    showFormScreen("edit");
     desc.addEventListener("input", () => autoResize(desc));
     setTimeout(() => autoResize(desc), 0);
 }
 
-function showFormScreen() {
+function showFormScreen(action) {
     content.style.display = "none";
     newBtn.style.display = "none";
     contentForm.style.display = "block";
     previewContent.style.display = "none";
     sideBarMenu.style.display = "block";
+    
+    if (action == "new") {
+        saveBtn[0].children[1].textContent = "Salvar rascunho";
+    }
 }
 
 /* ----- */
@@ -244,7 +314,19 @@ async function saveCourse() {
     const formData = new FormData(form);
     formData.delete("file");
 
+    for (const [key, value] of formData.entries()) {
+        if (value instanceof File) continue;
+
+        if (key === 'description') continue;
+        
+        const str = (typeof value === 'string') ? value.trim() : String(value ?? '').trim();
+        if (str.length === 0) {
+            alert("preencha o formulário corretamente.");
+            return;
+        }
+    }
     if (!selected_course) {
+        console.log("Oi")
         const res = await api("courses/", {
             method: "POST",
             data: {
@@ -266,7 +348,7 @@ async function saveCourse() {
                 description: formData.get("description"),
                 start_date: formData.get("start_date"),
                 end_date: formData.get("end_date"),
-                is_draft: true
+                is_draft: selected_course.is_draft
             }
         });
     }
@@ -298,17 +380,6 @@ async function uploadFileIfExists(courseId) {
 
 // registro de eventos
 function registerEvents() {
-    /* abrir preview de item */
-    document.addEventListener("click", async event => {
-        const item = event.target.closest(".item");
-        if (!item) return;
-
-        selected_course = JSON.parse(item.dataset.data);
-
-        pushScreen("PREVIEW");
-        await showPreviewScreen(selected_course);
-    });
-
     /* botão editar na preview */
     const editBtn = document.querySelector("#editBtn");
     if (editBtn) {
@@ -318,7 +389,6 @@ function registerEvents() {
     }
 
     /* salvar */
-    const saveBtn = document.querySelectorAll(".saveBtn");
     if (saveBtn) saveBtn.forEach(btn => btn.onclick = async () => await saveCourse());
 
     /* preview do formulário - novo registro */
@@ -344,7 +414,7 @@ function registerEvents() {
     }
 
     /* deletar curso */
-    const deleteBtn = document.querySelector("#delete");
+    const deleteBtn = document.querySelector("#deleteBtn");
     if (deleteBtn) {
         deleteBtn.onclick = async () => {
             if (!selected_course?.id) return;
@@ -352,13 +422,12 @@ function registerEvents() {
             await api(`courses/deactivate/${selected_course.id}`, {
                 method: "POST"
             });
-
-            setTimeout(() => {
-                selected_course = null;
-                form.reset();
-                showListScreen();
-                renderCourseLists();
-            }, 1500);
+            
+            deleteModal.style.display = "none";
+            selected_course = null;
+            form.reset();
+            showListScreen();
+            renderCourseLists();
         };
     }
 
@@ -407,7 +476,7 @@ function registerEvents() {
             form_title.textContent = "Adicionar curso";
 
             pushScreen("FORM");
-            showFormScreen();
+            showFormScreen("new");
         };
     }
 
@@ -418,6 +487,10 @@ function registerEvents() {
 
     const dontSaveBtn = document.querySelector("#dontSave");
     dontSaveBtn.onclick = () => showListScreen();
+
+    document.querySelector("#cancel").onclick = () => {
+        deleteModal.style.display = "none"
+    }
 }
 
 async function renderCourses() {
