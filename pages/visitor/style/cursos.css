@@ -127,14 +127,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-@keyframes dots {
-    0%   { content: "Carregando a api"; }
-    25%  { content: "Carregando a api."; }
-    50%  { content: "Carregando a api.."; }
-    75%  { content: "Carregando a api..."; }
-    100% { content: "Carregando a api"; }
-}
-
 /* ===============================
    HEADER
 ================================ */
