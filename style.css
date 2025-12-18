@@ -177,14 +177,6 @@ body {
     font-size: 38px;
 }
 
-.bottomMenu a:nth-child(3) li {
-    background-color: var(--color-blue);
-    width: 78px;
-    border-radius: 100%;
-    position: relative;
-    bottom: 10px;
-}
-
 .bottomMenu a{
     text-decoration: none;
 }
