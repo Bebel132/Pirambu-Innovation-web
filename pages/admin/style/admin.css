@@ -280,7 +280,7 @@ body {
     font-size: 38px;
 }
 
-#previewBtn {
+.previewBtn {
     background-color: var(--color-green);
 }
 

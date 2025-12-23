@@ -1,7 +1,3 @@
-
-
-/* access page */
-
 .access-container {
     position: relative;
 }
@@ -43,8 +39,12 @@
     margin-right: -20px;
 }
 
-.deleteBtn, .btnCancel {
+.deleteBtn {
     background-color: var(--color-red);
+}
+
+.btnCancel {
+    background-color: var(--color-gray);
 }
 
 .btnSave {
