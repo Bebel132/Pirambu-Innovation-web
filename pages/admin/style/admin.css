@@ -280,7 +280,7 @@ body {
     font-size: 38px;
 }
 
-#previewBtn {
+.previewBtn {
     background-color: var(--color-green);
 }
 
@@ -503,4 +503,11 @@ form span, form label {
 
 #publish {
     background-color: var(--color-green);
+}
+
+.admin-nullContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
