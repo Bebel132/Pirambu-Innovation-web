@@ -1,5 +1,5 @@
 import { dom } from "./dom.js";
-import { state, clearSelectedCourse } from "./state.js";
+import { state, clearSelectedNews } from "./state.js";
 
 export function pushScreen(screenName) {
   if (state.currentScreen) state.screenStack.push(state.currentScreen);
@@ -13,7 +13,7 @@ export function popScreen() {
 }
 
 /**
- * handlers = { showFormScreen, showPreviewScreen, showListScreen, renderCourseLists }
+ * handlers = { showFormScreen, showPreviewScreen, showListScreen, renderNewsLists }
  */
 export function goBack(handlers) {
   const previous = popScreen();
@@ -25,14 +25,14 @@ export function goBack(handlers) {
 
     case "PREVIEW":
       handlers.showPreviewScreen(
-        state.selectedCourse ||
-        state.lastTransientPreview.course ||
+        state.selectedNews ||
+        state.lastTransientPreview.news ||
         { title: "", description: "" }
       );
       break;
 
     case "LIST":
-      if (state.selectedCourse == null) {
+      if (state.selectedNews == null) {
         dom.confirmationModal.style.display = "flex";
       } else {
         handlers.showListScreen();
@@ -40,10 +40,10 @@ export function goBack(handlers) {
       break;
 
     default:
-      clearSelectedCourse();
+      clearSelectedNews();
       dom.form.reset();
       handlers.showListScreen();
-      handlers.renderCourseLists();
+      handlers.renderNewsLists();
       break;
   }
 }

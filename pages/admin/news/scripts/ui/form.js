@@ -1,6 +1,6 @@
 import { dom } from "../dom.js";
-import { state, setSelectedCourse } from "../state.js";
-import { getCourseFile } from "../services/courseService.js";
+import { state, setSelectedNews } from "../state.js";
+import { getNewsFile } from "../services/newsService.js";
 
 export function autoResize(el) {
   el.style.height = "auto";
@@ -13,16 +13,17 @@ export function showFormScreen(action) {
   dom.contentForm.style.display = "block";
   dom.previewContent.style.display = "none";
   dom.sideBarMenu.style.display = "block";
+  dom.nullContent.style.display = "none";
 
   if (action === "new") {
     dom.saveBtn[0].children[1].textContent = "Salvar rascunho";
   }
 }
 
-export async function openEditForm(course) {
-  if (course) setSelectedCourse(course);
+export async function openEditForm(news) {
+  if (news) setSelectedNews(news);
 
-  if (state.selectedCourse?.is_draft) {
+  if (state.selectedNews?.is_draft) {
     dom.form_title.textContent = "Editar rascunho";
     dom.saveBtn[0].children[1].textContent = "Salvar rascunho";
   } else {
@@ -30,17 +31,15 @@ export async function openEditForm(course) {
     dom.saveBtn[0].children[1].textContent = "Salvar";
   }
 
-  dom.titleInput().value = state.selectedCourse?.title || "";
-  dom.startInput().value = state.selectedCourse?.start_date?.split("T")[0] || "";
-  dom.endInput().value = state.selectedCourse?.end_date?.split("T")[0] || "";
+  dom.titleInput().value = state.selectedNews?.title || "";
 
   const desc = dom.descInput();
-  desc.value = state.selectedCourse?.description || "";
+  desc.value = state.selectedNews?.description || "";
 
   const filePrev = dom.filePreviewOnForm();
 
-  if (state.selectedCourse?.hasFile && state.selectedCourse.id) {
-    const res = await getCourseFile(state.selectedCourse.id);
+  if (state.selectedNews?.hasFile && state.selectedNews.id) {
+    const res = await getNewsFile(state.selectedNews.id);
     if (res.ok) {
       filePrev.src = URL.createObjectURL(res.data);
       filePrev.style.display = "block";

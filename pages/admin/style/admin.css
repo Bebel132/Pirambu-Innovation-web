@@ -504,3 +504,10 @@ form span, form label {
 #publish {
     background-color: var(--color-green);
 }
+
+.admin-nullContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

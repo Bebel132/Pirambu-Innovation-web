@@ -1,15 +1,15 @@
 import { dom } from "./dom.js";
-import { state, setSelectedCourse, clearSelectedCourse } from "./state.js";
+import { state, setSelectedNews, clearSelectedNews } from "./state.js";
 import { pushScreen, goBack } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
-import { uploadCourseFile, createCourse, updateCourse, deactivateCourse, publishCourse } from "./services/courseService.js";
+import { uploadNewsFile, createNews, updateNews, deactivateNews, publishNews } from "./services/newsService.js";
 
 export function showListScreen() {
   state.currentScreen = "LIST";
   state.screenStack.length = 0;
 
-  clearSelectedCourse();
+  clearSelectedNews();
   dom.confirmationModal.style.display = "none";
 
   dom.content.style.display = "block";
@@ -19,16 +19,16 @@ export function showListScreen() {
   dom.sideBarMenu.style.display = "block";
 }
 
-async function uploadFileIfExists(courseId) {
+async function uploadFileIfExists(newsId) {
   const fileInput = dom.fileInput();
   if (!fileInput) return;
   const file = fileInput.files[0];
-  if (!file || !courseId) return;
+  if (!file || !newsId) return;
 
-  await uploadCourseFile(courseId, file);
+  await uploadNewsFile(newsId, file);
 }
 
-async function saveCourse(renderCourseLists) {
+async function saveNews(renderNewsLists) {
   const formData = new FormData(dom.form);
   formData.delete("file");
 
@@ -44,42 +44,38 @@ async function saveCourse(renderCourseLists) {
     }
   }
 
-  if (!state.selectedCourse) {
-    const res = await createCourse({
+  if (!state.selectedNews) {
+    const res = await createNews({
       title: formData.get("title"),
       description: formData.get("description"),
-      start_date: formData.get("start_date"),
-      end_date: formData.get("end_date"),
       is_draft: true,
     });
 
-    setSelectedCourse(res.data);
-    await uploadFileIfExists(state.selectedCourse.id);
+    setSelectedNews(res.data);
+    await uploadFileIfExists(state.selectedNews.id);
   } else {
-    await updateCourse(state.selectedCourse.id, {
+    await updateNews(state.selectedNews.id, {
       title: formData.get("title"),
       description: formData.get("description"),
-      start_date: formData.get("start_date"),
-      end_date: formData.get("end_date"),
-      is_draft: state.selectedCourse.is_draft,
+      is_draft: state.selectedNews.is_draft,
     });
   }
 
   dom.confirmationModal.style.display = "none";
-  state.lastTransientPreview.course = null;
+  state.lastTransientPreview.news = null;
 
-  clearSelectedCourse();
+  clearSelectedNews();
   dom.form.reset();
   showListScreen();
-  await renderCourseLists();
+  await renderNewsLists();
 }
 
-export function registerEvents({ renderCourseLists }) {
+export function registerEvents({ renderNewsLists }) {
   // editar (na preview)
   const editBtn = dom.editBtn();
   if (editBtn) {
     editBtn.onclick = async () => {
-      await openEditForm(state.selectedCourse);
+      await openEditForm(state.selectedNews);
       pushScreen("FORM");
     };
   }
@@ -87,7 +83,7 @@ export function registerEvents({ renderCourseLists }) {
   // salvar (form)
   if (dom.saveBtn) {
     dom.saveBtn.forEach((btn) => {
-      btn.onclick = async () => await saveCourse(renderCourseLists);
+      btn.onclick = async () => await saveNews(renderNewsLists);
     });
   }
 
@@ -97,18 +93,16 @@ export function registerEvents({ renderCourseLists }) {
     previewBtn.onclick = () => {
       const fd = new FormData(dom.form);
 
-      const new_course = {
+      const new_news = {
         title: fd.get("title"),
         description: fd.get("description"),
-        start_date: fd.get("start_date"),
-        end_date: fd.get("end_date"),
         is_draft: true,
         hasFile: false,
       };
 
-      state.lastTransientPreview.course = new_course;
+      state.lastTransientPreview.news = new_news;
       pushScreen("PREVIEW");
-      showPreviewScreen(new_course);
+      showPreviewScreen(new_news);
     };
   }
 
@@ -116,15 +110,15 @@ export function registerEvents({ renderCourseLists }) {
   const deleteBtn = dom.deleteBtn();
   if (deleteBtn) {
     deleteBtn.onclick = async () => {
-      if (!state.selectedCourse?.id) return;
+      if (!state.selectedNews?.id) return;
 
-      await deactivateCourse(state.selectedCourse.id);
+      await deactivateNews(state.selectedNews.id);
 
       dom.deleteModal.style.display = "none";
-      clearSelectedCourse();
+      clearSelectedNews();
       dom.form.reset();
       showListScreen();
-      renderCourseLists();
+      renderNewsLists();
     };
   }
 
@@ -132,14 +126,14 @@ export function registerEvents({ renderCourseLists }) {
   const publishBtn = dom.publishBtn();
   if (publishBtn) {
     publishBtn.onclick = async () => {
-      if (!state.selectedCourse?.id) return;
+      if (!state.selectedNews?.id) return;
 
-      await publishCourse(state.selectedCourse.id);
+      await publishNews(state.selectedNews.id);
 
-      clearSelectedCourse();
+      clearSelectedNews();
       dom.form.reset();
       showListScreen();
-      renderCourseLists();
+      renderNewsLists();
     };
   }
 
@@ -155,8 +149,8 @@ export function registerEvents({ renderCourseLists }) {
         preview.style.display = "block";
         dom.customBtn.style.display = "none";
 
-        if (state.selectedCourse?.id) {
-          await uploadCourseFile(state.selectedCourse.id, file);
+        if (state.selectedNews?.id) {
+          await uploadNewsFile(state.selectedNews.id, file);
         }
       }
     };
@@ -165,7 +159,7 @@ export function registerEvents({ renderCourseLists }) {
   // novo
   if (dom.newBtn) {
     dom.newBtn.onclick = () => {
-      clearSelectedCourse();
+      clearSelectedNews();
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
@@ -185,7 +179,7 @@ export function registerEvents({ renderCourseLists }) {
         showFormScreen,
         showPreviewScreen,
         showListScreen,
-        renderCourseLists,
+        renderNewsLists,
       });
   });
 
