@@ -12,6 +12,26 @@
 </head>
 
 <body>
+    <div class="loader">
+      <div class="loader-inner">
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <p>Carregando...</p>
+      </div>
+    </div>
     <div class="admin_container">
         <div class="top_bar">
             <img src="../../../assets/imgs/logo-cinza.png" alt="">
@@ -22,26 +42,119 @@
         <div class="admin_content">
             <nav class="sidebar_menu">
             </nav>
-            <div class="admin-content_container content">
-                <!-- <div class="drafts">
+            <div class="admin-content_container content" style="display: none;">
+                <div class="drafts">
                     <h1>Rascunhos</h1>
                     <div class="drafts_list list"></div>
                 </div>
                 <hr>
                 <div class="published">
-                    <h1>Eventos publicados</h1>
+                    <h1>Notícias publicadas</h1>
                     <div class="published_list list"></div>
-                </div> -->
-                <div class="underConstruction">
-                    <span class="material-symbols-outlined">construction</span>
-                    <h2>Ainda estamos construindo essa tela!</h2>
-                    <p>volte depois</p>
+                </div>
+            </div>
+            <div class="admin-contentForm_container contentForm">
+                    <div class="contentForm_title-container">
+                        <span class="material-symbols-outlined back">chevron_left</span>
+                        <h1 class="contentForm-title"></h1>
+                    </div>
+                    <div class="btns">
+                        <button class="saveBtn">
+                            <span class="material-symbols-outlined">save_as</span>
+                            <span></span>
+                        </button>
+                        <button class="previewBtn">
+                            Pré-visualização <span class="material-symbols-outlined"><span
+                                    class="material-symbols-outlined">arrow_right_alt</span></span>
+                        </button>
+                    </div>
+                    <form class="form" action="">
+                        <div class="top_form">
+                            <label for="file" class="custom-btn">
+                                <span class="material-symbols-outlined">
+                                    add_photo_alternate
+                                </span>
+                                Adicionar imagem
+                            </label>
+                            <label for="file" class="custom-img_container">
+                                <img src="" alt="" class="custom-file_preview">
+                            </label>
+                            <input type="file" name="file" id="file">
+                            <div class="top-right_form">
+                                <div class="title-input">
+                                    <label for="title">Título</label>
+                                    <input type="text" name="title" id="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="description-input">
+                            <label for="description">Descrição</label>
+                            <textarea name="description" id="description"></textarea>
+                        </div>
+                    </form>
+            </div>
+            <div class="admin-previewContent_container previewContent">
+                <h1><span class="material-symbols-outlined back">chevron_left</span> Pré-visualização</h1>
+                <div class="btns">
+                    <button id="editBtn">
+                        <span class="material-symbols-outlined">edit</span> Editar
+                    </button>
+                    <button id="publish">
+                        <span class="material-symbols-outlined">publish</span> Publicar
+                    </button>
+                </div>
+                <div class="preview">
+                    <img src="" alt="" class="previewImg">
+                    <div class="preview-texts">
+                        <h1 class="preview-title"></h1>
+                        <span class="preview-dates"></span>
+                        <p class="preview-description"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-nullContent" style="display: none;">
+                <h1>Ainda não há registros</h1>
+            </div>
+            <div class="modal" id="confirmation-modal" style="display: none;">
+                <div class="modal-container">
+                    <h1>Deseja sair sem salvar?</h1>
+                    <div class="btns">
+                        <button class="saveBtn">
+                            <span class="material-symbols-outlined">save_as</span> Salvar rascunho
+                        </button>
+                        <button id="dontSave">Não salvar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="delete-modal" style="display: none;">
+                <div class="modal-container">
+                    <h1>Você tem certeza que deseja excluir o curso?</h1>
+                    <span>A publicação será adicionada a lixeira onde permanecerá por 30 dias.</span>
+                    <div class="btns">
+                        <button id="deleteBtn">
+                            <span class="material-symbols-outlined">delete</span> Excluir
+                        </button>
+                        <button id="cancel">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="published-modal" style="display: none;">
+                <div class="modal-container">
+                    <h1>Publicado com sucesso!</h1>
+                    <div class="btns">
+                        <button class="backToPrevious">Voltar</button>
+                        <button class="previewBtn">Visualizar</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <button class="newButton">+</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="module">
         import { initMenu } from './../scripts/menu.js';
+        import { renderEvents } from './index.js';
 
         const menu_items = [
             { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html" },
@@ -53,6 +166,8 @@
         ]
 
         initMenu(menu_items);
+
+        renderEvents();
     </script>
 </body>
 
