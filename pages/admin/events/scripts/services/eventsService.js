@@ -1,6 +1,6 @@
 import { api } from "../../../../../assets/apiHelper.js";
 
-export async function listEventss() {
+export async function listEvents() {
   return api("events/");
 }
 

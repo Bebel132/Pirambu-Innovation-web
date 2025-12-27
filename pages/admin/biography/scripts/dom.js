@@ -1,0 +1,43 @@
+export const dom = {
+  content: document.querySelector(".content"),
+  nullContent: document.querySelector(".admin-nullContent"),
+  contentForm: document.querySelector(".contentForm"),
+  previewContent: document.querySelector(".previewContent"),
+  newBtn: document.querySelector(".newButton"),
+  backBtn: document.querySelectorAll(".back"),
+  file_preview: document.querySelector(".previewImg"),
+  customBtn: document.querySelector(".custom-btn"),
+  form: document.querySelector(".form"),
+  sideBarMenu: document.querySelector(".sidebar_menu"),
+  form_title: document.querySelector(".contentForm-title"),
+  saveBtn: document.querySelectorAll(".saveBtn"),
+  confirmationModal: document.querySelector("#confirmation-modal"),
+  deleteModal: document.querySelector("#delete-modal"),
+  
+  publishBtn: () => document.querySelector("#publish"),
+  editBtn: () => document.querySelector("#editBtn"),
+  previewBtn: () => document.querySelectorAll(".previewBtn"),
+  deleteBtn: () => document.querySelector("#deleteBtn"),
+  dontSaveBtn: () => document.querySelector("#dontSave"),
+  cancelDeleteBtn: () => document.querySelector("#cancel"),
+  
+  titleInput: () => document.querySelector("#title"),
+  startInput: () => document.querySelector("#start"),
+  endInput: () => document.querySelector("#end"),
+  descInput: () => document.querySelector("#description"),
+  fileInput: () => document.querySelector("#file"),
+  filePreviewOnForm: () => document.querySelector(".custom-file_preview"),
+  
+  aboutUsCustomBtn: document.querySelector(".aboutUsCustom-btn"),
+  aboutUsContentForm: document.querySelector(".contentForm-aboutUs"),
+  aboutUsPreview: document.querySelector(".previewContent-aboutUs"),
+  aboutUsFile_preview: document.querySelector(".aboutUs-previewImg"),
+  aboutUsForm: document.querySelector(".aboutUs-form"),
+  aboutUsSaveBtn: document.querySelector("#aboutUs-saveBtn"),
+  
+  aboutUsEditBtn: () => document.querySelector("#aboutUs-editBtn"),
+  aboutUsItem: () => document.querySelector(".aboutUs-item"),
+
+  aboutUsFilePreviewOnForm: () => document.querySelector(".aboutUsCustom-file_preview"),
+  aboutUsDescInput: () => document.querySelector("#aboutUs-description"),
+};

@@ -1,36 +1,36 @@
 import { dom } from "../dom.js";
-import { state, setSelectedEvents } from "../state.js";
-import { listEvents, getEventsFile } from "../services/eventsService.js";
+import { state, setSelectedProjects } from "../state.js";
+import { listProjects, getProjectsFile } from "../services/projectsService.js";
 
-export async function renderEventsLists({ onEdit, onDelete }) {
+export async function renderProjectsLists({ onEdit, onDelete }) {
   let drafts = [];
   let published = [];
 
-  const response = await listEvents();
-  response.data.forEach((event) => {
-    event.is_draft ? drafts.push(event) : published.push(event);
+  const response = await listProjects();
+  response.data.forEach((project) => {
+    project.is_draft ? drafts.push(project) : published.push(project);
   });
 
   if(drafts.length > 0 || published.length > 0) {
-    await renderEventsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
-    await renderEventsListUI(published, ".published_list", "published_item", { onEdit, onDelete });
+    await renderProjectsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
+    await renderProjectsListUI(published, ".published_list", "published_item", { onEdit, onDelete });
   } else {
     dom.content.style.display = "none";
     dom.nullContent.style.display = "flex";
   }
 }
 
-async function renderEventsListUI(list, containerSelector, className, handlers) {
+async function renderProjectsListUI(list, containerSelector, className, handlers) {
   const container = document.querySelector(containerSelector);
   container.innerHTML = "";
 
-  for (const event of list) {
+  for (const project of list) {
     const item = document.createElement("div");
     item.classList.add(className, "item");
-    item.dataset.data = JSON.stringify(event);
+    item.dataset.data = JSON.stringify(project);
 
     const titleSpan = document.createElement("span");
-    titleSpan.append(event.title || "(Sem título)");
+    titleSpan.append(project.title || "(Sem título)");
     item.append(titleSpan);
 
     const dots = document.createElement("span");
@@ -52,8 +52,8 @@ async function renderEventsListUI(list, containerSelector, className, handlers) 
     item.append(div);
 
     // background (imagem/placeholder)
-    if (event.hasFile) {
-      const res = await getEventsFile(event.id);
+    if (project.hasFile) {
+      const res = await getProjectsFile(project.id);
       if (res.ok) item.style.backgroundImage = `url(${URL.createObjectURL(res.data)})`;
       else item.style.backgroundColor = "var(--color-gray)";
     } else {
@@ -72,14 +72,14 @@ async function renderEventsListUI(list, containerSelector, className, handlers) 
       div.style.display = "none";
 
       const parsed = JSON.parse(item.dataset.data);
-      setSelectedEvents(parsed);
+      setSelectedProjects(parsed);
 
       await handlers.onEdit(parsed);
     };
 
     deleteButton.onclick = () => {
       const parsed = JSON.parse(item.dataset.data);
-      setSelectedEvents(parsed);
+      setSelectedProjects(parsed);
       handlers.onDelete(parsed);
     };
   }
