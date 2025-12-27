@@ -1,6 +1,6 @@
 import { dom } from "../dom.js";
-import { state, setSelectedEvents } from "../state.js";
-import { getEventsFile } from "../services/eventsService.js";
+import { state, setSelectedProjects } from "../state.js";
+import { getProjectsFile } from "../services/projectsService.js";
 
 export function autoResize(el) {
   el.style.height = "auto";
@@ -20,26 +20,26 @@ export function showFormScreen(action) {
   }
 }
 
-export async function openEditForm(event) {
-  if (event) setSelectedEvents(event);
+export async function openEditForm(project) {
+  if (project) setSelectedProjects(project);
 
-  if (state.selectedEvents?.is_draft) {
+  if (state.selectedProjects?.is_draft) {
     dom.form_title.textContent = "Editar rascunho";
     dom.saveBtn[0].children[1].textContent = "Salvar rascunho";
   } else {
-    dom.form_title.textContent = "Editar evento";
+    dom.form_title.textContent = "Editar projeto";
     dom.saveBtn[0].children[1].textContent = "Salvar";
   }
 
-  dom.titleInput().value = state.selectedEvents?.title || "";
+  dom.titleInput().value = state.selectedProjects?.title || "";
 
   const desc = dom.descInput();
-  desc.value = state.selectedEvents?.description || "";
+  desc.value = state.selectedProjects?.description || "";
 
   const filePrev = dom.filePreviewOnForm();
 
-  if (state.selectedEvents?.hasFile && state.selectedEvents.id) {
-    const res = await getEventsFile(state.selectedEvents.id);
+  if (state.selectedProjects?.hasFile && state.selectedProjects.id) {
+    const res = await getProjectsFile(state.selectedProjects.id);
     if (res.ok) {
       filePrev.src = URL.createObjectURL(res.data);
       filePrev.style.display = "block";

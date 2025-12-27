@@ -1,0 +1,36 @@
+.aboutUs-item {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutUs-item > span {
+    position: relative;
+    font-size: 40px;
+}
+
+#aboutUs-preview {
+    max-width: 916px;
+    margin: 0 auto;
+}
+
+#aboutUs-image {
+    width: 100%;
+    height: 175px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    border-radius: 15px;
+}
+
+.aboutUs-previewImg {
+    width: 282px;
+}
+
+.preview-texts {
+    border: none;
+    box-shadow: none;
+}
