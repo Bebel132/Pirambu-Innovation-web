@@ -75,6 +75,18 @@ async function saveCourse(renderCourseLists) {
 }
 
 export function registerEvents({ renderCourseLists }) {
+  const items = dom.items();
+  if (items) {
+    items.forEach((item) => {
+      item.onclick = async () => {
+        const parsed = JSON.parse(item.dataset.data);
+        setSelectedCourse(parsed);
+        pushScreen("PREVIEW");
+        await showPreviewScreen(parsed);
+      };
+    });
+  }
+
   // editar (na preview)
   const editBtn = dom.editBtn();
   if (editBtn) {

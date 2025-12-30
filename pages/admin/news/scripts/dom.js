@@ -14,6 +14,7 @@ export const dom = {
   confirmationModal: document.querySelector("#confirmation-modal"),
   deleteModal: document.querySelector("#delete-modal"),
 
+  items: () => document.querySelectorAll(".item"),
   publishBtn: () => document.querySelector("#publish"),
   editBtn: () => document.querySelector("#editBtn"),
   previewBtn: () => document.querySelector("#previewBtn"),

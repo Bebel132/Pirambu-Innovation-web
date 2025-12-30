@@ -6,8 +6,8 @@ import { dom } from "./scripts/dom.js";
 import { pushScreen } from "./scripts/navigation.js";
 
 async function onEditFromList(news) {
-  pushScreen("PREVIEW");
-  await showPreviewScreen(news);
+  await openEditForm(news);
+  pushScreen("FORM");
 }
 
 function onDeleteFromList() {

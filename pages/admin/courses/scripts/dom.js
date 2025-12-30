@@ -13,7 +13,8 @@ export const dom = {
   saveBtn: document.querySelectorAll(".saveBtn"),
   confirmationModal: document.querySelector("#confirmation-modal"),
   deleteModal: document.querySelector("#delete-modal"),
-
+  
+  items: () => document.querySelectorAll(".item"),
   publishBtn: () => document.querySelector("#publish"),
   editBtn: () => document.querySelector("#editBtn"),
   previewBtn: () => document.querySelector("#previewBtn"),

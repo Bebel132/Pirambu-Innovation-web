@@ -90,6 +90,18 @@ export async function saveAboutUs() {
 }
 
 export function registerProjects({ renderProjectsLists }) {
+  const items = dom.items();
+  if (items) {
+    items.forEach((item) => {
+      item.onclick = async () => {
+        const parsed = JSON.parse(item.dataset.data);
+        setSelectedProjects(parsed);
+        pushScreen("PREVIEW");
+        await showPreviewScreen(parsed);
+      };
+    });
+  }
+  
   // editar (na preview)
   const editBtn = dom.editBtn();
   if (editBtn) {

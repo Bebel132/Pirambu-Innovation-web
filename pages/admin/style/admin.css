@@ -133,8 +133,10 @@ body {
 }
 
 .list {
+    display: flex;
     flex-wrap: wrap;
     margin: 40px 0;
+    gap: 30px;
     overflow-x: clip;
 }
 
@@ -155,20 +157,24 @@ body {
 }
 
 .list > .item {
-    cursor: default;
+    cursor: pointer;
+    overflow: visible;
+    position: relative;
 }
 
 .list > .item:hover {
     transform: none;
-    box-shadow: none;
+    box-shadow: 1px 1px 10px #cccccc;
 }
 
 .item-actions {
     display: none;
     flex-direction: column;
-    position: absolute;
-    right: 0;
-    bottom: -105px;
+    position: relative;
+    float: right;
+    top: 55%;
+    cursor: pointer;
+    z-index: 1000;
 }
 
 .item-actions > button {
@@ -180,8 +186,8 @@ body {
     border: none;
     background-color: var(--color-gray);
     color: #000;
-    cursor: pointer;
     transition: .2s;
+    cursor: pointer;
 }
 
 .item-actions > button:hover {
