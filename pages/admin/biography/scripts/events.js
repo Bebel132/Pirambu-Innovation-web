@@ -238,7 +238,7 @@ export function registerProjects({ renderProjectsLists }) {
       dom.customBtn.style.display = "flex";
       dom.filePreviewOnForm().style.display = "none";
 
-      dom.form_title.textContent = "Adicionar curso";
+      dom.form_title.textContent = "Adicionar projeto";
 
       pushScreen("FORM");
       showFormScreen("new");

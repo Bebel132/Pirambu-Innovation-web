@@ -189,7 +189,7 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
       dom.customBtn.style.display = "flex";
       dom.filePreviewOnForm().style.display = "none";
 
-      dom.form_title.textContent = "Adicionar curso";
+      dom.form_title.textContent = "Adicionar evento";
 
       pushScreen("FORM");
       showFormScreen("new");

@@ -27,7 +27,7 @@ export async function openEditForm(news) {
     dom.form_title.textContent = "Editar rascunho";
     dom.saveBtn[0].children[1].textContent = "Salvar rascunho";
   } else {
-    dom.form_title.textContent = "Editar curso";
+    dom.form_title.textContent = "Editar notícia";
     dom.saveBtn[0].children[1].textContent = "Salvar";
   }
 
