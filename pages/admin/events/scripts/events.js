@@ -98,24 +98,37 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
     });
   }
 
-  // preview do form (novo registro)
   const previewBtn = dom.previewBtn();
-  if (previewBtn) {
-    previewBtn.onclick = () => {
-      const fd = new FormData(dom.form);
+    if (previewBtn) {
+      previewBtn.forEach((btn) => {
+        btn.onclick = () => {
+          const fd = new FormData(dom.form);
 
-      const new_events = {
-        title: fd.get("title"),
-        description: fd.get("description"),
-        is_draft: true,
-        hasFile: false,
-      };
+          if(state.selectedEvents) {
+            const updated_event = {
+              ...state.selectedEvents,
+              title: fd.get("title"),
+              description: fd.get("description"),
+            };
 
-      state.lastTransientPreview.events = new_events;
-      pushScreen("PREVIEW");
-      showPreviewScreen(new_events);
-    };
-  }
+            state.lastTransientPreview.events = updated_event;
+            pushScreen("PREVIEW");
+            showPreviewScreen(updated_event);
+          } else {
+            const new_event = {
+              title: fd.get("title"),
+              description: fd.get("description"),
+              is_draft: true,
+              hasFile: false,
+            };
+
+            state.lastTransientPreview.events = new_event;
+            pushScreen("PREVIEW");
+            showPreviewScreen(new_event);
+          }
+        };
+      })
+    }
 
   // deletar
   const deleteBtn = dom.deleteBtn();

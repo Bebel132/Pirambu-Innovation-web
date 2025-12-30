@@ -24,6 +24,10 @@ export async function renderPreview(course) {
   if (course.hasFile && course.id) {
     const res = await getCourseFile(course.id);
     if (res.ok) dom.file_preview.src = URL.createObjectURL(res.data);
+  } else {
+    if(dom.fileInput()?.files[0]) {
+      dom.file_preview.src = URL.createObjectURL(dom.fileInput().files[0]);
+    }
   }
 }
 
@@ -45,14 +49,17 @@ export async function showPreviewScreen(course) {
 
   if (!publishBtn || !editBtn) return;
 
-  if (course.active && course.is_draft) {
-    publishBtn.style.display = "flex";
-    editBtn.style.display = "flex";
-  } else if (course.active === undefined) {
-    publishBtn.style.display = "flex";
-    editBtn.style.display = "none";
-  } else {
+  if(course.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {
     publishBtn.style.display = "none";
+    editBtn.style.display = "none";
+  } else if(!course.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {
+    publishBtn.style.display = "none"; 
+    editBtn.style.display = "none";
+  } else if(course.is_draft && state.screenStack[state.screenStack.length -1] == "LIST") {
+    publishBtn.style.display = "flex"; 
+    editBtn.style.display = "flex";
+  } else if(!course.is_draft && state.screenStack[state.screenStack.length -1] == "LIST") {
+    publishBtn.style.display = "none"; 
     editBtn.style.display = "flex";
   }
 }

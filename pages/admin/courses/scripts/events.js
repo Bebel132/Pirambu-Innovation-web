@@ -103,25 +103,41 @@ export function registerEvents({ renderCourseLists }) {
     });
   }
 
-  // preview do form (novo registro)
+  // preview do form
   const previewBtn = dom.previewBtn();
   if (previewBtn) {
-    previewBtn.onclick = () => {
-      const fd = new FormData(dom.form);
+    previewBtn.forEach((btn) => {
+      btn.onclick = () => {
+        const fd = new FormData(dom.form);
+        
+        if(state.selectedCourse) {
+          const updated_course = {
+            ...state.selectedCourse,
+            title: fd.get("title"),
+            description: fd.get("description"),
+            start_date: fd.get("start_date"),
+            end_date: fd.get("end_date"),
+          };
 
-      const new_course = {
-        title: fd.get("title"),
-        description: fd.get("description"),
-        start_date: fd.get("start_date"),
-        end_date: fd.get("end_date"),
-        is_draft: true,
-        hasFile: false,
+          state.lastTransientPreview.course = updated_course;
+          pushScreen("PREVIEW");
+          showPreviewScreen(updated_course);
+        } else {
+          const new_course = {
+            title: fd.get("title"),
+            description: fd.get("description"),
+            start_date: fd.get("start_date"),
+            end_date: fd.get("end_date"),
+            is_draft: true,
+            hasFile: false,
+          };
+          
+          state.lastTransientPreview.course = new_course;
+          pushScreen("PREVIEW");
+          showPreviewScreen(new_course);
+        }
       };
-
-      state.lastTransientPreview.course = new_course;
-      pushScreen("PREVIEW");
-      showPreviewScreen(new_course);
-    };
+    })
   }
 
   // deletar

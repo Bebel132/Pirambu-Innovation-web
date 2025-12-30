@@ -15,6 +15,10 @@ export async function renderPreview(event) {
   if (event.hasFile && event.id) {
     const res = await getEventsFile(event.id);
     if (res.ok) dom.file_preview.src = URL.createObjectURL(res.data);
+  } else {
+    if(dom.fileInput()?.files[0]) {
+      dom.file_preview.src = URL.createObjectURL(dom.fileInput().files[0]);
+    }
   }
 }
 
@@ -36,14 +40,17 @@ export async function showPreviewScreen(event) {
 
   if (!publishBtn || !editBtn) return;
 
-  if (event.active && event.is_draft) {
-    publishBtn.style.display = "flex";
-    editBtn.style.display = "flex";
-  } else if (event.active === undefined) {
-    publishBtn.style.display = "flex";
-    editBtn.style.display = "none";
-  } else {
+  if(event.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {
     publishBtn.style.display = "none";
+    editBtn.style.display = "none";
+  } else if(!event.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {
+    publishBtn.style.display = "none"; 
+    editBtn.style.display = "none";
+  } else if(event.is_draft && state.screenStack[state.screenStack.length -1] == "LIST") {
+    publishBtn.style.display = "flex"; 
+    editBtn.style.display = "flex";
+  } else if(!event.is_draft && state.screenStack[state.screenStack.length -1] == "LIST") {
+    publishBtn.style.display = "none"; 
     editBtn.style.display = "flex";
   }
 }

@@ -146,18 +146,29 @@ export function registerProjects({ renderProjectsLists }) {
         } else {
           const fd = new FormData(dom.form);
           
-          const new_projects = {
-            id: state.selectedProjects?.id,
-            title: fd.get("title"),
-            description: fd.get("description"),
-            is_draft: true,
-            hasFile: fd.get("file")?.size > 0 || dom.file_preview.src !== "",
-          };
-          
-          state.lastTransientPreview.projects = new_projects;
-
-          pushScreen("PREVIEW");
-          showPreviewScreen(new_projects);
+          if(state.selectedProjects) {
+            const updated_projects = {
+              ...state.selectedProjects,
+              title: fd.get("title"),
+              description: fd.get("description"),
+            };
+            state.lastTransientPreview.projects = updated_projects;
+            pushScreen("PREVIEW");
+            showPreviewScreen(updated_projects);
+          } else {
+            const new_projects = {
+              id: state.selectedProjects?.id,
+              title: fd.get("title"),
+              description: fd.get("description"),
+              is_draft: true,
+              hasFile: fd.get("file")?.size > 0 || dom.file_preview.src !== "",
+            };
+            
+            state.lastTransientPreview.projects = new_projects;
+  
+            pushScreen("PREVIEW");
+            showPreviewScreen(new_projects);
+          }
         }
       };
     }

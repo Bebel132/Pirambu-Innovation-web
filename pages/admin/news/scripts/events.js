@@ -99,24 +99,37 @@ export function registerEvents({ renderNewsLists }) {
     });
   }
 
-  // preview do form (novo registro)
   const previewBtn = dom.previewBtn();
-  if (previewBtn) {
-    previewBtn.onclick = () => {
-      const fd = new FormData(dom.form);
+    if (previewBtn) {
+      previewBtn.forEach((btn) => {
+        btn.onclick = () => {
+          const fd = new FormData(dom.form);
+          
+          if(state.selectedNews) {
+            const updated_news = {
+              ...state.selectedNews,
+              title: fd.get("title"),
+              description: fd.get("description"),
+            };
 
-      const new_news = {
-        title: fd.get("title"),
-        description: fd.get("description"),
-        is_draft: true,
-        hasFile: false,
-      };
+            state.lastTransientPreview.news = updated_news;
+            pushScreen("PREVIEW");
+            showPreviewScreen(updated_news);
+          } else {
+            const new_news = {
+              title: fd.get("title"),
+              description: fd.get("description"),
+              is_draft: true,
+              hasFile: false,
+            };
 
-      state.lastTransientPreview.news = new_news;
-      pushScreen("PREVIEW");
-      showPreviewScreen(new_news);
-    };
-  }
+            state.lastTransientPreview.news = new_news;
+            pushScreen("PREVIEW");
+            showPreviewScreen(new_news);
+          }
+        };
+      })
+    }
 
   // deletar
   const deleteBtn = dom.deleteBtn();

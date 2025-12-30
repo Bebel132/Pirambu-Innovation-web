@@ -15,9 +15,9 @@ export const dom = {
   deleteModal: document.querySelector("#delete-modal"),
 
   items: () => document.querySelectorAll(".item"),
-  publishBtn: () => document.querySelector("#publish"),
+  publishBtn: () => document.querySelectorAll("#publish"),
   editBtn: () => document.querySelector("#editBtn"),
-  previewBtn: () => document.querySelector("#previewBtn"),
+  previewBtn: () => document.querySelectorAll(".previewBtn"),
   deleteBtn: () => document.querySelector("#deleteBtn"),
   dontSaveBtn: () => document.querySelector("#dontSave"),
   cancelDeleteBtn: () => document.querySelector("#cancel"),

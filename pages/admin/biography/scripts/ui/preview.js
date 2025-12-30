@@ -15,6 +15,10 @@ export async function renderPreview(project) {
   if (project.hasFile) {
     const res = await getProjectsFile(project.id);
     if (res.ok) dom.file_preview.src = URL.createObjectURL(res.data);
+  } else {
+    if(dom.fileInput()?.files[0]) {
+      dom.file_preview.src = URL.createObjectURL(dom.fileInput().files[0]);
+    }
   }
 }
 
@@ -36,14 +40,17 @@ export async function showPreviewScreen(project) {
 
   if (!publishBtn || !editBtn) return;
 
-  if (project.active && project.is_draft) {
-    publishBtn.style.display = "flex";
-    editBtn.style.display = "flex";
-  } else if (project.active === undefined) {
-    publishBtn.style.display = "flex";
-    editBtn.style.display = "none";
-  } else {
+  if(project.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {
     publishBtn.style.display = "none";
+    editBtn.style.display = "none";
+  } else if(!project.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {
+    publishBtn.style.display = "none"; 
+    editBtn.style.display = "none";
+  } else if(project.is_draft && state.screenStack[state.screenStack.length -1] == "LIST") {
+    publishBtn.style.display = "flex"; 
+    editBtn.style.display = "flex";
+  } else if(!project.is_draft && state.screenStack[state.screenStack.length -1] == "LIST") {
+    publishBtn.style.display = "none"; 
     editBtn.style.display = "flex";
   }
 }
