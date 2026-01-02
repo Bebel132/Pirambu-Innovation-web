@@ -63,6 +63,11 @@ async function renderTrashList() {
         listContainer.appendChild(projectsItem)
     }
 
+    if(listContainer.innerHTML.trim() === "") {
+        document.querySelector(".trash-empty").style.display = "flex";
+        listContainer.style.display = "none";
+    }
+
     document.querySelectorAll(".item").forEach(item => {
         item.onclick = () => {
             switch(item.id) {
