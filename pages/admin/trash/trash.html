@@ -8,10 +8,36 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../../../style.css">
     <link rel="stylesheet" href="../style/admin.css">
+    <style>
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="loading" style="display: none;"></div>
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <div class="loader-line-wrap">
+                <div class="loader-line"></div>
+            </div>
+            <p>Carregando...</p>
+        </div>
+    </div>
     <div class="admin_container">
         <div class="top_bar">
             <img src="../../../assets/imgs/logo-cinza.png" alt="">
@@ -23,21 +49,37 @@
             <nav class="sidebar_menu">
             </nav>
             <div class="admin-content_container content trash-container">
-                <!-- <div class="trash">
+                <div class="trash">
                     <h1>Lixeira</h1>
                     <div class="list"></div>
-                </div> -->
-                
-                <div class="underConstruction">
-                    <span class="material-symbols-outlined">construction</span>
-                    <h2>Ainda estamos construindo essa tela!</h2>
-                    <p>volte depois</p>
+                </div>
+                <div class="coursesTrash admin-content_container trash" style="display: none;">
+                    <h1><span class="material-symbols-outlined back">chevron_left</span>Cursos</h1>
+                    <div class="coursesList list"></div>
+                </div>
+                <div class="newsTrash admin-content_container trash" style="display: none;">
+                    <h1><span class="material-symbols-outlined back">chevron_left</span>Notícias</h1>
+                    <div class="newsList list"></div>
+                </div>
+                <div class="eventsTrash admin-content_container trash" style="display: none;">
+                    <h1><span class="material-symbols-outlined back">chevron_left</span>Eventos</h1>
+                    <div class="eventsList list"></div>
+                </div>
+                <div class="projectsTrash admin-content_container trash" style="display: none;">
+                    <h1><span class="material-symbols-outlined back">chevron_left</span>Projetos</h1>
+                    <div class="projectsList list"></div>
                 </div>
             </div>
-            <!-- <div class="coursesTrash admin-content_container trash" style="display: none;">
-                <h1>Cursos</h1>
-                <div class="coursesList"></div>
-            </div> -->
+        </div>
+        <div class="modal" id="delete-modal" style="display: none;">
+            <div class="modal-container">
+                <h1>Deseja excluir permanentemente a publicação?</h1>
+                <p>A publicação não poderá mais ser restaurada.</p>
+                <div class="btns">
+                    <button id="deleteBtn">Excluir</button>
+                    <button class="cancel">Cancelar</button>
+                </div>
+            </div>
         </div>
     </div>
     <script type="module">

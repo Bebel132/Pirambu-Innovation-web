@@ -77,7 +77,9 @@ async function renderCourseListUI(list, containerSelector, className, handlers) 
       await handlers.onEdit(parsed);
     };
 
-    deleteButton.onclick = () => {
+    deleteButton.onclick = (e) => {
+      e.stopPropagation();
+      
       const parsed = JSON.parse(item.dataset.data);
       setSelectedCourse(parsed);
       handlers.onDelete(parsed);
