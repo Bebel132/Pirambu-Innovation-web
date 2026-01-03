@@ -33,30 +33,32 @@
 
     <!-- HEADER -->
     <header class="header">
-      <img src="assets/imgs/logo-cinza.png" alt="Pirambu Innovation" />
-      <span class="material-symbols-outlined">search</span>
-    </header>
-        <nav id="navbar">
+      <a href="/index.html"><img src="assets/imgs/logo-cinza.png" alt="Pirambu Innovation" /></a>
+      
+      <nav id="navbar">
             <ul id="nav_list">
                 <li class="nav-item active">
-                    <a href="#cursos">Cursos</a>
+                    <a href="/pages/visitor/cursos.html">Cursos</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#eventos">Eventos</a>
+                    <a href="/">Eventos</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#nos-apoie">Nos apoie</a>
+                    <a href="/pages/visitor/apoie.html">Nos apoie</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#sobre-nos">Sobre nós</a>
+                    <a href="/pages/visitor/sobre.html">Sobre nós</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contatos">Contatos</a>
+                    <a href="/">Contatos</a>
+                </li>
+                <li>
+                    <span class="material-symbols-outlined">search</span>
                 </li>
             </ul>
-
         </nav>
-    </div>
+    </header>
+        
     <div class="bottomMenu">
         <ul>
             <a href="">
@@ -112,7 +114,10 @@
             <h1>Nos apoie</h1>
             <div class="text">
                 <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
-                <button><img src="assets/imgs/logo-zap.svg" alt=""> Whatsapp</button>
+                    <button onclick="window.open('https://wa.me/?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
+                        <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
+                        Whatsapp
+                    </button>
             </div>
         </div>
     </section>
@@ -121,7 +126,7 @@
         <div class="aboutUs-container">
             <img class="aboutUs-image" src="assets/imgs/logo-branca.png" alt="logo" class="logo">
             <p class="aboutUs-text">O Pirambu Innovation mantém a mesma saga do Pirambu Digital, o compromisso da oportunidade ao jovem, a oportunidade que faz a diferença em suas vidas. A diferença que reduz as desigualdades.</p>
-            <button>Saiba mais</button>
+            <button onclick="window.location.href='/pages/visitor/sobre.html'">Saiba mais</button>
         </div>
     </section>
     <section class="contacts-section">
