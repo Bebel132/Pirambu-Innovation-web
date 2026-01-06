@@ -181,7 +181,7 @@ body {
     font-size: 38px;
 }
 
-/* Botão central (Cursos) */
+/* Botão central (Cursos) 
 .bottomMenu a:nth-child(3) li {
     background-color: var(--color-blue);
     width: 78px;
@@ -189,7 +189,8 @@ body {
     position: relative;
     bottom: 10px;
     color: #fff;
-}
+} */
+ 
 /* ===============================
    CURSOS
 ================================ */
