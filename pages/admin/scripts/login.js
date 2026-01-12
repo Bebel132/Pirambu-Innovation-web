@@ -5,14 +5,19 @@ async function initLogin() {
         const login = document.querySelector(".login")
         const unauthorized = document.querySelector("#unauthorized")
         
-        const loginBtn = document.querySelector("#login_btn")
+        const googleBtn = document.querySelector("#google")
+        const microsoftBtn = document.querySelector("#microsoft")
         //const logoutBtn = document.querySelector("#logout-btn")
 
         loading.style.display = "none"
         unauthorized.style.display = "none"
 
-        loginBtn.onclick = () => {
+        googleBtn.onclick = () => {
             window.location.href = `${API_URL}/auth/login`
+        }
+
+        microsoftBtn.onclick = () => {
+            window.location.href = `${API_URL}/auth/microsoft/login`
         }
 
         // logoutBtn.onclick = async () => {

@@ -25,18 +25,13 @@
     flex-direction: column;
 }
 
-.login_container h1 {
-    font-size: 64px;
-    margin-bottom: 30px;
-}
-
 #unauthorized {
     color: #9c0000;
     margin-top: 10px;
     font-weight: bold;
 }
 
-#login_btn {
+.login-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -55,18 +50,23 @@
     min-width: 200px;
 }
 
-#login_btn:hover {
+.login-btn:hover {
     background-color: #f8f9fa;
     border-color: #d2e3fc;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
 }
 
-#login_btn:active {
+.login-btn:active {
     background-color: #eeeeee;
 }
 
-.google-logo {
+
+.logo {
     width: 18px;
     height: 18px;
     margin-right: 10px; /* Espaço entre o G e o texto */
+}
+
+.login_container span {
+    margin: 10px 0;
 }

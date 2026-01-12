@@ -8,8 +8,8 @@ async function initUser() {
     document.querySelector("#imagemDePerfil").src = user.picture;
 
     document.querySelector("#logout").onclick = async () => {
-        await api("auth/logout", { method: "POST" });
-        window.location = "index.html";
+        await api("auth/logout", { method: "POST", credentials: "include" });
+        window.location = "/pages/admin/index.html";
     };
 
     document.querySelector(".user-btn").onclick = null;
