@@ -11,6 +11,8 @@ export async function renderCourseLists({ onEdit, onDelete }) {
     course.is_draft ? drafts.push(course) : published.push(course);
   });
 
+  state.listLength = drafts.length + published.length;
+
   if(drafts.length > 0 || published.length > 0) {
     await renderCourseListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
     await renderCourseListUI(published, ".published_list", "published_item", { onEdit, onDelete });

@@ -10,6 +10,8 @@ export async function renderEventsLists({ onEdit, onDelete }) {
   response.data.forEach((event) => {
     event.is_draft ? drafts.push(event) : published.push(event);
   });
+  
+  state.listLength = drafts.length + published.length;
 
   if(drafts.length > 0 || published.length > 0) {
     await renderEventsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });

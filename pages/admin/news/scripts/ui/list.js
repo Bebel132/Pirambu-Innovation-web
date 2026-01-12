@@ -10,6 +10,8 @@ export async function renderNewsLists({ onEdit, onDelete }) {
   response.data.forEach((news) => {
     news.is_draft ? drafts.push(news) : published.push(news);
   });
+    
+  state.listLength = drafts.length + published.length;
 
   if(drafts.length > 0 || published.length > 0) {
     await renderNewsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });

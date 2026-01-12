@@ -1,7 +1,7 @@
 export const state = {
   selectedEvents: null,
   lastTransientPreview: { events: null },
-
+  listLength: 0,
   screenStack: [],
   currentScreen: "LIST",
 };

@@ -17,6 +17,11 @@ export function showListScreen() {
   dom.previewContent.style.display = "none";
   dom.contentForm.style.display = "none";
   dom.sideBarMenu.style.display = "block";
+    
+  if(state.listLength === 0) {
+    dom.content.style.display = "none";
+    dom.nullContent.style.display = "flex"; 
+  }
 }
 
 async function uploadFileIfExists(eventsId) {

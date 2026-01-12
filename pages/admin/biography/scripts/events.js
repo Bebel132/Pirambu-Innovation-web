@@ -23,6 +23,11 @@ export function showListScreen() {
   dom.sideBarMenu.style.display = "block";
   dom.aboutUsPreview.style.display = "none";
   dom.aboutUsContentForm.style.display = "none";
+  
+  if(state.listLength === 0) {
+    dom.content.style.display = "none";
+    dom.nullContent.style.display = "flex"; 
+  }
 }
 
 async function uploadFileIfExists(projectsId) {

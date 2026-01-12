@@ -10,6 +10,8 @@ export async function renderProjectsLists({ onEdit, onDelete }) {
   response.data.forEach((project) => {
     project.is_draft ? drafts.push(project) : published.push(project);
   });
+  
+  state.listLength = drafts.length + published.length;
 
   if(drafts.length > 0 || published.length > 0) {
     await renderProjectsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
