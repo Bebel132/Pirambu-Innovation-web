@@ -74,6 +74,11 @@ export function registerMarkdownEvents(textarea) {
                 wrapOrInsert('~~', '~~', { reselectInner: true }, textarea);
                 break;
 
+            case 'separator':
+                // ---
+                insertBlock('\n---\n', 'block', textarea);
+                break;
+
             case 'h1':
                 // # Título
                 insertBlock('# ', "block", textarea);
