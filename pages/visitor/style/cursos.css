@@ -128,69 +128,6 @@ body {
 }
 
 /* ===============================
-   HEADER
-================================ */
-
-.header {
-    height: 76px;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: -1px 2px 19.3px rgba(0,0,0,0.25);
-}
-
-.header img {
-    width: 132px;
-}
-
-/* ===============================
-   NAVBAR INFERIOR
-================================ */
-
-.bottomMenu {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff;
-    z-index: 100000;
-}
-
-.bottomMenu ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-}
-
-.bottomMenu a {
-    text-decoration: none;
-}
-
-.bottomMenu li {
-    padding: 10px;
-    font-size: 12px;
-    color: var(--color-gray);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.bottomMenu span {
-    font-size: 38px;
-}
-
-/* Botão central (Cursos) */
-.bottomMenu a:nth-child(3) li {
-    background-color: var(--color-blue);
-    width: 78px;
-    border-radius: 100%;
-    position: relative;
-    bottom: 10px;
-    color: #fff;
-}
-/* ===============================
    CURSOS
 ================================ */
 
@@ -224,7 +161,7 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
     position: relative;
     cursor: pointer;
-
+    width: 180px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
