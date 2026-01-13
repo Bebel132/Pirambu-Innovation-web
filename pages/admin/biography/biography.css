@@ -34,3 +34,13 @@
     border: none;
     box-shadow: none;
 }
+
+.custom-img_container {
+    cursor: pointer;
+    width: fit-content;
+}
+
+.aboutUsCustom-file_preview {
+    max-width: 420px;
+    width: 100%;
+}

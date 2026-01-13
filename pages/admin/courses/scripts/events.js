@@ -4,6 +4,7 @@ import { pushScreen, goBack } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadCourseFile, createCourse, updateCourse, deactivateCourse, publishCourse } from "./services/courseService.js";
+import { registerMarkdownEvents } from "../../../../assets/markdownMenu.js";
 
 export function showListScreen() {
   state.currentScreen = "LIST";
@@ -228,4 +229,7 @@ export function registerEvents({ renderCourseLists }) {
 
   const cancel = dom.cancelDeleteBtn();
   if (cancel) cancel.onclick = () => (dom.deleteModal.style.display = "none");
+
+  const textarea = dom.descInput();
+  registerMarkdownEvents(textarea)
 }

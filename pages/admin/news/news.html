@@ -87,6 +87,16 @@
                     </div>
                     <div class="description-input">
                         <label for="description">Descrição</label>
+                        <div class="markdownBtns">
+                            <button class="markdownBtn" id="bold" type="button" title="Negrito (**texto**)"><b>N</b></button>
+                            <button class="markdownBtn" id="italic" type="button" title="Itálico (*texto*)"><i>I</i></button>
+                            <button class="markdownBtn" id="strike" type="button" title="Tachado (~~texto~~)"><s>S</s></button>
+                            <button class="markdownBtn" id="h1" type="button" title="Título 1 (# Título)">H1</button>
+                            <button class="markdownBtn" id="h2" type="button" title="Título 2 (## Título)">H2</button>
+                            <button class="markdownBtn" id="ul" type="button" title="Lista não ordenada (- item)">Lista</button>
+                            <button class="markdownBtn" id="table" type="button" title="Tabela">Tabela</button>
+                            <button class="markdownBtn" id="link" type="button" title="Link (cola URL)">Link</button>
+                        </div>
                         <textarea name="description" id="description"></textarea>
                     </div>
                 </form>
@@ -127,7 +137,7 @@
             <div class="modal" id="delete-modal" style="display: none;">
                 <div class="modal-container">
                     <h1>Você tem certeza que deseja excluir o curso?</h1>
-                    <span>A publicação será adicionada a lixeira onde permanecerá por 30 dias.</span>
+                    <span>A publicação será adicionada a lixeira onde permanecerá até você esvaziar a lixeira..</span>
                     <div class="btns">
                         <button id="deleteBtn">
                             <span class="material-symbols-outlined">delete</span> Excluir

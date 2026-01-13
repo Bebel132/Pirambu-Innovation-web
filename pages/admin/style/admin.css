@@ -525,3 +525,27 @@ form span, form label {
     align-items: center;
     margin: 0 auto;
 }
+
+/* markdown menu */
+
+.markdownBtns {
+    display: flex;
+    top: 0;
+    position: sticky;
+    background: #fff;
+}
+
+.markdownBtns button {
+    min-width: 50px;
+    padding: .5rem 1rem;
+    border-radius: none;
+    border: none;
+    background-color: var(--color-gray);
+    color: #000;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.markdownBtns button:hover {
+    background-color: var(--color-green);
+}

@@ -74,6 +74,7 @@ async function renderProjectsListUI(list, containerSelector, className, handlers
     editButton.onclick = async (e) => {
       e.stopPropagation();
       div.style.display = "none";
+      state.inAboutUs = false;
 
       const parsed = JSON.parse(item.dataset.data);
       setSelectedProjects(parsed);

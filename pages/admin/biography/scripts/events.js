@@ -8,6 +8,7 @@ import { updateAboutUs } from "./services/aboutUsService.js";
 import { getAboutUs, uploadAboutUsFile } from "./services/aboutUsService.js";
 import { showAboutUsPreviewScreen } from "./ui/preview-aboutUs.js";
 import { openAboutUsEditForm } from "./ui/form-aboutUs.js";
+import { registerMarkdownEvents } from "../../../../assets/markdownMenu.js";
 
 export function showListScreen() {
   state.currentScreen = "LIST";
@@ -103,6 +104,7 @@ export function registerProjects({ renderProjectsLists }) {
         setSelectedProjects(parsed);
         pushScreen("PREVIEW");
         await showPreviewScreen(parsed);
+        state.inAboutUs = false;
       };
     });
   }
@@ -275,4 +277,10 @@ export function registerProjects({ renderProjectsLists }) {
     showAboutUsPreviewScreen(aboutUs.data);
     state.inAboutUs = true;
   }
+
+  const textarea = dom.descInput();
+  registerMarkdownEvents(textarea);
+
+  const aboutUsTextarea = dom.aboutUsDescInput();
+  registerMarkdownEvents(aboutUsTextarea);
 }

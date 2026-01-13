@@ -10,7 +10,7 @@ export function showAboutUsFormScreen() {
   dom.content.style.display = "none";
   dom.newBtn.style.display = "none";
   dom.aboutUsContentForm.style.display = "block";
-  dom.aboutUsForm.style.display = "block";
+  dom.aboutUsForm.style.display = "flex";
   dom.sideBarMenu.style.display = "block";
   dom.aboutUsPreview.style.display = "none";
   
