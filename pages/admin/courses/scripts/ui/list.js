@@ -12,10 +12,12 @@ export async function renderCourseLists({ onEdit, onDelete }) {
   });
 
   state.listLength = drafts.length + published.length;
-
+  
   if(drafts.length > 0 || published.length > 0) {
     await renderCourseListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
     await renderCourseListUI(published, ".published_list", "published_item", { onEdit, onDelete });
+    dom.content.style.display = "block";
+    dom.nullContent.style.display = " none";
   } else {
     dom.content.style.display = "none";
     dom.nullContent.style.display = "flex";

@@ -36,7 +36,7 @@
         <div class="top_bar">
             <img src="../../../assets/imgs/logo-cinza.png" alt="">
             <div class="user-btn">
-                <span class="material-symbols-outlined">account_circle</span>
+                <span class="material-symbols-outlined">manage_accounts</span>
             </div>
         </div>
         <div class="admin_content">
@@ -69,22 +69,20 @@
                     </button>
                 </div>
                 <form class="form" action="">
-                    <div class="top_form">
-                        <label for="file" class="custom-btn">
-                            <span class="material-symbols-outlined">
-                                add_photo_alternate
-                            </span>
-                            Adicionar imagem
-                        </label>
-                        <label for="file" class="custom-img_container">
-                            <img src="" alt="" class="custom-file_preview">
-                        </label>
-                        <input type="file" name="file" id="file">
-                        <div class="top-right_form">
-                            <div class="title-input">
-                                <label for="title">Título</label>
-                                <input type="text" name="title" id="title">
-                            </div>
+                    <label for="file" class="custom-btn">
+                        <span class="material-symbols-outlined">
+                            add_photo_alternate
+                        </span>
+                        Adicionar imagem
+                    </label>
+                    <label for="file" class="custom-img_container">
+                        <img src="" alt="" class="custom-file_preview">
+                    </label>
+                    <input type="file" name="file" id="file">
+                    <div class="top-right_form">
+                        <div class="title-input">
+                            <label for="title">Título</label>
+                            <input type="text" name="title" id="title">
                         </div>
                     </div>
                     <div class="description-input">
@@ -148,7 +146,9 @@
                 </div>
             </div>
         </div>
-        <button class="newButton">+</button>
+        <button class="newButton">
+            <span class="material-symbols-outlined">add</span>
+        </button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>

@@ -31,7 +31,7 @@ body {
 .user-btn {
     position: absolute;
     right: 0;
-    padding: 0 50px 0 25px;
+    padding: 0 50px 0 85px;
     border-left: 1px solid #000;
     cursor: pointer;
     transition: .2s;
@@ -54,20 +54,27 @@ body {
     position: fixed;
     background-color: #91268D;
     width: 99px;
-    height: 99px;
+    height: 95px;
     right: 0;
     bottom: 0;
-    color: #FFA9FC;
-    font-size: 57px;
+    color: #ffffff;
+    font-weight: lighter;
     border-radius: 100%;
     border: 0;
     margin: 70px 50px;
     cursor: pointer;
     transition: .1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .newButton:hover {
     box-shadow: 1px 1px 10px #989898;
+}
+
+.newButton span {
+    font-size: 60px;
 }
 
 /* menu */
@@ -79,8 +86,13 @@ body {
     padding-top: 30px;
 }
 
+.menu_item {
+    padding: 0 20px;
+}
+
 .menu-item_btn {
-    width: 240px;
+    max-width: 240px;
+    width: 100%;
     height: 51px;
     margin: 10px auto;
     text-align: left;
@@ -122,6 +134,7 @@ body {
     width: 100%;
     margin-top: 30px;
     padding-bottom: 100px;
+    padding-right: 50px;
 }
 
 .drafts h1, .published h1, .trash h1 {
@@ -213,32 +226,6 @@ body {
     margin-left: -5px;
 }
 
-.perfil-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#imagemDePerfil {
-    margin: 20px 0;
-}
-
-#email {
-    margin: 5px 0;
-}
-
-#logout {
-    margin-top: 20px;
-    padding: 10px 30px;
-    border: none;
-    cursor: pointer;
-    transition: .2s;
-}
-
-#logout:hover {
-    background-color: #d0d0d0;
-}
-
 .underConstruction {
     display: flex;
     justify-content: center;
@@ -315,6 +302,8 @@ body {
 
 .contentForm {
     padding-bottom: 60px;
+    max-width: 900px;
+    width: 100%;
 }
 
 .contentForm_title-container {
@@ -323,7 +312,24 @@ body {
     gap: 10px;
 }
 
+form {
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 form input {
+    height: 57px;
+    border: none;
+    background-color: #D9D9D945;
+    border-radius: 50px;
+    padding: 0 30px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+form textarea {
     height: 57px;
     border: none;
     background-color: #D9D9D945;
@@ -349,7 +355,6 @@ form span, form label {
     flex-direction: column;
     font-weight: 400;
     color: #4B4B4D;
-    margin: 40px auto;
 }
 
 .custom-btn span {
@@ -374,7 +379,6 @@ form span, form label {
     height: 218px;
     background-color: #D9D9D945;
     border: none;
-    margin-top: 10px;
     padding: 15px;
 }
 
@@ -391,7 +395,6 @@ form span, form label {
     background-color: var(--color-gray);
     padding: 15px;
 }
-
 
 .modal {
     width: 100vw;
@@ -487,6 +490,8 @@ form span, form label {
 
 .previewImg {
     margin: 0 auto;
+    max-width: 916px;
+    width: 100%;
 }
 
 .preview-texts {

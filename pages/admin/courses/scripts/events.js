@@ -13,7 +13,7 @@ export function showListScreen() {
   dom.confirmationModal.style.display = "none";
 
   dom.content.style.display = "block";
-  dom.newBtn.style.display = "block";
+  dom.newBtn.style.display = "flex";
   dom.previewContent.style.display = "none";
   dom.contentForm.style.display = "none";
   dom.sideBarMenu.style.display = "block";

@@ -6,7 +6,7 @@ async function initAccess() {
     const { data : allowedUsers }  = await api("users/allowedUsers");
 
     document.querySelector("#newAccess").onclick = async () => {
-        let email = prompt("");
+        let email = prompt("Adicione um novo acesso (email)");
 
         await api("users/allowedUsers/", {
             method: "POST",

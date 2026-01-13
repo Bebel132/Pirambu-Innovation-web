@@ -16,6 +16,8 @@ export async function renderProjectsLists({ onEdit, onDelete }) {
   if(drafts.length > 0 || published.length > 0) {
     await renderProjectsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
     await renderProjectsListUI(published, ".published_list", "published_item", { onEdit, onDelete });
+    dom.content.style.display = "block";
+    dom.nullContent.style.display = " none";
   } else {
     dom.content.style.display = "none";
     dom.nullContent.style.display = "flex";

@@ -50,12 +50,3 @@
 .btnSave {
     background-color: var(--color-green);
 }
-
-#newAccess {
-    width: 140px;
-    position: absolute;
-    right: 0;
-    margin-top: -30px;
-    background-color: var(--main-color);
-    color: #fff;
-}

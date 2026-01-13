@@ -39,7 +39,6 @@ input[type=date] {
 }
 
 .description-input {
-    margin-top: 30px;
     min-height: 200px;
     overflow: hidden;
     resize: none;
