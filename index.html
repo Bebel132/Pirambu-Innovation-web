@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="pages/visitor/style/media.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 <body>
 <div class="loader">
       <div class="loader-inner">
@@ -38,6 +40,9 @@
       <nav id="navbar">
             <ul id="nav_list">
                 <li class="nav-item active">
+                    <a href="/">Página Inicial</a>
+                </li>
+                <li class="nav-item">
                     <a href="/pages/visitor/cursos.html">Cursos</a>
                 </li>
                 <li class="nav-item">
@@ -48,9 +53,6 @@
                 </li>
                 <li class="nav-item">
                     <a href="/pages/visitor/sobre.html">Sobre nós</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/">Contatos</a>
                 </li>
             </ul>
         </nav>
@@ -111,7 +113,7 @@
             <h1>Nos apoie</h1>
             <div class="text">
                 <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
-                    <button onclick="window.open('https://wa.me/?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
+                    <button onclick="window.open('https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
                         <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
                         Whatsapp
                     </button>
@@ -131,12 +133,15 @@
             <h1>Contatos</h1>
             <ul>
                 <li>
+                    <img src="/assets/imgs/Instagram_logo_2016 3.png" alt="icone_instagram">
                     <p>@pirambuinnovation.oficial</p>
                 </li>
                 <li>
+                    <img src="/assets/imgs/Group.png" alt="icone_whatsapp" class="whatsapp-icon">
                     <p>(85) 99705-4321</p>
                 </li>
                 <li>
+                    <img src="/assets/imgs/Frame.png" alt="icone_local">
                     <p>Rua N Sra das Graças 1097,<br> Cristo Redentor (Pirambu), <br>Fortaleza/CE</p>
                 </li>
             </ul>
@@ -147,6 +152,5 @@
 
         initHome()
     </script>
-    <script src="pages/visitor/animation.js"></script>
 </body>
 </html>
