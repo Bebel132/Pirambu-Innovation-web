@@ -127,10 +127,16 @@ body {
     margin: 0 20px;
 }
 
+@media (max-width: 1360px) {
+    .menu-item_icon {
+        margin: 0 10px;
+    }
+}
+
 /*  */
 
 .admin-content_container {
-    max-width: 900px;
+    max-width: 1140px;
     width: 100%;
     margin-top: 30px;
     padding-bottom: 100px;
@@ -319,17 +325,7 @@ form {
     width: 100%;
 }
 
-form input {
-    height: 57px;
-    border: none;
-    background-color: #D9D9D945;
-    border-radius: 50px;
-    padding: 0 30px;
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-form textarea {
+form input, form textarea {
     height: 57px;
     border: none;
     background-color: #D9D9D945;
