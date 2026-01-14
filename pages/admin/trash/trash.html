@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="../../../style.css">
     <link rel="stylesheet" href="../style/admin.css">
+    <link rel="stylesheet" href="trash.css">
     <style>
         h1 {
             display: flex;
@@ -60,7 +61,10 @@
             </nav>
             <div class="admin-content_container content trash-container">
                 <div class="trash">
-                    <h1>Lixeira</h1>
+                    <div class="title">
+                        <h1>Lixeira</h1>
+                        <button id="cleanAll" class="cleanBtn">Esvaziar a lixeira</button>
+                    </div>
                     <div class="list"></div>
                 </div>
                 <div class="trash-empty">
@@ -68,20 +72,32 @@
                     <h2>A lixeira está vazia</h2>
                     <p>Os itens excluídos aparecerão aqui.</p>
                 </div>
-                <div class="coursesTrash admin-content_container trash" style="display: none;">
-                    <h1><span class="material-symbols-outlined back">chevron_left</span>Cursos</h1>
+                <div class="coursesTrash trash" style="display: none;">
+                    <div class="title">
+                        <h1><span class="material-symbols-outlined back">chevron_left</span>Cursos</h1>
+                        <button id="cleanCourses" class="cleanBtn">Esvaziar cursos</button>
+                    </div>
                     <div class="coursesList list"></div>
                 </div>
-                <div class="newsTrash admin-content_container trash" style="display: none;">
-                    <h1><span class="material-symbols-outlined back">chevron_left</span>Notícias</h1>
+                <div class="newsTrash trash" style="display: none;">
+                    <div class="title">
+                        <h1><span class="material-symbols-outlined back">chevron_left</span>Notícias</h1>
+                        <button id="cleanNews" class="cleanBtn">Esvaziar notícias</button>
+                    </div>
                     <div class="newsList list"></div>
                 </div>
-                <div class="eventsTrash admin-content_container trash" style="display: none;">
-                    <h1><span class="material-symbols-outlined back">chevron_left</span>Eventos</h1>
+                <div class="eventsTrash trash" style="display: none;">
+                    <div class="title">
+                        <h1><span class="material-symbols-outlined back">chevron_left</span>Eventos</h1>
+                        <button id="cleanEvents" class="cleanBtn">Esvaziar eventos</button>
+                    </div>
                     <div class="eventsList list"></div>
                 </div>
-                <div class="projectsTrash admin-content_container trash" style="display: none;">
-                    <h1><span class="material-symbols-outlined back">chevron_left</span>Projetos</h1>
+                <div class="projectsTrash trash" style="display: none;">
+                    <div class="title">
+                        <h1><span class="material-symbols-outlined back">chevron_left</span>Projetos</h1>
+                        <button id="cleanProjects" class="cleanBtn">Esvaziar projetos</button>
+                    </div>
                     <div class="projectsList list"></div>
                 </div>
             </div>
@@ -100,6 +116,7 @@
     <script type="module">
         import { initMenu } from './../scripts/menu.js';
         import { renderTrashList } from './trash.js';
+        import { api } from '../../../assets/apiHelper.js';
 
         const menu_items = [
             { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html" },
@@ -112,7 +129,7 @@
 
         initMenu(menu_items);
 
-        renderTrashList()
+        renderTrashList();
     </script>
 </body>
 
