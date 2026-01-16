@@ -80,6 +80,7 @@ async function saveProjects(renderProjectsLists) {
   dom.form.reset();
   showListScreen();
   await renderProjectsLists();
+  registerProjects()
 }
 
 export async function saveAboutUs() {
@@ -96,18 +97,21 @@ export async function saveAboutUs() {
 }
 
 export function registerProjects({ renderProjectsLists }) {
-  const items = dom.items();
-  if (items) {
-    items.forEach((item) => {
-      item.onclick = async () => {
-        const parsed = JSON.parse(item.dataset.data);
-        setSelectedProjects(parsed);
-        pushScreen("PREVIEW");
-        await showPreviewScreen(parsed);
-        state.inAboutUs = false;
-      };
-    });
-  }
+  const container = dom.content;
+
+  if (!container || container.dataset.bound === "true") return;
+
+  container.addEventListener("click", async (event) => {
+    const item = event.target.closest(".item");
+    if (!item) return;
+
+    const data = JSON.parse(item.dataset.data);
+
+    setSelectedProjects(data);
+    pushScreen("PREVIEW");
+    await showPreviewScreen(data);
+    state.inAboutUs = false;
+  });
   
   // editar (na preview)
   const editBtn = dom.editBtn();

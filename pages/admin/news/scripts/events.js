@@ -77,17 +77,21 @@ async function saveNews(renderNewsLists) {
 }
 
 export function registerEvents({ renderNewsLists }) {
-  const items = dom.items();
-    if (items) {
-      items.forEach((item) => {
-        item.onclick = async () => {
-          const parsed = JSON.parse(item.dataset.data);
-          setSelectedNews(parsed);
-          pushScreen("PREVIEW");
-          await showPreviewScreen(parsed);
-        };
-      });
-    }
+  const container = dom.content;
+  
+  if (!container || container.dataset.bound === "true") return;
+
+  container.addEventListener("click", async (event) => {
+    const item = event.target.closest(".item");
+    if (!item) return;
+
+    const data = JSON.parse(item.dataset.data);
+
+    setSelectedNews(data);
+    pushScreen("PREVIEW");
+    await showPreviewScreen(data);
+    state.inAboutUs = false;
+  });
   
   // editar (na preview)
   const editBtn = dom.editBtn();
