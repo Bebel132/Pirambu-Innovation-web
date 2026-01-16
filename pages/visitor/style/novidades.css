@@ -1,0 +1,67 @@
+.novidades-page {
+  padding-bottom: 130px;
+}
+
+.novidades-section {
+  margin-top: 20px;
+}
+
+.section-title {
+  margin: 16px 20px;
+  font-size: 26px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-title span {
+  font-size: 28px;
+}
+
+/* SLIDER */
+.slider {
+  overflow-x: auto;
+  padding-left: 20px;
+}
+
+.slider-track {
+  display: flex;
+  gap: 16px;
+}
+
+/* CARD */
+.novidade-card {
+  min-width: 85vw;
+  height: 230px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* GRADIENTE */
+.novidade-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.25),
+    transparent
+  );
+}
+
+/* TEXTO */
+.novidade-card span {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 1;
+}
