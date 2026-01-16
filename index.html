@@ -87,6 +87,14 @@
         </ul>
     </div>
     <section class="courses-section">
+        <div class="banner">
+            <img src="/assets/imgs/Foto-com-os-Alunos-do-PJ3.jpeg" alt="Foto com os alunos do PJ3">  
+
+            <div class="overlay">
+                <h2>Explore nossos Cursos</h2>
+                <a href="/pages/visitor/cursos.html" class="btn">Mais Cursos</a>
+            </div>
+        </div>
         <div class="courses-container">
             <a href="pages/visitor/cursos.html"><h1>Cursos gratuitos ❯</h1></a>
             <ul class="courses-list list"></ul>
@@ -102,40 +110,41 @@
     <section class="news-section">
   <a href="pages/visitor/novidades.html"><h1>Notícias ❯</h1></a>
 
-  <div class="news-slider">
-    <button class="arrow left" id="newsPrev">❮</button>
+        <div class="news-slider">
+            <button class="arrow left" id="newsPrev">❮</button>
 
-    <ul class="news-track" id="newsTrack"></ul>
+            <ul class="news-track" id="newsTrack"></ul>
 
-    <button class="arrow right" id="newsNext">❯</button>
-  </div>
+            <button class="arrow right" id="newsNext">❯</button>
+        </div>
 
-  <div class="news-dots" id="newsDots"></div>
-</section>
-
-
+        <div class="news-dots" id="newsDots"></div>
+    </section>
 
 
-    <section class="supportUs-section">
-        <div class="supportUs-container">
-            <h1>Nos apoie</h1>
-            <div class="text">
-                <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
-                    <button onclick="window.open('https://wa.me/?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
-                        <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
-                        Whatsapp
-                    </button>
+
+    <div class="desktop-wrapper">
+        <section class="supportUs-section">
+            <div class="supportUs-container">
+                <h1>Nos apoie</h1>
+                <div class="text">
+                    <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
+                        <button onclick="window.open('https://wa.me/?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
+                            <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
+                            Whatsapp
+                        </button>
+                </div>
             </div>
-        </div>
-    </section>
-    <section class="aboutUs-section">
-        <h1>Sobre nós</h1>
-        <div class="aboutUs-container">
-            <img class="aboutUs-image" src="assets/imgs/logo-branca.png" alt="logo" class="logo">
-            <p class="aboutUs-text">O Pirambu Innovation mantém a mesma saga do Pirambu Digital, o compromisso da oportunidade ao jovem, a oportunidade que faz a diferença em suas vidas. A diferença que reduz as desigualdades.</p>
-            <button onclick="window.location.href='/pages/visitor/sobre.html'">Saiba mais</button>
-        </div>
-    </section>
+        </section>
+        <section class="aboutUs-section">
+            <h1>Sobre nós</h1>
+            <div class="aboutUs-container">
+                <img class="aboutUs-image" src="assets/imgs/logo-branca.png" alt="logo" class="logo">
+                <p class="aboutUs-text">O Pirambu Innovation mantém a mesma saga do Pirambu Digital, o compromisso da oportunidade ao jovem, a oportunidade que faz a diferença em suas vidas. A diferença que reduz as desigualdades.</p>
+                <button onclick="window.location.href='/pages/visitor/sobre.html'">Saiba mais</button>
+            </div>
+        </section>
+    </div>
     <section class="contacts-section">
         <div class="contacts-container">
             <h1>Contatos</h1>
@@ -157,6 +166,5 @@
 
         initHome()
     </script>
-    <script src="pages/visitor/animation.js"></script>
 </body>
 </html>

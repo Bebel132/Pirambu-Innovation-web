@@ -39,7 +39,7 @@ export async function api(
 
     // Redireciona se não autorizado (admin)
     if (response.status === 401 && window.location.href.includes("pages/admin")) {
-      window.location.href = "index.html";
+      window.location.href = "/pages/admin";
       return;
     }
 

@@ -3,15 +3,17 @@
 }
 
 #access-list {
-    margin: 15px 0 0 30px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
+    font-size: 18px;
 }
 
 #access-list li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 30px;
 }
 
@@ -23,20 +25,8 @@
     width: 100%;
 }
 
-.access-container button {
-    padding: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 15px;
-    transition: .2s;
-}
-
 .access-container button:hover {
     transform: scale(1.02);
-}
-
-.btnCancel {
-    margin-right: -20px;
 }
 
 .deleteBtn {
@@ -49,4 +39,28 @@
 
 .btnSave {
     background-color: var(--color-green);
+}
+
+.editBtn {
+    background-color: var(--color-gray);
+}
+
+.btns {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+}
+
+.btns button {
+    font-size: 20px;
+}
+
+input {
+    height: 57px;
+    border: none;
+    background-color: #D9D9D945;
+    border-radius: 50px;
+    padding: 0 30px;
+    font-size: 18px;
+    margin-top: 10px;
 }
