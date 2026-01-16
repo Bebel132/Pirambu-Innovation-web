@@ -61,12 +61,12 @@ function render(users) {
     })
 
     document.querySelector("#deleteBtn").onclick = async () => {
+        deleteModal.style.display = "none";
         await api(`users/allowedUsers/${currentUserId}`, {
             method: "DELETE"
         });
         
         const { data : allowedUsers }  = await api("users/allowedUsers");
-        deleteModal.style.display = "none";
         render(allowedUsers)
         currentUserId = null;
     }
