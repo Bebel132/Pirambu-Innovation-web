@@ -524,6 +524,14 @@ form span, form label {
 
 /* markdown menu */
 
+.markdownContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    position: relative;
+}
+
 .markdownBtns {
     display: flex;
     top: 0;
@@ -534,7 +542,7 @@ form span, form label {
 .markdownBtns button {
     min-width: 50px;
     padding: .5rem 1rem;
-    border-radius: none;
+    border-radius: 0;
     border: none;
     background-color: var(--color-gray);
     color: #000;
@@ -544,4 +552,43 @@ form span, form label {
 
 .markdownBtns button:hover {
     background-color: var(--color-green);
+}
+
+.markdown-help {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.markdown-tooltip {
+    position: absolute;
+    background: #222;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    width: 500px;
+    font-size: 14px;
+    z-index: 1000;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.markdown-help-wrapper:hover .markdown-tooltip,
+.markdown-help-wrapper:focus-within .markdown-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.markdown-tooltip code {
+    background: none;
+    padding: 0;
+}
+
+.markdown-tooltip hr {
+    margin: 10px 0;
+}
+
+.markdown-tooltip h3 {
+    margin-bottom: 5px;
 }
