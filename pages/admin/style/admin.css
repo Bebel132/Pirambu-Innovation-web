@@ -357,7 +357,7 @@ form span, form label {
     font-size: 150px;
 }
 
-.custom-file_preview, .custom-img_container {
+.custom-file_preview {
     width: 420px;
     height: 240px;
     cursor: pointer;
