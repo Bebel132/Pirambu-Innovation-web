@@ -47,7 +47,6 @@
         width: 100vw;
         height: 400px;
         object-fit: cover;
-        max-width: 1400px;
     }
 
     .overlay {
@@ -91,7 +90,6 @@
 
     .courses-container {
         background-color: white;
-        max-width: 1200px; 
         margin: 8%; 
         margin-bottom: 1%;
         margin-top: -60px; 
