@@ -363,6 +363,10 @@ form span, form label {
     cursor: pointer;
 }
 
+.custom-img_container {
+    height: auto;
+}
+
 #file {
     display: none;
 }
