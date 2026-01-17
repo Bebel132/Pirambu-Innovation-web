@@ -142,7 +142,7 @@ export function registerProjects({ renderProjectsLists }) {
   const previewBtn = dom.previewBtn();
   previewBtn.forEach((btn) => {
     if (btn) {
-      btn.onclick = () => {
+      btn.onclick = async () => {
         if (state.inAboutUs) {
           const fd = new FormData(dom.aboutUsForm);
           
@@ -154,7 +154,9 @@ export function registerProjects({ renderProjectsLists }) {
           state.lastTransientPreview.aboutUs = aboutUsContent;
 
           pushScreen("PREVIEW ABOUT US");
-          showAboutUsPreviewScreen(aboutUsContent);
+          await showAboutUsPreviewScreen(aboutUsContent);
+
+          dom.aboutUsEditBtn().style.display = "none";
         } else {
           const fd = new FormData(dom.form);
           
@@ -180,6 +182,7 @@ export function registerProjects({ renderProjectsLists }) {
   
             pushScreen("PREVIEW");
             showPreviewScreen(new_projects);
+            
           }
         }
       };
@@ -231,21 +234,27 @@ export function registerProjects({ renderProjectsLists }) {
       const file = e.target.files[0];
       
       if (file) {
+        const preview = dom.filePreviewOnForm();
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
         dom.customBtn.style.display = "none";
-        
-        if (state.selectedProjects?.id && !state.inAboutUs) {
-          await uploadProjectsFile(state.selectedProjects.id, file);
-          const preview = dom.filePreviewOnForm();
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = "block";
-        } else {
-          await uploadAboutUsFile(file);
-          const preview = dom.aboutUsFilePreviewOnForm();
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = "block";
-        }
       }
     };
+  }
+
+  const aboutUsFileInput = dom.aboutUsFileInput();
+  if(aboutUsFileInput) {
+    aboutUsFileInput.onchange = async (e) => {
+      const file = e.target.files[0];
+
+      if(file) {
+        await uploadAboutUsFile(file);
+        const preview = dom.aboutUsFilePreviewOnForm();
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        dom.customBtn.style.display = "none";
+      }
+    }
   }
 
   // novo

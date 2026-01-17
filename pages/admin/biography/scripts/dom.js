@@ -28,6 +28,7 @@ export const dom = {
   endInput: () => document.querySelector("#end"),
   descInput: () => document.querySelector("#description"),
   fileInput: () => document.querySelector("#file"),
+  aboutUsFileInput: () => document.querySelector("#aboutUs-file"),
   filePreviewOnForm: () => document.querySelector(".custom-file_preview"),
   
   aboutUsCustomBtn: document.querySelector(".aboutUsCustom-btn"),

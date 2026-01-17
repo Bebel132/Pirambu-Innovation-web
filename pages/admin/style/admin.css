@@ -367,7 +367,7 @@ form span, form label {
     height: auto;
 }
 
-#file {
+#file, #aboutUs-file {
     display: none;
 }
 
