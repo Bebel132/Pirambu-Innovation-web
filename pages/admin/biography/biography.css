@@ -44,3 +44,7 @@
     max-width: 420px;
     width: 100%;
 }
+
+.admin-nullContent {
+    margin-top: 100px;
+}

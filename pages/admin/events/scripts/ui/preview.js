@@ -37,7 +37,7 @@ export async function showPreviewScreen(event) {
 
   const publishBtn = dom.publishBtn();
   const editBtn = dom.editBtn();
-
+  
   if (!publishBtn || !editBtn) return;
 
   if(event.is_draft && state.screenStack[state.screenStack.length -1] == "FORM") {

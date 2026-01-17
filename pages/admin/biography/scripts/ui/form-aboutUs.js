@@ -13,13 +13,12 @@ export function showAboutUsFormScreen() {
   dom.aboutUsForm.style.display = "flex";
   dom.sideBarMenu.style.display = "block";
   dom.aboutUsPreview.style.display = "none";
-  
 }
 
 export async function openAboutUsEditForm(aboutUs) {
     const desc = dom.aboutUsDescInput();
     desc.value = aboutUs?.description || "";
-
+    
     const filePrev = dom.aboutUsFilePreviewOnForm();
     
     if(aboutUs.hasFile) {

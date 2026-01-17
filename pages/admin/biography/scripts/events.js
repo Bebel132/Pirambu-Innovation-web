@@ -80,6 +80,7 @@ async function saveProjects(renderProjectsLists) {
   dom.form.reset();
   showListScreen();
   await renderProjectsLists();
+  registerProjects()
 }
 
 export async function saveAboutUs() {
@@ -96,18 +97,21 @@ export async function saveAboutUs() {
 }
 
 export function registerProjects({ renderProjectsLists }) {
-  const items = dom.items();
-  if (items) {
-    items.forEach((item) => {
-      item.onclick = async () => {
-        const parsed = JSON.parse(item.dataset.data);
-        setSelectedProjects(parsed);
-        pushScreen("PREVIEW");
-        await showPreviewScreen(parsed);
-        state.inAboutUs = false;
-      };
-    });
-  }
+  const container = dom.content;
+
+  if (!container || container.dataset.bound === "true") return;
+
+  container.addEventListener("click", async (event) => {
+    const item = event.target.closest(".item");
+    if (!item) return;
+
+    const data = JSON.parse(item.dataset.data);
+
+    setSelectedProjects(data);
+    pushScreen("PREVIEW");
+    await showPreviewScreen(data);
+    state.inAboutUs = false;
+  });
   
   // editar (na preview)
   const editBtn = dom.editBtn();
@@ -115,6 +119,7 @@ export function registerProjects({ renderProjectsLists }) {
     editBtn.onclick = async () => {
       await openEditForm(state.selectedProjects);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -137,7 +142,7 @@ export function registerProjects({ renderProjectsLists }) {
   const previewBtn = dom.previewBtn();
   previewBtn.forEach((btn) => {
     if (btn) {
-      btn.onclick = () => {
+      btn.onclick = async () => {
         if (state.inAboutUs) {
           const fd = new FormData(dom.aboutUsForm);
           
@@ -149,7 +154,9 @@ export function registerProjects({ renderProjectsLists }) {
           state.lastTransientPreview.aboutUs = aboutUsContent;
 
           pushScreen("PREVIEW ABOUT US");
-          showAboutUsPreviewScreen(aboutUsContent);
+          await showAboutUsPreviewScreen(aboutUsContent);
+
+          dom.aboutUsEditBtn().style.display = "none";
         } else {
           const fd = new FormData(dom.form);
           
@@ -196,6 +203,13 @@ export function registerProjects({ renderProjectsLists }) {
       renderProjectsLists();
     };
   }
+    
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
 
   // publicar
   const publishBtn = dom.publishBtn();
@@ -217,23 +231,33 @@ export function registerProjects({ renderProjectsLists }) {
   if (fileInput) {
     fileInput.onchange = async (e) => {
       const file = e.target.files[0];
+      const preview = dom.filePreviewOnForm();
       
       if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
         dom.customBtn.style.display = "none";
-        
-        if (state.selectedProjects?.id && !state.inAboutUs) {
-          await uploadProjectsFile(state.selectedProjects.id, file);
-          const preview = dom.filePreviewOnForm();
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = "block";
-        } else {
-          await uploadAboutUsFile(file);
-          const preview = dom.aboutUsFilePreviewOnForm();
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = "block";
+
+        if (state.selectedProjects?.id) {
+          await uploadProjectsFile(state.selectedProjects?.id, file)
         }
       }
     };
+  }
+
+  const aboutUsFileInput = dom.aboutUsFileInput();
+  if(aboutUsFileInput) {
+    aboutUsFileInput.onchange = async (e) => {
+      const file = e.target.files[0];
+
+      if(file) {
+        await uploadAboutUsFile(file);
+        const preview = dom.aboutUsFilePreviewOnForm();
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        dom.customBtn.style.display = "none";
+      }
+    }
   }
 
   // novo
@@ -243,7 +267,9 @@ export function registerProjects({ renderProjectsLists }) {
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
+      dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar projeto";
 

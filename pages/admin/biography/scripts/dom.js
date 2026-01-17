@@ -19,6 +19,7 @@ export const dom = {
   editBtn: () => document.querySelector("#editBtn"),
   previewBtn: () => document.querySelectorAll(".previewBtn"),
   deleteBtn: () => document.querySelector("#deleteBtn"),
+  formDeleteBtn: () => document.querySelector(".deleteBtn"),
   dontSaveBtn: () => document.querySelector("#dontSave"),
   cancelDeleteBtn: () => document.querySelector("#cancel"),
   
@@ -27,6 +28,7 @@ export const dom = {
   endInput: () => document.querySelector("#end"),
   descInput: () => document.querySelector("#description"),
   fileInput: () => document.querySelector("#file"),
+  aboutUsFileInput: () => document.querySelector("#aboutUs-file"),
   filePreviewOnForm: () => document.querySelector(".custom-file_preview"),
   
   aboutUsCustomBtn: document.querySelector(".aboutUsCustom-btn"),

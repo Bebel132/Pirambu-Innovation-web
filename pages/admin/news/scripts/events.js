@@ -77,17 +77,21 @@ async function saveNews(renderNewsLists) {
 }
 
 export function registerEvents({ renderNewsLists }) {
-  const items = dom.items();
-    if (items) {
-      items.forEach((item) => {
-        item.onclick = async () => {
-          const parsed = JSON.parse(item.dataset.data);
-          setSelectedNews(parsed);
-          pushScreen("PREVIEW");
-          await showPreviewScreen(parsed);
-        };
-      });
-    }
+  const container = dom.content;
+  
+  if (!container || container.dataset.bound === "true") return;
+
+  container.addEventListener("click", async (event) => {
+    const item = event.target.closest(".item");
+    if (!item) return;
+
+    const data = JSON.parse(item.dataset.data);
+
+    setSelectedNews(data);
+    pushScreen("PREVIEW");
+    await showPreviewScreen(data);
+    
+  });
   
   // editar (na preview)
   const editBtn = dom.editBtn();
@@ -95,6 +99,7 @@ export function registerEvents({ renderNewsLists }) {
     editBtn.onclick = async () => {
       await openEditForm(state.selectedNews);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -152,6 +157,13 @@ export function registerEvents({ renderNewsLists }) {
       renderNewsLists();
     };
   }
+    
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
 
   // publicar
   const publishBtn = dom.publishBtn();
@@ -194,7 +206,9 @@ export function registerEvents({ renderNewsLists }) {
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
+      dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar notícia";
 

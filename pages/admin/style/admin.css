@@ -127,10 +127,16 @@ body {
     margin: 0 20px;
 }
 
+@media (max-width: 1360px) {
+    .menu-item_icon {
+        margin: 0 10px;
+    }
+}
+
 /*  */
 
 .admin-content_container {
-    max-width: 900px;
+    max-width: 1140px;
     width: 100%;
     margin-top: 30px;
     padding-bottom: 100px;
@@ -284,7 +290,7 @@ body {
     background-color: var(--color-blue);
 }
 
-#dontSave, #deleteBtn {
+#dontSave, #deleteBtn, .deleteBtn {
     background-color: var(--color-red);
 }
 
@@ -319,17 +325,7 @@ form {
     width: 100%;
 }
 
-form input {
-    height: 57px;
-    border: none;
-    background-color: #D9D9D945;
-    border-radius: 50px;
-    padding: 0 30px;
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-form textarea {
+form input, form textarea {
     height: 57px;
     border: none;
     background-color: #D9D9D945;
@@ -364,9 +360,14 @@ form span, form label {
 .custom-file_preview {
     width: 420px;
     height: 240px;
+    cursor: pointer;
 }
 
-#file {
+.custom-img_container {
+    height: auto;
+}
+
+#file, #aboutUs-file {
     display: none;
 }
 
@@ -491,7 +492,7 @@ form span, form label {
 .previewImg {
     margin: 0 auto;
     max-width: 916px;
-    width: 100%;
+    width: 70%;
 }
 
 .preview-texts {
@@ -528,6 +529,14 @@ form span, form label {
 
 /* markdown menu */
 
+.markdownContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    position: relative;
+}
+
 .markdownBtns {
     display: flex;
     top: 0;
@@ -538,7 +547,7 @@ form span, form label {
 .markdownBtns button {
     min-width: 50px;
     padding: .5rem 1rem;
-    border-radius: none;
+    border-radius: 0;
     border: none;
     background-color: var(--color-gray);
     color: #000;
@@ -548,4 +557,43 @@ form span, form label {
 
 .markdownBtns button:hover {
     background-color: var(--color-green);
+}
+
+.markdown-help {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.markdown-tooltip {
+    position: absolute;
+    background: #222;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    width: 500px;
+    font-size: 14px;
+    z-index: 1000;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.markdown-help-wrapper:hover .markdown-tooltip,
+.markdown-help-wrapper:focus-within .markdown-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.markdown-tooltip code {
+    background: none;
+    padding: 0;
+}
+
+.markdown-tooltip hr {
+    margin: 10px 0;
+}
+
+.markdown-tooltip h3 {
+    margin-bottom: 5px;
 }

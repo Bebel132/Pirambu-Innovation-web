@@ -19,6 +19,7 @@ export const dom = {
   editBtn: () => document.querySelector("#editBtn"),
   previewBtn: () => document.querySelectorAll(".previewBtn"),
   deleteBtn: () => document.querySelector("#deleteBtn"),
+  formDeleteBtn: () => document.querySelector(".deleteBtn"),
   dontSaveBtn: () => document.querySelector("#dontSave"),
   cancelDeleteBtn: () => document.querySelector("#cancel"),
 
