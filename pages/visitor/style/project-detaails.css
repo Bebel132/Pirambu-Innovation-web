@@ -1,0 +1,88 @@
+/* ===== LAYOUT MOBILE ===== */
+.mobile-layout {
+  background: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 16px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.header-logo img {
+  height: 36px;
+}
+
+/* BOTÃO VOLTAR */
+.header-back {
+  position: absolute;
+  left: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-back span {
+  font-size: 26px;
+  color: #333;
+}
+
+/* ===== CONTEÚDO ===== */
+.project-container {
+  padding: 16px;
+}
+
+/* TÍTULO */
+.project-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  color: #000;
+}
+
+/* IMAGEM */
+.project-image-wrapper {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+/* ===== DESCRIÇÃO / MARKDOWN ===== */
+.project-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 80px
+}
+
+.project-description p {
+  margin: 16px 0;
+}
+
+.project-description strong {
+  font-weight: 600;
+}
+
+.project-description ul {
+  padding-left: 18px;
+  margin-bottom: 12px;
+}
+
+.project-description li {
+  margin-bottom: 6px;
+}

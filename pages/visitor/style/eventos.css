@@ -1,0 +1,56 @@
+.events-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 120px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD */
+.event-card {
+  display: flex;
+  gap: 12px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* IMAGEM */
+.event-image {
+  width: 90px;
+  height: 90px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* TEXTO */
+.event-content h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.event-content p {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #444;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    overflow: hidden;
+}
