@@ -182,7 +182,6 @@ export function registerProjects({ renderProjectsLists }) {
   
             pushScreen("PREVIEW");
             showPreviewScreen(new_projects);
-            
           }
         }
       };
@@ -232,12 +231,16 @@ export function registerProjects({ renderProjectsLists }) {
   if (fileInput) {
     fileInput.onchange = async (e) => {
       const file = e.target.files[0];
+      const preview = dom.filePreviewOnForm();
       
       if (file) {
-        const preview = dom.filePreviewOnForm();
         preview.src = URL.createObjectURL(file);
         preview.style.display = "block";
         dom.customBtn.style.display = "none";
+
+        if (state.selectedProjects?.id) {
+          await uploadProjectsFile(state.selectedProjects?.id, file)
+        }
       }
     };
   }
