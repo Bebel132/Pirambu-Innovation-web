@@ -17,9 +17,15 @@ export async function renderProjectsLists({ onEdit, onDelete }) {
     await renderProjectsListUI(drafts, ".drafts_list", "draft_item", { onEdit, onDelete });
     await renderProjectsListUI(published, ".published_list", "published_item", { onEdit, onDelete });
     dom.content.style.display = "block";
+    dom.content.children[1].style.display = "block";
+    dom.content.children[2].style.display = "block";
+    dom.content.children[3].style.display = "block";
     dom.nullContent.style.display = " none";
   } else {
-    dom.content.style.display = "none";
+    dom.content.style.display = "block";
+    dom.content.children[1].style.display = "none";
+    dom.content.children[2].style.display = "none";
+    dom.content.children[3].style.display = "none";
     dom.nullContent.style.display = "flex";
   }
 }
@@ -80,6 +86,7 @@ async function renderProjectsListUI(list, containerSelector, className, handlers
       setSelectedProjects(parsed);
 
       await handlers.onEdit(parsed);
+      dom.formDeleteBtn().style.display = "flex";
     };
 
     deleteButton.onclick = (e) => {

@@ -25,4 +25,6 @@ export async function showAboutUsPreviewScreen(aboutUs) {
     dom.newBtn.style.display = "none";
     dom.aboutUsPreview.style.display = "block";
     dom.sideBarMenu.style.display = "none";
+    dom.aboutUsEditBtn().style.display = "flex";
+    console.log("oi")
 }

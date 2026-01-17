@@ -15,10 +15,11 @@ export const dom = {
   deleteModal: document.querySelector("#delete-modal"),
 
   items: () => document.querySelectorAll(".item"),
-  publishBtn: () => document.querySelectorAll("#publish"),
+  publishBtn: () => document.querySelector("#publish"),
   editBtn: () => document.querySelector("#editBtn"),
   previewBtn: () => document.querySelectorAll(".previewBtn"),
   deleteBtn: () => document.querySelector("#deleteBtn"),
+  formDeleteBtn: () => document.querySelector(".deleteBtn"),
   dontSaveBtn: () => document.querySelector("#dontSave"),
   cancelDeleteBtn: () => document.querySelector("#cancel"),
 

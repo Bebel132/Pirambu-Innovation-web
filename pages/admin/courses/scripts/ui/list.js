@@ -79,6 +79,7 @@ async function renderCourseListUI(list, containerSelector, className, handlers) 
       setSelectedCourse(parsed);
 
       await handlers.onEdit(parsed);
+      dom.formDeleteBtn().style.display = "flex";
     };
 
     deleteButton.onclick = (e) => {

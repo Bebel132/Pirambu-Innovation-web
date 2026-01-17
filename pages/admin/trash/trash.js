@@ -6,6 +6,11 @@ const newsContainer = document.querySelector(".newsTrash");
 const eventsContainer = document.querySelector(".eventsTrash");
 const projectsContainer = document.querySelector(".projectsTrash");
 const listContainer = document.querySelector(".list");
+const cleanCourses = document.querySelector("#cleanCourses");
+const cleanNews = document.querySelector("#cleanNews");
+const cleanEvents = document.querySelector("#cleanEvents");
+const cleanProjects = document.querySelector("#cleanProjects");
+const cleanAll = document.querySelector("#cleanAll");
 
 let coursesList = [];
 let newsList = [];
@@ -65,6 +70,7 @@ async function renderTrashList() {
 
     if(listContainer.innerHTML.trim() === "") {
         document.querySelector(".trash-empty").style.display = "flex";
+        cleanAll.style.display = "none";
         listContainer.style.display = "none";
     }
 
@@ -91,6 +97,24 @@ async function renderTrashList() {
             trashContainer.style.display = "none";
         }
     })
+
+    cleanAll.onclick = async () => {
+        if (confirm("Tem certeza que deseja esvaziar toda a lixeira?")) {
+            if(coursesList.data.length > 0) {
+                await api(`courses/`, { method: "DELETE" });
+            }
+            if(newsList.data.length > 0) {
+                await api(`news/`, { method: "DELETE" });
+            }
+            if(eventsList.data.length > 0) {
+                await api(`events/`, { method: "DELETE" });
+            }
+            if(projectsList.data.length > 0) {
+                await api(`projects/`, { method: "DELETE" });
+            }
+            renderTrashList();
+        }
+    }
 }
 
 async function renderCoursesList() {
@@ -158,6 +182,16 @@ async function renderCoursesList() {
             if (res.ok) {
                 coursesList = await api("courses/deactivated");
                 await renderCoursesList();
+            }
+        }
+
+        cleanCourses.onclick = async () => {
+            if (confirm("Tem certeza que deseja esvaziar a lixeira de cursos?")) {
+                const res = await api(`courses/`, { method: "DELETE" });
+                if (res.ok) {
+                    coursesList = await api("courses/deactivated");
+                    await renderCoursesList();
+                }
             }
         }
 
@@ -235,6 +269,16 @@ async function renderNewsList() {
             }
         }
 
+        cleanNews.onclick = async () => {
+            if (confirm("Tem certeza que deseja esvaziar a lixeira de notícias?")) {
+                const res = await api(`news/`, { method: "DELETE" });
+                if (res.ok) {
+                    newsList = await api("news/deactivated");
+                    await renderNewsList();
+                }
+            }
+        }
+
         registerActionMenuAutoClose();
 
         listContainer.appendChild(newsItem)
@@ -309,6 +353,16 @@ async function renderEventsList() {
             }
         }
 
+        cleanEvents.onclick = async () => {
+            if (confirm("Tem certeza que deseja esvaziar a lixeira de eventos?")) {
+                const res = await api(`events/`, { method: "DELETE" });
+                if (res.ok) {
+                    eventsList = await api("events/deactivated");
+                    await renderEventsList();
+                }
+            }
+        }
+
         registerActionMenuAutoClose();
 
         listContainer.appendChild(eventItem)
@@ -380,6 +434,16 @@ async function renderProjectsList() {
             if (res.ok) {
                 projectsList = await api("projects/deactivated");
                 await renderProjectsList();
+            }
+        }
+
+        cleanProjects.onclick = async () => {
+            if (confirm("Tem certeza que deseja esvaziar a lixeira de projetos?")) {
+                const res = await api(`projects/`, { method: "DELETE" });
+                if (res.ok) {
+                    projectsList = await api("projects/deactivated");
+                    await renderProjectsList();
+                }
             }
         }
 

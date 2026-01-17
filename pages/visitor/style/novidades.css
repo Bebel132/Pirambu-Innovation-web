@@ -65,3 +65,9 @@
   font-weight: 500;
   z-index: 1;
 }
+
+@media screen and (min-width: 470px) {
+  .novidade-card {
+    min-width: 400px; /* Altera a largura de 85vw para 450px fixos */
+  }
+}

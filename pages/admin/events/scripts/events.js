@@ -77,16 +77,20 @@ async function saveEvents(renderEventsLists) {
 }
 
 export function registerEvents({ renderEventsLists }) {const items = dom.items();
-  if (items) {
-    items.forEach((item) => {
-      item.onclick = async () => {
-        const parsed = JSON.parse(item.dataset.data);
-        setSelectedEvents(parsed);
-        pushScreen("PREVIEW");
-        await showPreviewScreen(parsed);
-      };
-    });
-  }
+  const container = dom.content;
+
+  if (!container || container.dataset.bound === "true") return;
+
+  container.addEventListener("click", async (event) => {
+    const item = event.target.closest(".item");
+    if (!item) return;
+
+    const data = JSON.parse(item.dataset.data);
+
+    setSelectedEvents(data);
+    pushScreen("PREVIEW");
+    await showPreviewScreen(data);
+  });
 
   // editar (na preview)
   const editBtn = dom.editBtn();
@@ -94,6 +98,7 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
     editBtn.onclick = async () => {
       await openEditForm(state.selectedEvents);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -151,6 +156,13 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
       renderEventsLists();
     };
   }
+  
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
 
   // publicar
   const publishBtn = dom.publishBtn();
@@ -193,10 +205,12 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
+      dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar evento";
-
+      
       pushScreen("FORM");
       showFormScreen("new");
     };
