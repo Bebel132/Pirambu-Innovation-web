@@ -119,6 +119,7 @@ export function registerProjects({ renderProjectsLists }) {
     editBtn.onclick = async () => {
       await openEditForm(state.selectedProjects);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -200,6 +201,13 @@ export function registerProjects({ renderProjectsLists }) {
       renderProjectsLists();
     };
   }
+    
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
 
   // publicar
   const publishBtn = dom.publishBtn();
@@ -247,7 +255,9 @@ export function registerProjects({ renderProjectsLists }) {
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
+      dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar projeto";
 

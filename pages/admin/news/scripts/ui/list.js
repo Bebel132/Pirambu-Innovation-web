@@ -79,6 +79,7 @@ async function renderNewsListUI(list, containerSelector, className, handlers) {
       setSelectedNews(parsed);
 
       await handlers.onEdit(parsed);
+      dom.formDeleteBtn().style.display = "flex";
     };
 
     deleteButton.onclick = (e) => {

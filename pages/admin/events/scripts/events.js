@@ -90,7 +90,6 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
     setSelectedEvents(data);
     pushScreen("PREVIEW");
     await showPreviewScreen(data);
-    state.inAboutUs = false;
   });
 
   // editar (na preview)
@@ -99,6 +98,7 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
     editBtn.onclick = async () => {
       await openEditForm(state.selectedEvents);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -156,6 +156,13 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
       renderEventsLists();
     };
   }
+  
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
 
   // publicar
   const publishBtn = dom.publishBtn();
@@ -198,10 +205,12 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
+      dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar evento";
-
+      
       pushScreen("FORM");
       showFormScreen("new");
     };

@@ -94,7 +94,6 @@ export function registerEvents({ renderCourseLists }) {
     setSelectedCourse(data);
     pushScreen("PREVIEW");
     await showPreviewScreen(data);
-    state.inAboutUs = false;
   });
 
   // editar (na preview)
@@ -103,6 +102,7 @@ export function registerEvents({ renderCourseLists }) {
     editBtn.onclick = async () => {
       await openEditForm(state.selectedCourse);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -166,6 +166,13 @@ export function registerEvents({ renderCourseLists }) {
     };
   }
 
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
+
   // publicar
   const publishBtn = dom.publishBtn();
   if (publishBtn) {
@@ -209,6 +216,7 @@ export function registerEvents({ renderCourseLists }) {
       dom.customBtn.style.display = "flex";
       dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar curso";
 

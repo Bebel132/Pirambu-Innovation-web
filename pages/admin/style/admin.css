@@ -290,7 +290,7 @@ body {
     background-color: var(--color-blue);
 }
 
-#dontSave, #deleteBtn {
+#dontSave, #deleteBtn, .deleteBtn {
     background-color: var(--color-red);
 }
 

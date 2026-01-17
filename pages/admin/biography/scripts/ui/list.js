@@ -86,6 +86,7 @@ async function renderProjectsListUI(list, containerSelector, className, handlers
       setSelectedProjects(parsed);
 
       await handlers.onEdit(parsed);
+      dom.formDeleteBtn().style.display = "flex";
     };
 
     deleteButton.onclick = (e) => {

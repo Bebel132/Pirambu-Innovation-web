@@ -90,7 +90,7 @@ export function registerEvents({ renderNewsLists }) {
     setSelectedNews(data);
     pushScreen("PREVIEW");
     await showPreviewScreen(data);
-    state.inAboutUs = false;
+    
   });
   
   // editar (na preview)
@@ -99,6 +99,7 @@ export function registerEvents({ renderNewsLists }) {
     editBtn.onclick = async () => {
       await openEditForm(state.selectedNews);
       pushScreen("FORM");
+      dom.formDeleteBtn().style.display = "flex";
     };
   }
 
@@ -156,6 +157,13 @@ export function registerEvents({ renderNewsLists }) {
       renderNewsLists();
     };
   }
+    
+  const formDeleteBtn = dom.formDeleteBtn();
+  if(deleteBtn) {
+    formDeleteBtn.onclick = () => {
+      dom.deleteModal.style.display = "flex";
+    }
+  }
 
   // publicar
   const publishBtn = dom.publishBtn();
@@ -198,7 +206,9 @@ export function registerEvents({ renderNewsLists }) {
       dom.form.reset();
 
       dom.customBtn.style.display = "flex";
+      dom.nullContent.style.display = "none";
       dom.filePreviewOnForm().style.display = "none";
+      dom.formDeleteBtn().style.display = "none";
 
       dom.form_title.textContent = "Adicionar notícia";
 
