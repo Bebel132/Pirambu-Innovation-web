@@ -1,0 +1,85 @@
+.support-page {
+  padding: 20px;
+  padding-bottom: 120px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.support-page h1 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+/* CARD PADRÃO */
+.support-card {
+    background-color: #FFC533;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    height: 247px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.support-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.support-card p {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+/* BOTÕES */
+.support-btn {
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    padding: 14px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+/* BOTÃO ROXO */
+.support-btn.primary {
+    background-color: #8e24aa;
+    color: #fff;
+}
+
+.support-btn.primary:hover {
+    background-color: #7b1fa2;
+}
+
+/* BOTÃO FINANCEIRO */
+.support-btn.secondary {
+    background-color: #8e24aa;
+    color: #fff;
+}
+
+.support-btn.secondary:hover {
+    background-color: #7b1fa2;
+}
+.support-card-2 h2{
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #000;
+}
+.support-card-2{
+    background-color: #FFC533;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+}

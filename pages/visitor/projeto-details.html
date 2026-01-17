@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pirambu Innovation</title>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link rel="stylesheet" href="../visitor/style/media.css" />
+    <link rel="stylesheet" href="../visitor/style/project-detaails.css" />
+  <link rel="stylesheet" href="../../style.css" />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div class="loader">
+      <div class="loader-inner">
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <p>Carregando...</p>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+  <header class="header project-header">
+    <button class="header-back" onclick="history.back()">
+      <span class="material-symbols-outlined">❮</span>
+    </button>
+
+    <a href="../../index.html">
+      <img src="../../assets/imgs/logo-cinza.png" alt="Pirambu Innovation" />
+    </a>
+  </header>
+<body class="mobile-layout">
+
+  <!-- CONTEÚDO -->
+  <main class="project-container">
+    <h1 id="projectTitle" class="project-title"></h1>
+
+    <!-- IMAGEM / SLIDER -->
+    <div class="project-image-wrapper">
+      <img id="projectImage" alt="Imagem do projeto" />
+    </div>
+
+    <!-- DESCRIÇÃO -->
+    <div id="projectDescription" class="project-description"></div>
+  </main>
+
+<div class="bottomMenu">
+        <ul>
+            <a href="../../index.html">
+            <li class="menu-item">
+                <span class="material-symbols-outlined">home</span>
+                Home
+            </li>
+            </a>
+            <a href="../../pages/visitor/novidades.html"><li class="menu-item">
+                <span class="material-symbols-outlined">newsmode</span>
+                Novidades
+            </li></a>
+            <a href="../../pages/visitor/cursos.html">
+            <li class="menu-item">
+                <span class="material-symbols-outlined">book_ribbon</span>
+                Cursos
+            </li>
+            </a>
+            <a href="../../pages/visitor/apoie.html"><li class="menu-item">
+                <span class="material-symbols-outlined">handshake</span>
+                Apoie
+            </li>
+            </a>
+            <a href="#"><li class="menu-item active">
+                <img src="../../assets/imgs/sobre-nos-icone.png" alt="sobre nós">
+                Sobre nós
+            </li>
+            </a>
+        </ul>
+    </div>
+
+  <script type="module" src="./scripts/project-details.js"></script>
+</body>
+</html>

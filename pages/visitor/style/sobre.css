@@ -1,0 +1,99 @@
+.about-page {
+  padding: 20px;
+  padding-bottom: 120px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* SEÇÕES */
+.about-section {
+  margin-bottom: 30px;
+}
+
+/* HERO */
+.hero {
+    background-color: var(--color-blue);
+    border-bottom-left-radius: 37%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 100%;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -20px;
+    width: calc(100% + 40px);
+    box-shadow: inset 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.hero-logo img {
+  max-width: 200px;
+}
+
+.aboutUs-text {
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* IMAGEM */
+.image-section img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+
+/* ===== PROJETOS ===== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.project-card {
+  position: relative;
+  height: 130px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #e0e0e0;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+/* overlay escuro */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+/* texto */
+.project-card span {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
