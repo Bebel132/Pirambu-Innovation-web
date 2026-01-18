@@ -376,6 +376,7 @@ form span, form label {
 
 .custom-img_container {
     height: auto;
+    width: 420px;
 }
 
 #file, #aboutUs-file {
@@ -573,6 +574,14 @@ form span, form label {
 .markdown-help {
   cursor: pointer;
   font-size: 18px;
+  background-color: var(--color-gray);
+  padding: 5px;
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
 }
 
 .markdown-tooltip {
