@@ -3,32 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eventos | Pirambu Innovation</title>
+  <title>Evento | Pirambu Innovation</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="../visitor/style/media.css" />
-  <link rel="stylesheet" href="../visitor/style/eventos.css" />
+  <link rel="stylesheet" href="./style/eventos-details.css" />
   <link rel="stylesheet" href="../../style.css" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <!-- LOADER -->
+  <div class="loader">
+    <div class="loader-inner">
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <p>Carregando...</p>
+    </div>
+  </div>
+
   <!-- HEADER -->
-  <header class="header eventos-header">
+  <header class="header eventos-details-header">
     <button class="header-back" onclick="history.back()">
       <span class="material-symbols-outlined">❮</span>
     </button>
     <img src="../../assets/imgs/logo-cinza.png" alt="Pirambu Innovation" />
   </header>
 
-  <main class="events-page">
-    <h1 class="page-title">Eventos</h1>
+  <!-- CONTEÚDO -->
+  <main class="event-details">
+  <h1 id="eventTitle"></h1>
 
-    <!-- LISTA DE EVENTOS (API) -->
-    <section id="eventsList" class="events-list"></section>
-  </main>
+  <img
+    id="eventImage"
+    class="event-details-image"
+    alt="Imagem do evento"
+  />
 
-  <!-- MENU MOBILE -->
-  <div class="bottomMenu">
+  <article
+    id="eventContent"
+    class="event-details-content">
+  </article>
+</main>
+
+
+  <!-- MENU INFERIOR -->
+  <nav class="bottomMenu">
     <ul>
       <a href="../../index.html">
         <li class="menu-item">
@@ -36,7 +63,7 @@
         </li>
       </a>
 
-      <a href="../visitor/novidades.html">
+      <a href="./novidades.html">
         <li class="menu-item active">
           <img src="../../assets/imgs/novidades-icone.png" />
           Novidades
@@ -55,14 +82,14 @@
         </li>
       </a>
 
-      <a href="../../pages/visitor/sobre.html">
+      <a href="./sobre.html">
         <li class="menu-item">
           <span class="material-symbols-outlined">diversity_4</span> Sobre nós
         </li>
       </a>
     </ul>
-  </div>
+  </nav>
 
-  <script type="module" src="./scripts/eventos.js"></script>
+  <script type="module" src="./scripts/eventos-details.js"></script>
 </body>
 </html>

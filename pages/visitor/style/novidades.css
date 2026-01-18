@@ -8,7 +8,7 @@
 
 .section-title {
   margin: 16px 20px;
-  font-size: 26px;
+  font-size: 32px;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -69,5 +69,95 @@
 @media screen and (min-width: 470px) {
   .novidade-card {
     min-width: 400px; /* Altera a largura de 85vw para 450px fixos */
+  }
+}
+/* ===== SLIDER COM DOTS ===== */
+.novidades-slider {
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.novidades-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.novidade-card {
+  min-width: 100vw;
+  height: 230px;
+  border-radius: 0;
+}
+
+/* DOTS */
+.novidades-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.novidades-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.novidades-dots button.active {
+  background: #1295C7;
+}
+
+/* DESKTOP */
+@media screen and (min-width: 470px) {
+  .novidade-card {
+    min-width: 400px;
+    border-radius: 12px;
+    margin-left: 20px;
+  }
+}
+/* ===== SLIDER WRAPPER ===== */
+.novidades-slider-wrapper {
+  position: relative;
+}
+
+/* ===== SETAS ===== */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.slider-arrow.left {
+  left: 10px;
+}
+
+.slider-arrow.right {
+  right: 10px;
+}
+
+.slider-arrow:hover {
+  background: rgba(0,0,0,0.75);
+}
+
+/* MOBILE: mantém setas */
+@media (max-width: 768px) {
+  .slider-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

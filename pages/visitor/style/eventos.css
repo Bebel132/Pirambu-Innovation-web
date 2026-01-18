@@ -5,8 +5,34 @@
   padding-bottom: 120px;
 }
 
+/* ===== HEADER ===== */
+.eventos-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 16px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  background: #fff;
+}
+
+/* BOTÃO VOLTAR */
+.header-back {
+  position: absolute;
+  left: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-back span {
+  font-size: 28px;
+  color: #333;
+}
+
 .page-title {
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 600;
   margin-bottom: 20px;
 }
@@ -53,4 +79,8 @@
     -webkit-box-orient: vertical;
     line-clamp: 4;
     overflow: hidden;
+}
+.event-image {
+  background-size: cover;
+  background-position: center;
 }
