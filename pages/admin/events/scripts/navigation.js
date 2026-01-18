@@ -27,7 +27,7 @@ export function goBack(handlers) {
       if (state.isEdited) {
         dom.confirmationModal.style.display = "flex";
         dom.saveBtnText.innerHTML = "";
-        dom.saveBtnText.innerHTML = state.selectedCourse.is_draft ? "Salvar rascunho" : "Salvar";
+        dom.saveBtnText.innerHTML = state.selectedEvents.is_draft ? "Salvar rascunho" : "Salvar";
       } else {
         handlers.showPreviewScreen(
           state.selectedEvents ||
