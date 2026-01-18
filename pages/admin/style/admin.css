@@ -104,6 +104,8 @@ body {
     transition: .1s;
     display: flex;
     align-items: center;
+    gap: 20px;
+    padding-left: 20px;
 }
 
 .menu-item_btn:hover {
@@ -119,12 +121,15 @@ body {
 
 .activeProfile {
     color: var(--main-color);
-    cursor: default;
+    cursor: pointer;
 }
 
 .menu-item_icon {
     font-size: 35px;
-    margin: 0 20px;
+}
+
+.menu-item_btn img {
+    width: 27px;
 }
 
 @media (max-width: 1360px) {
@@ -186,7 +191,7 @@ body {
     box-shadow: 1px 1px 10px #cccccc;
 }
 
-.item-actions {
+.item-actions, .access-actions {
     display: none;
     flex-direction: column;
     position: relative;
@@ -198,7 +203,13 @@ body {
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-.item-actions > button {
+.access-actions {
+    top: 75px;
+    position: absolute;
+    left: -100px;
+}
+
+.item-actions > button, .access-actions > button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -212,36 +223,36 @@ body {
     cursor: pointer;
 }
 
-.item-actions > button:hover {
+.access-actions > button {
+    justify-content: start;
+}
+
+.item-actions > button:hover, .access-actions > button:hover {
     background-color: #ededed;
 }
 
-.item-actions > button:nth-child(1) {
+.item-actions > button:nth-child(1), .access-actions > button:nth-child(1) {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
 
-.item-actions > button:nth-child(2) {
+.item-actions > button:nth-child(2), .access-actions > button:nth-child(2) {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
 
-.item-actions > button > span {
+.item-actions > button > span, .access-actions > button > span {
     position: relative;
     color: #000;
     margin-left: -5px;
 }
 
-.underConstruction {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
+.access-actions > button {
+    gap: 10px;
 }
 
-.underConstruction h2 {
-    margin: 15px 0 5px 0;
+.access-actions > button > span {
+    font-size: 30px;
 }
 
 /* contentForm */

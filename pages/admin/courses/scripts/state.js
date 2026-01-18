@@ -1,6 +1,7 @@
 export const state = {
   selectedCourse: null,
   lastTransientPreview: { course: null },
+  isEdited: false,
   listLength: 0,
   screenStack: [],
   currentScreen: "LIST",

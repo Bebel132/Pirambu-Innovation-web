@@ -11,7 +11,6 @@ export function showListScreen() {
   state.screenStack.length = 0;
 
   clearSelectedNews();
-  dom.confirmationModal.style.display = "none";
 
   dom.content.style.display = "block";
   dom.newBtn.style.display = "flex";
@@ -106,7 +105,10 @@ export function registerEvents({ renderNewsLists }) {
   // salvar (form)
   if (dom.saveBtn) {
     dom.saveBtn.forEach((btn) => {
-      btn.onclick = async () => await saveNews(renderNewsLists);
+      btn.onclick = async () => {
+        await saveNews(renderNewsLists);
+        state.isEdited = false;
+      }
     });
   }
 
@@ -227,9 +229,25 @@ export function registerEvents({ renderNewsLists }) {
         renderNewsLists,
       });
   });
+  
+  dom.form.addEventListener("input", () => {
+    if(!state.isEdited) {
+      state.isEdited = true;
+    }
+  })
 
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => showListScreen();
+  if (dontSaveBtn) dontSaveBtn.onclick = () => {
+    dom.confirmationModal.style.display = "none";
+    
+    if(state.screenStack[0] == 'LIST') {
+      showPreviewScreen(state.selectedNews);
+    } else {
+      showListScreen();
+    }
+
+    state.isEdited = false;
+  }
 
   const cancel = dom.cancelDeleteBtn();
   if (cancel) cancel.onclick = () => (dom.deleteModal.style.display = "none");

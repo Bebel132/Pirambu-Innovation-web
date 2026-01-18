@@ -11,6 +11,7 @@ export const dom = {
   sideBarMenu: document.querySelector(".sidebar_menu"),
   form_title: document.querySelector(".contentForm-title"),
   saveBtn: document.querySelectorAll(".saveBtn"),
+  saveBtnText: document.querySelector("#saveBtnText"),
   confirmationModal: document.querySelector("#confirmation-modal"),
   deleteModal: document.querySelector("#delete-modal"),
   

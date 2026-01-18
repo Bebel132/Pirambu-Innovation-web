@@ -34,18 +34,32 @@ export async function goBack(handlers) {
       break;
 
     case "PREVIEW":
-      handlers.showPreviewScreen(
-        state.selectedProjects ||
-        state.lastTransientPreview.projects ||
-        { title: "", description: "" }
-      );
+      if (state.isEdited) {
+        dom.confirmationModal.style.display = "flex";
+        dom.saveBtnText.innerHTML = "";
+        dom.saveBtnText.innerHTML = state.selectedProjects.is_draft ? "Salvar rascunho" : "Salvar";
+      } else {
+        handlers.showPreviewScreen(
+          state.selectedProjects ||
+          state.lastTransientPreview.projects ||
+          { title: "", description: "" }
+        );
+      }
       break;
 
     case "LIST":
       if (state.selectedProjects == null && !state.inAboutUs) {
         dom.confirmationModal.style.display = "flex";
-        handlers.showListScreen();
-      } else {
+        dom.saveBtnText.innerHTML = "Salvar rascunho";
+      } 
+      
+      if (state.isEdited) {
+        dom.confirmationModal.style.display = "flex";
+        dom.saveBtnText.innerHTML = "";
+        dom.saveBtnText.innerHTML = state.selectedProjects.is_draft ? "Salvar rascunho" : "Salvar";
+      }
+      
+      if (state.selectedProjects != null && !state.isEdited) {
         handlers.showListScreen();
       }
       break;

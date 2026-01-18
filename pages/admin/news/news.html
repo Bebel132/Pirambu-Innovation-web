@@ -37,6 +37,14 @@
             <img src="../../../assets/imgs/logo-cinza.png" alt="">
             <div class="user-btn">
                 <span class="material-symbols-outlined">manage_accounts</span>
+                <div class="access-actions">
+                    <button>
+                        <span class="material-symbols-outlined">person</span> Perfil
+                    </button>
+                    <button>
+                        <span class="material-symbols-outlined">lock_open</span> Gerenciamento de acessos
+                    </button>
+                </div>
             </div>
         </div>
         <div class="admin_content">
@@ -206,19 +214,19 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="module">
-        import { initMenu } from './../scripts/menu.js';
+        import { initMenu, registerAccessActionsAutoClose } from './../scripts/menu.js';
         import { renderNews } from './index.js';
 
         const menu_items = [
             { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html" },
-            { icon: "news", label: "Notícias", file: "../news/news.html", active: true },
+            { icon: "newsmode", label: "Notícias", file: "../news/news.html", active: true },
             { icon: "event", label: "Eventos", file: "../events/events.html" },
             { icon: "diversity_3", label: "Biografia", file: "../biography/biography.html" },
-            { icon: "lock_open", label: "Acessos", file: "../access/access.html" },
             { icon: "delete", label: "Lixeira", file: "../trash/trash.html" }
         ]
 
         initMenu(menu_items);
+        registerAccessActionsAutoClose();
 
         renderNews();
     </script>

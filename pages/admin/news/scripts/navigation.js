@@ -24,17 +24,32 @@ export function goBack(handlers) {
       break;
 
     case "PREVIEW":
-      handlers.showPreviewScreen(
-        state.selectedNews ||
-        state.lastTransientPreview.news ||
-        { title: "", description: "" }
-      );
+      if (state.isEdited) {
+        dom.confirmationModal.style.display = "flex";
+        dom.saveBtnText.innerHTML = "";
+        dom.saveBtnText.innerHTML = state.selectedCourse.is_draft ? "Salvar rascunho" : "Salvar";
+      } else {
+        handlers.showPreviewScreen(
+          state.selectedNews ||
+          state.lastTransientPreview.news ||
+          { title: "", description: "" }
+        );
+      }
       break;
 
     case "LIST":
       if (state.selectedNews == null) {
         dom.confirmationModal.style.display = "flex";
-      } else {
+        dom.saveBtnText.innerHTML = "Salvar rascunho";
+      }
+      
+      if (state.isEdited) {
+        dom.confirmationModal.style.display = "flex";
+        dom.saveBtnText.innerHTML = "";
+        dom.saveBtnText.innerHTML = state.selectedNews.is_draft ? "Salvar rascunho" : "Salvar";
+      }
+      
+      if (state.selectedCourse != null && !state.isEdited){
         handlers.showListScreen();
       }
       break;

@@ -1,6 +1,7 @@
 export const state = {
   selectedProjects: null,
   lastTransientPreview: { projects: null },
+  isEdited: false,
   listLength: 0,
 
   inAboutUs: false,
