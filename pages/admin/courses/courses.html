@@ -37,6 +37,14 @@
             <img src="../../../assets/imgs/logo-cinza.png" alt="">
             <div class="user-btn">
                 <span class="material-symbols-outlined">manage_accounts</span>
+                <div class="access-actions">
+                    <button>
+                        <span class="material-symbols-outlined">person</span> Perfil
+                    </button>
+                    <button>
+                        <span class="material-symbols-outlined">lock_open</span> Gerenciamento de acessos
+                    </button>
+                </div>
             </div>
         </div>
         <div class="admin_content">
@@ -180,7 +188,7 @@
                     <h1>Deseja sair sem salvar?</h1>
                     <div class="btns">
                         <button class="saveBtn">
-                            <span class="material-symbols-outlined">save_as</span> Salvar rascunho
+                            <span class="material-symbols-outlined">save_as</span> <span id="saveBtnText">Salvar</span>
                         </button>
                         <button id="dontSave">Não salvar</button>
                     </div>
@@ -215,19 +223,19 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
     <script type="module">
-        import { initMenu } from './../scripts/menu.js';
+        import { initMenu, registerAccessActionsAutoClose } from './../scripts/menu.js';
         import { renderCourses } from './index.js';
 
         const menu_items = [
             { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html", active: true },
-            { icon: "news", label: "Notícias", file: "../news/news.html" },
+            { icon: "newsmode", label: "Notícias", file: "../news/news.html" },
             { icon: "event", label: "Eventos", file: "../events/events.html" },
-            { icon: "diversity_3", label: "Biografia", file: "../biography/biography.html" },
-            { icon: "lock_open", label: "Acessos", file: "../access/access.html" },
+            { icon: "diversity_4", label: "Biografia", file: "../biography/biography.html" },
             { icon: "delete", label: "Lixeira", file: "../trash/trash.html" }
         ]
 
         initMenu(menu_items);
+        registerAccessActionsAutoClose();
 
         renderCourses();
     </script>

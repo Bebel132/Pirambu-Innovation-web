@@ -2,6 +2,17 @@ import { dom } from "./dom.js";
 import { state, clearSelectedProjects } from "./state.js";
 import { getAboutUs } from "./services/aboutUsService.js";
 
+export function openConfirmationModal() {
+  dom.confirmationModal.style.display = "flex";
+
+  dom.saveBtnText.textContent =
+    state.selectedProjects?.is_draft ? "Salvar rascunho" : "Salvar";
+}
+
+export function closeConfirmationModal() {
+  dom.confirmationModal.style.display = "none";
+}
+
 export function pushScreen(screenName) {
   if (state.currentScreen) state.screenStack.push(state.currentScreen);
   state.currentScreen = screenName;
@@ -17,20 +28,16 @@ export function popScreen() {
  * handlers = { showFormScreen, showPreviewScreen, showListScreen, renderProjectsLists }
  */
 export async function goBack(handlers) {
+   if (state.isEdited) {
+    openConfirmationModal();
+    return;
+  }
+
   const previous = popScreen();
 
   switch (previous) {
     case "FORM":
       handlers.showFormScreen();
-      break;
-
-    case "PREVIEW ABOUT US":
-      const aboutUs = await getAboutUs();
-      handlers.showAboutUsPreviewScreen(aboutUs.data);
-      break;
-
-    case "FORM ABOUT US":
-      handlers.openAboutUsEditForm(state.lastTransientPreview.aboutUs);
       break;
 
     case "PREVIEW":
@@ -41,20 +48,22 @@ export async function goBack(handlers) {
       );
       break;
 
-    case "LIST":
-      if (state.selectedProjects == null && !state.inAboutUs) {
-        dom.confirmationModal.style.display = "flex";
-        handlers.showListScreen();
-      } else {
-        handlers.showListScreen();
-      }
+    case "FORM ABOUT US":
+      handlers.openAboutUsEditForm(state.lastTransientPreview.aboutUs);
       break;
 
+    case "PREVIEW ABOUT US": {
+      const aboutUs = await getAboutUs();
+      handlers.showAboutUsPreviewScreen(aboutUs.data);
+      break;
+    }
+
+    case "LIST":
     default:
       clearSelectedProjects();
       dom.form.reset();
       handlers.showListScreen();
-      handlers.renderProjectsLists();
+      handlers.renderProjectsLists?.();
       break;
   }
 }

@@ -5,8 +5,6 @@ const deleteModal = document.querySelector("#delete-modal");
 let currentUserId = null;
 
 async function initAccess() {
-    const { data : allowedUsers }  = await api("users/allowedUsers");
-
     document.querySelector("#newAccess").onclick = async () => {
         let email = prompt("Adicione um novo acesso (email)");
 
@@ -17,14 +15,14 @@ async function initAccess() {
             }
         })
 
-        const { data : allowedUsers }  = await api("users/allowedUsers");
-        render(allowedUsers)
+        render()
     }
 
-    render(allowedUsers)
+    render()
 }
 
-function render(users) {
+async function render() {
+    const { data : users }  = await api("users/allowedUsers");
     allowedUsersList.innerHTML = ""
 
     users.forEach(user => {
@@ -54,7 +52,11 @@ function render(users) {
 
         editBtn.onclick = () => edit(li, user);
         
-        deleteBtn.onclick = () => {
+        deleteBtn.onclick = async () => {
+            const { data : localUser }  = await api("auth/profile");
+            localUser.email == user.email ?
+                deleteModal.children[0].children[1].style.display = "block" :
+                deleteModal.children[0].children[1].style.display = "none"
             deleteModal.style.display = "flex";
             currentUserId = user.id;
         }
@@ -67,8 +69,21 @@ function render(users) {
         });
         
         const { data : allowedUsers }  = await api("users/allowedUsers");
-        render(allowedUsers)
+        render()
         currentUserId = null;
+
+        const { data : localUser }  = await api("auth/profile");
+        let count = 0;
+        allowedUsers.forEach(user => {
+            if(user.email == localUser.email) {
+                count++
+            } 
+        })
+
+        if(count == 0) {
+            await api("auth/logout", { method: "POST", credentials: "include" });
+            window.location = "/pages/admin/index.html";
+        }
     }
 
     document.querySelector("#cancel").onclick = () => {
@@ -165,6 +180,8 @@ const edit = (li, user) => {
         deleteBtn.onclick = () => {
             deleteModal.style.display = "flex";
         }
+
+        render()
     }
 }
 

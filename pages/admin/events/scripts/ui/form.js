@@ -18,6 +18,10 @@ export function showFormScreen(action) {
   if (action === "new") {
     dom.saveBtn[0].children[1].textContent = "Salvar rascunho";
   }
+  
+  const desc = dom.descInput();
+  desc.addEventListener("input", () => {autoResize(desc)});
+  setTimeout(() => autoResize(desc), 0);
 }
 
 export async function openEditForm(event) {

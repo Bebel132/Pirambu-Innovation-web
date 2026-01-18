@@ -1,6 +1,17 @@
 import { dom } from "./dom.js";
 import { state, clearSelectedNews } from "./state.js";
 
+export function openConfirmationModal() {
+  dom.confirmationModal.style.display = "flex";
+
+  dom.saveBtnText.textContent =
+    state.selectedNews?.is_draft ? "Salvar rascunho" : "Salvar";
+}
+
+export function closeConfirmationModal() {
+  dom.confirmationModal.style.display = "none";
+}
+
 export function pushScreen(screenName) {
   if (state.currentScreen) state.screenStack.push(state.currentScreen);
   state.currentScreen = screenName;
@@ -18,6 +29,13 @@ export function popScreen() {
 export function goBack(handlers) {
   const previous = popScreen();
 
+  if (state.isEdited) {
+    dom.confirmationModal.style.display = "flex";
+    dom.saveBtnText.textContent =
+      state.selectedNews?.is_draft ? "Salvar rascunho" : "Salvar";
+    return;
+  }
+
   switch (previous) {
     case "FORM":
       handlers.showFormScreen();
@@ -27,21 +45,13 @@ export function goBack(handlers) {
       handlers.showPreviewScreen(
         state.selectedNews ||
         state.lastTransientPreview.news ||
-        { title: "", description: "" }
+        {}
       );
       break;
 
     case "LIST":
-      if (state.selectedNews == null) {
-        dom.confirmationModal.style.display = "flex";
-      } else {
-        handlers.showListScreen();
-      }
-      break;
-
     default:
       clearSelectedNews();
-      dom.form.reset();
       handlers.showListScreen();
       handlers.renderNewsLists();
       break;

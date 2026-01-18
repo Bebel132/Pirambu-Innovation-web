@@ -1,6 +1,6 @@
 import { dom } from "./dom.js";
 import { state, setSelectedNews, clearSelectedNews } from "./state.js";
-import { pushScreen, goBack } from "./navigation.js";
+import { pushScreen, goBack, closeConfirmationModal } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadNewsFile, createNews, updateNews, deactivateNews, publishNews } from "./services/newsService.js";
@@ -11,7 +11,6 @@ export function showListScreen() {
   state.screenStack.length = 0;
 
   clearSelectedNews();
-  dom.confirmationModal.style.display = "none";
 
   dom.content.style.display = "block";
   dom.newBtn.style.display = "flex";
@@ -106,7 +105,10 @@ export function registerEvents({ renderNewsLists }) {
   // salvar (form)
   if (dom.saveBtn) {
     dom.saveBtn.forEach((btn) => {
-      btn.onclick = async () => await saveNews(renderNewsLists);
+      btn.onclick = async () => {
+        await saveNews(renderNewsLists);
+        state.isEdited = false;
+      }
     });
   }
 
@@ -227,9 +229,27 @@ export function registerEvents({ renderNewsLists }) {
         renderNewsLists,
       });
   });
+  
+  dom.form.addEventListener("input", () => {
+    if(!state.isEdited) {
+      state.isEdited = true;
+    }
+  })
 
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => showListScreen();
+  if (dontSaveBtn) {
+    dontSaveBtn.onclick = () => {
+      state.isEdited = false;
+      closeConfirmationModal();
+
+      goBack({
+        showFormScreen,
+        showPreviewScreen,
+        showListScreen,
+        renderNewsLists,
+      });
+    };
+  }
 
   const cancel = dom.cancelDeleteBtn();
   if (cancel) cancel.onclick = () => (dom.deleteModal.style.display = "none");

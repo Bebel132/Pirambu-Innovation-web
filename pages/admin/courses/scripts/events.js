@@ -1,6 +1,6 @@
 import { dom } from "./dom.js";
 import { state, setSelectedCourse, clearSelectedCourse } from "./state.js";
-import { pushScreen, goBack } from "./navigation.js";
+import { pushScreen, goBack, closeConfirmationModal } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadCourseFile, createCourse, updateCourse, deactivateCourse, publishCourse } from "./services/courseService.js";
@@ -11,7 +11,6 @@ export function showListScreen() {
   state.screenStack.length = 0;
 
   clearSelectedCourse();
-  dom.confirmationModal.style.display = "none";
 
   dom.content.style.display = "block";
   dom.newBtn.style.display = "flex";
@@ -109,7 +108,10 @@ export function registerEvents({ renderCourseLists }) {
   // salvar (form)
   if (dom.saveBtn) {
     dom.saveBtn.forEach((btn) => {
-      btn.onclick = async () => await saveCourse(renderCourseLists);
+      btn.onclick = async () => {
+        await saveCourse(renderCourseLists);
+        state.isEdited = false;
+      } 
     });
   }
 
@@ -236,8 +238,26 @@ export function registerEvents({ renderCourseLists }) {
       });
   });
 
+  dom.form.addEventListener("input", () => {
+    if(!state.isEdited) {
+      state.isEdited = true;
+    }
+  })
+
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => showListScreen();
+  if (dontSaveBtn) {
+    dontSaveBtn.onclick = () => {
+      state.isEdited = false;
+      closeConfirmationModal();
+
+      goBack({
+        showFormScreen,
+        showPreviewScreen,
+        showListScreen,
+        renderCourseLists,
+      });
+    };
+  }
 
   const cancel = dom.cancelDeleteBtn();
   if (cancel) cancel.onclick = () => (dom.deleteModal.style.display = "none");

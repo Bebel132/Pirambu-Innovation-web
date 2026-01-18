@@ -1,6 +1,6 @@
 import { dom } from "./dom.js";
 import { state, setSelectedProjects, clearSelectedProjects } from "./state.js";
-import { pushScreen, goBack } from "./navigation.js";
+import { pushScreen, goBack, closeConfirmationModal } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadProjectsFile, createProjects, updateProjects, deactivateProjects, publishProjects } from "./services/projectsService.js";
@@ -15,7 +15,6 @@ export function showListScreen() {
   state.screenStack.length = 0;
 
   clearSelectedProjects();
-  dom.confirmationModal.style.display = "none";
 
   dom.content.style.display = "block";
   dom.newBtn.style.display = "flex";
@@ -132,7 +131,10 @@ export function registerProjects({ renderProjectsLists }) {
   // salvar (form)
   if (dom.saveBtn) {
     dom.saveBtn.forEach((btn) => {
-      btn.onclick = async () => await saveProjects(renderProjectsLists);
+      btn.onclick = async () => {
+        await saveProjects(renderProjectsLists);
+        state.isEdited = false;
+      }
     });
   }
 
@@ -232,7 +234,7 @@ export function registerProjects({ renderProjectsLists }) {
     fileInput.onchange = async (e) => {
       const file = e.target.files[0];
       const preview = dom.filePreviewOnForm();
-      
+
       if (file) {
         preview.src = URL.createObjectURL(file);
         preview.style.display = "block";
@@ -255,7 +257,7 @@ export function registerProjects({ renderProjectsLists }) {
         const preview = dom.aboutUsFilePreviewOnForm();
         preview.src = URL.createObjectURL(file);
         preview.style.display = "block";
-        dom.customBtn.style.display = "none";
+        dom.aboutUsCustomBtn.style.display = "none";
       }
     }
   }
@@ -290,9 +292,29 @@ export function registerProjects({ renderProjectsLists }) {
         renderProjectsLists,
       });
   });
+  
+  dom.form.addEventListener("input", () => {
+    if(!state.isEdited) {
+      state.isEdited = true;
+    }
+  })
 
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => showListScreen();
+  if (dontSaveBtn) {
+    dontSaveBtn.onclick = () => {
+      state.isEdited = false;
+      closeConfirmationModal();
+
+      goBack({
+        showFormScreen,
+        openAboutUsEditForm,
+        showPreviewScreen,
+        showAboutUsPreviewScreen,
+        showListScreen,
+        renderProjectsLists,
+      });
+    };
+  }
 
   const cancel = dom.cancelDeleteBtn();
   if (cancel) cancel.onclick = () => (dom.deleteModal.style.display = "none");
