@@ -2,4 +2,4 @@ export const API_URL = 'https://pirambu-innovation-api.onrender.com'
 // export const API_URL = 'http://127.0.0.1:5000'
 
 // caminho base do projeto
-export const BASE_PATH = '/Pirambu-Innovation-web';
+export const BASE_PATH = '';
