@@ -1,15 +1,14 @@
 .supportUs-section {
     padding-bottom: 100px; 
 }
-/* Container: Centralizado e sem ser flexbox direto */
+
 .supportUs-container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    display: block !important; /* Força o bloco para o h1 não sumir */
+    display: block !important; 
 }
 
-/* Título: Agora visível e ocupando a linha toda */
 .supportUs-container h1 {
     display: block !important;
     width: 100% !important;
@@ -17,42 +16,36 @@
     font-weight: bold;
     margin-bottom: 30px;
     text-align: left;
-    position: static !important; /* Anula qualquer sumiço vindo de outros arquivos */
+    position: static !important; 
 }
 
-/* Wrapper dos Cards: Controla o alinhamento deles */
 .supportUs-cards-wrapper {
     display: flex;
-    flex-direction: column; /* Mobile: um embaixo do outro */
+    flex-direction: column; 
     gap: 20px;
-    align-items: flex-start; /* ESSENCIAL: impede os cards de esticarem no mobile */
+    align-items: flex-start; 
 }
 
-/* Estilo Individual do Card com TAMANHO FIXO */
 .join-us, .other-forms {
     background-color: #FFB81C;
     border-radius: 20px;
     padding: 25px;
     display: flex;
     flex-direction: column;
-    
-    /* Define o tamanho fixo aqui */
-    width: 380px;      /* Largura fixa */
-    max-width: 100%;   /* Segurança para telas muito pequenas */
-    flex: none;        /* Impede que o flexbox force o esticamento */
+    width: 380px;    
+    max-width: 100%;  
+    flex: none;      
 }
 
-/* Alinhamento dos botões */
 .join-us p, .other-forms p {
     flex-grow: 1; 
     margin-bottom: 20px;
 }
 
 .join-us a, .other-forms a {
-    width: 200px; /* Define o tamanho exato */
+    width: 200px; 
     margin-left: auto;
-    margin-right: auto; /* Essas duas linhas centralizam o botão se desejar */
-    
+    margin-right: auto;
     text-align: center;
     background-color: #912F91;
     color: white;
@@ -60,6 +53,7 @@
     border-radius: 25px;
     text-decoration: none;
 }
+
 .join-us a:hover, .other-forms a:hover {
     background-color: #772073;
     transform: translateY(-3px);
@@ -71,7 +65,6 @@
     box-shadow: 0px 2px 2px 0px #00000040;
 }
 
-/* --- MEDIA QUERY PARA DESKTOP (1024px+) --- */
 @media screen and (min-width: 1024px) {
     .supportUs-section .supportUs-container {
         display: block ; 
@@ -82,23 +75,23 @@
         display: block;
         visibility: visible ;
         opacity: 1;
-        position: static; /* Anula positions que tiram ele do lugar */
+        position: static; 
         width: 100%;
-        transform: none; /* Anula empurrões de animações */
+        transform: none; 
         margin: 0 0 30px 0;
         padding: 0;
         color: #000;
     }
-    /* Cards Lado a Lado no Desktop */
+ 
     .supportUs-cards-wrapper {
         display: flex;
         flex-direction: row;
-        align-items: stretch; /* Mantém a mesma altura */
+        align-items: stretch; 
         gap: 20px;
     }
 
     .join-us, .other-forms {
-        width: 380px; /* Mantém o tamanho fixo no PC */
+        width: 380px; 
         flex: none;
         margin-bottom: 0;
     }
