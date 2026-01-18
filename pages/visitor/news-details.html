@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notícia | Pirambu Innovation</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="../visitor/style/media.css" />
+  <link rel="stylesheet" href="../visitor/style/news-details.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- LOADER -->
+  <div class="loader">
+    <div class="loader-inner">
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <div class="loader-line-wrap"><div class="loader-line"></div></div>
+      <p>Carregando...</p>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header news-details-header">
+    <button class="header-back" onclick="history.back()">
+      <span class="material-symbols-outlined">❮</span>
+    </button>
+
+    <a href="../../index.html">
+      <img src="../../assets/imgs/logo-cinza.png" alt="Pirambu Innovation" />
+    </a>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="news-details">
+    <h1 id="newsTitle"></h1>
+
+    <img id="newsImage" class="news-details-image" alt="Imagem da notícia" />
+
+    <article id="newsContent" class="news-details-content"></article>
+  </main>
+
+  <!-- MENU INFERIOR -->
+  <nav class="bottomMenu">
+    <ul>
+      <a href="../../index.html">
+        <li class="menu-item">
+          <span class="material-symbols-outlined">home</span> Home
+        </li>
+      </a>
+
+      <a href="./noticias.html">
+        <li class="menu-item active">
+          <img src="../../assets/imgs/novidades-icone.png" />
+          Novidades
+        </li>
+      </a>
+
+      <a href="./cursos.html">
+        <li class="menu-item">
+          <span class="material-symbols-outlined">book_ribbon</span> Cursos
+        </li>
+      </a>
+
+      <a href="./apoie.html">
+        <li class="menu-item">
+          <span class="material-symbols-outlined">handshake</span> Apoie
+        </li>
+      </a>
+
+      <a href="./sobre.html">
+        <li class="menu-item">
+          <span class="material-symbols-outlined">diversity_4</span> Sobre nós
+        </li>
+      </a>
+    </ul>
+  </nav>
+
+  <script type="module" src="./scripts/news-details.js"></script>
+</body>
+</html>

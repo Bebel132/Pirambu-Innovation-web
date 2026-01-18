@@ -45,7 +45,7 @@
 .course-info {
   padding: 16px;
   border: #3333333a 1px solid;
-  margin-top: 50px;
+  margin-top: 25px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   animation: slideIn 0.6s ease-out;
