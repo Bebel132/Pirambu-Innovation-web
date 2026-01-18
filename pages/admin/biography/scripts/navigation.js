@@ -62,6 +62,10 @@ export async function goBack(handlers) {
       if (state.selectedProjects != null && !state.isEdited) {
         handlers.showListScreen();
       }
+
+      if (state.selectedProjects == null && !state.isEdited) {
+        handlers.showListScreen();
+      }
       break;
 
     default:

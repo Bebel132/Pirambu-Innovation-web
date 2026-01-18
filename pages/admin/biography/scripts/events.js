@@ -234,7 +234,7 @@ export function registerProjects({ renderProjectsLists }) {
     fileInput.onchange = async (e) => {
       const file = e.target.files[0];
       const preview = dom.filePreviewOnForm();
-      
+
       if (file) {
         preview.src = URL.createObjectURL(file);
         preview.style.display = "block";
@@ -257,7 +257,7 @@ export function registerProjects({ renderProjectsLists }) {
         const preview = dom.aboutUsFilePreviewOnForm();
         preview.src = URL.createObjectURL(file);
         preview.style.display = "block";
-        dom.customBtn.style.display = "none";
+        dom.aboutUsCustomBtn.style.display = "none";
       }
     }
   }
