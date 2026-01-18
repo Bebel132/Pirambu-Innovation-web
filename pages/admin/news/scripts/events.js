@@ -1,6 +1,6 @@
 import { dom } from "./dom.js";
 import { state, setSelectedNews, clearSelectedNews } from "./state.js";
-import { pushScreen, goBack } from "./navigation.js";
+import { pushScreen, goBack, closeConfirmationModal } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadNewsFile, createNews, updateNews, deactivateNews, publishNews } from "./services/newsService.js";
@@ -237,16 +237,18 @@ export function registerEvents({ renderNewsLists }) {
   })
 
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => {
-    dom.confirmationModal.style.display = "none";
-    
-    if(state.screenStack[0] == 'LIST') {
-      showPreviewScreen(state.selectedNews);
-    } else {
-      showListScreen();
-    }
+  if (dontSaveBtn) {
+    dontSaveBtn.onclick = () => {
+      state.isEdited = false;
+      closeConfirmationModal();
 
-    state.isEdited = false;
+      goBack({
+        showFormScreen,
+        showPreviewScreen,
+        showListScreen,
+        renderNewsLists,
+      });
+    };
   }
 
   const cancel = dom.cancelDeleteBtn();

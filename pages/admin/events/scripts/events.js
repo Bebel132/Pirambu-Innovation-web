@@ -1,6 +1,6 @@
 import { dom } from "./dom.js";
 import { state, setSelectedEvents, clearSelectedEvents } from "./state.js";
-import { pushScreen, goBack } from "./navigation.js";
+import { pushScreen, goBack, closeConfirmationModal } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadEventsFile, createEvents, updateEvents, deactivateEvents, publishEvents } from "./services/eventsService.js";
@@ -236,16 +236,18 @@ export function registerEvents({ renderEventsLists }) {const items = dom.items()
   })
 
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => {
-    dom.confirmationModal.style.display = "none";
-    
-    if(state.screenStack[0] == 'LIST') {
-      showPreviewScreen(state.selectedEvents);
-    } else {
-      showListScreen();
-    }
+  if (dontSaveBtn) {
+    dontSaveBtn.onclick = () => {
+      state.isEdited = false;
+      closeConfirmationModal();
 
-    state.isEdited = false;
+      goBack({
+        showFormScreen,
+        showPreviewScreen,
+        showListScreen,
+        renderEventsLists,
+      });
+    };
   }
 
   const cancel = dom.cancelDeleteBtn();

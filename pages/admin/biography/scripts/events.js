@@ -1,6 +1,6 @@
 import { dom } from "./dom.js";
 import { state, setSelectedProjects, clearSelectedProjects } from "./state.js";
-import { pushScreen, goBack } from "./navigation.js";
+import { pushScreen, goBack, closeConfirmationModal } from "./navigation.js";
 import { openEditForm, showFormScreen } from "./ui/form.js";
 import { showPreviewScreen } from "./ui/preview.js";
 import { uploadProjectsFile, createProjects, updateProjects, deactivateProjects, publishProjects } from "./services/projectsService.js";
@@ -300,16 +300,20 @@ export function registerProjects({ renderProjectsLists }) {
   })
 
   const dontSaveBtn = dom.dontSaveBtn();
-  if (dontSaveBtn) dontSaveBtn.onclick = () => {
-    dom.confirmationModal.style.display = "none";
-    
-    if(state.screenStack[0] == 'LIST') {
-      showPreviewScreen(state.selectedProjects);
-    } else {
-      showListScreen();
-    }
+  if (dontSaveBtn) {
+    dontSaveBtn.onclick = () => {
+      state.isEdited = false;
+      closeConfirmationModal();
 
-    state.isEdited = false;
+      goBack({
+        showFormScreen,
+        openAboutUsEditForm,
+        showPreviewScreen,
+        showAboutUsPreviewScreen,
+        showListScreen,
+        renderProjectsLists,
+      });
+    };
   }
 
   const cancel = dom.cancelDeleteBtn();
