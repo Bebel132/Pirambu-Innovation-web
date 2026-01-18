@@ -53,7 +53,6 @@ function initMenu(items) {
     })
     
     sidebar_menu.appendChild(ul)
-    console.log(accessActions, userBtn)
     
     userBtn.addEventListener("click", (e) => {
         e.stopPropagation();
