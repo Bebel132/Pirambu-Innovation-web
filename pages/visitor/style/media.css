@@ -346,6 +346,9 @@
     .about-page {
         margin: 0 auto;
     }
+    .contacts-section {
+        margin-bottom: 60px;
+    }
 }
 
 .overlay {
