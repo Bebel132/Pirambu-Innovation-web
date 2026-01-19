@@ -567,3 +567,8 @@ a{
 .news-dots button.active {
      background: #007bff;
 }
+
+.course-description a, .event-details-content a, .news-details-content a, .project-description a {
+    text-decoration: underline;
+    color: #003cff;
+}

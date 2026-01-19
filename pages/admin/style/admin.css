@@ -397,7 +397,6 @@ form span, form label {
 
 .custom-img_container {
     height: auto;
-    width: 420px;
 }
 
 #file, #aboutUs-file {
@@ -531,6 +530,11 @@ form span, form label {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.previewContent a {
+    text-decoration: underline;
+    color: #003cff;
 }
 
 .previewImg {

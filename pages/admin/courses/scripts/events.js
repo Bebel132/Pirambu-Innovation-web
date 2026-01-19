@@ -196,7 +196,7 @@ export function registerEvents({ renderCourseLists }) {
     fileInput.onchange = async (e) => {
       const file = e.target.files[0];
       const preview = dom.filePreviewOnForm();
-
+      
       if (file) {
         preview.src = URL.createObjectURL(file);
         preview.style.display = "block";
