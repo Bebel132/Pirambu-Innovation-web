@@ -336,6 +336,10 @@
     .about-page {
         margin: 0 auto;
     }
+
+    .courses-container {
+        margin-top: -30px;
+    }
 }
 
 @media screen and (max-width: 850px) {
