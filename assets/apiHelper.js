@@ -1,5 +1,14 @@
 import { API_URL } from "./config.js";
 
+function logout() {
+  // se tiver algo salvo no front
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // redireciona para login
+  window.location.href = "/pages/admin";
+}
+
 export async function api(
   endpoint,
   { method = "GET", data = null, params = null, headers = {}, ...customConfig } = {}
@@ -36,6 +45,18 @@ export async function api(
 
   try {
     const response = await fetch(url, config);
+
+    if (
+      (response.status === 401 || response.status === 403) &&
+      window.location.href.includes("pages/admin")
+    ) {
+      logout();
+      return {
+        ok: false,
+        status: response.status,
+        data: { error: "Unauthorized" }
+      };
+    }
 
     // Redireciona se não autorizado (admin)
     if (response.status === 401 && window.location.href.includes("pages/admin")) {
