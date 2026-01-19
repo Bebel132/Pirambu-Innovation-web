@@ -346,8 +346,9 @@ a{
 /* ============================================
     CONTATOS
     ============================================ */
+    
 .contacts-section {
-     padding-bottom: 130px;
+     padding-bottom: 30px;
 }
 
 .contacts-container ul {
@@ -359,10 +360,6 @@ a{
 .contacts-container li {
      display: flex;
      align-items: center;
-}
-
-.contacts-section {
-    padding-bottom: 130px;
 }
 
 .contacts-container ul {

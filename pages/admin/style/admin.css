@@ -249,6 +249,33 @@ body {
     font-size: 30px;
 }
 
+.item {
+     width: 200px;
+     height: 180px;
+     position: relative;
+     background-position: center;
+     border-radius: 15px;
+     cursor: pointer;
+     transition: .1s;
+     background-color: rgba(0, 0, 0, 0.5);
+     background-blend-mode: darken;
+     flex: 0 0 auto;
+     scroll-snap-align: start;
+}
+
+.item span {
+     position: absolute;
+     bottom: 0;
+     margin: 10px 10px;
+     color: #fff;
+}
+
+.item:hover {
+     transform: scale(1.02);
+     box-shadow: 1px 1px 10px #cccccc;
+     filter: blur(0);
+}
+
 /* contentForm */
 
 .contentForm {
