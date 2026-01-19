@@ -477,7 +477,7 @@ a{
 .news-slider {
      position: relative;
      overflow: hidden;
-     width: 100vw;
+     width: 100%;
      margin-left: calc(-50vw + 50%);
 }
 

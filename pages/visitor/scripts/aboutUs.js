@@ -19,38 +19,46 @@ export async function renderAboutUs() {
     );
   }
 
+  /* INSTAGRAM */
   const instagram = document.querySelector("#instagram");
-  if (instagram) {
+  const linkInstagram = document.querySelector("#link-contato-instagram");
+
+  if (instagram && linkInstagram && aboutUs.instagram) {
     instagram.innerHTML = aboutUs.instagram;
+
+    // Garante link válido
+    const instagramUrl = aboutUs.instagram.startsWith("http")
+      ? aboutUs.instagram
+      : `https://www.instagram.com/${aboutUs.instagram.replace("@", "")}`;
+
+    linkInstagram.href = instagramUrl;
   }
 
+  /* WHATSAPP */
   const whatsapp = document.querySelector("#whatsapp");
-  const zapBtn = document.querySelector("#zapBtn");
   const linkZap = document.querySelector("#link-contato-zap");
-  if (whatsapp && zapBtn && linkZap) {
-    whatsapp.innerHTML = aboutUs.whatsapp;
+
+  if (whatsapp && linkZap && aboutUs.whatsapp) {
+    whatsapp.textContent = aboutUs.whatsapp;
 
     const onlyNumbers = aboutUs.whatsapp.replace(/\D/g, "");
-
-    // Mensagem do WhatsApp
     const message = encodeURIComponent("Olá! Como posso apoiar vocês?");
 
-    // Abre o WhatsApp no formato correto
-    zapBtn.onclick = () =>
-      window.open(
-        `https://wa.me/55${onlyNumbers}?text=${message}`,
-        "_blank"
-      );
-
-    linkZap.href = `https://wa.me/${onlyNumbers}`
+    linkZap.href = `https://wa.me/55${onlyNumbers}?text=${message}`;
   }
 
+  /* ENDEREÇO */
   const endereco = document.querySelector("#endereco");
-  if (endereco) {
-    endereco.innerHTML = aboutUs.endereco
+  const linkEndereco = document.querySelector("#link-contato-endereco");
+
+  if (endereco && linkEndereco && aboutUs.endereco) {
+    endereco.textContent = aboutUs.endereco;
+
+    const enderecoEncoded = encodeURIComponent(aboutUs.endereco);
+    linkEndereco.href = `https://www.google.com/maps/search/?api=1&query=${enderecoEncoded}`;
   }
 
-  /* IMAGEM ÚNICA */
+  /* IMAGEM */
   const image = document.getElementById("aboutUs-image");
   if (!image) return;
 

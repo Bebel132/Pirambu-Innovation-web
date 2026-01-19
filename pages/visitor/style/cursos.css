@@ -81,3 +81,18 @@
     transform: translateY(-2px);
 }
 
+.courses-list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 920px) {
+    .courses-list {
+        justify-content: center;
+    }
+}

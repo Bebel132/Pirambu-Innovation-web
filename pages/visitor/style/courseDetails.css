@@ -27,9 +27,9 @@
 
 .course-card {
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .course-card img {
@@ -104,4 +104,8 @@
   color: #fff;
   font-size: 15px;
   cursor: pointer;
+}
+
+.course-description img, .course-description video {
+  width: 70%;
 }
