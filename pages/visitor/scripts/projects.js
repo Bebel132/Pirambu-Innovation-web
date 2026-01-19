@@ -59,7 +59,6 @@ export async function renderProjects() {
     card.appendChild(img);
     card.appendChild(content);
 
-    /* clique */
     card.addEventListener("click", () => {
       window.location.href =
         `${BASE_PATH}/pages/visitor/projeto-details.html?id=${project.id}`;
