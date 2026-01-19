@@ -5,7 +5,7 @@ async function initUser() {
 
     document.querySelector("#nome").textContent += user.username;
     document.querySelector("#email").textContent += user.email;
-    console.log(user)
+    
     if(user.picture != null) {
         document.querySelector("#imagemDePerfil").src = user.picture;
     } else {

@@ -97,13 +97,6 @@ export async function saveAboutUs() {
     endereco
   });
 
-  console.log({
-    description,
-    instagram,
-    whatsapp,
-    endereco
-  })
-
   dom.aboutUsForm.reset();
   showListScreen();
 }
