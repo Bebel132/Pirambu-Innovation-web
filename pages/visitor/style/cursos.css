@@ -17,6 +17,21 @@
    CURSOS
 ================================ */
 
+.header-back {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-back span {
+  font-size: 28px;
+  color: #333;
+}
+
 .courses-section {
     padding: 20px;
     padding-bottom: 130px;
