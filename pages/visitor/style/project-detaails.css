@@ -38,6 +38,9 @@
 /* ===== CONTEÚDO ===== */
 .project-container {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* TÍTULO */
@@ -47,6 +50,8 @@
   line-height: 1.25;
   margin-bottom: 16px;
   color: #000;
+  width: 100%;
+  text-align: left;
 }
 
 /* IMAGEM */
@@ -67,7 +72,13 @@
   font-size: 15px;
   line-height: 1.6;
   color: #333;
-  margin-bottom: 80px
+  margin-bottom: 80px;
+  padding: 16px;
+  border: #3333333a 1px solid;
+  margin-top: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.6s ease-out;
 }
 
 .project-description p {
@@ -85,4 +96,8 @@
 
 .project-description li {
   margin-bottom: 6px;
+}
+
+.project-description img, .project-description video {
+  width: 70%;
 }
