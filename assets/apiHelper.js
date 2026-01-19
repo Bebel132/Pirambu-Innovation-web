@@ -6,7 +6,7 @@ function logout() {
   sessionStorage.clear();
 
   // redireciona para login
-  window.location.href = "/pages/admin";
+  window.location.href = "/pages/admin?error=unauthorized";
 }
 
 export async function api(
