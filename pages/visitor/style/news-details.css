@@ -36,7 +36,6 @@
     height: 220px;
     object-fit: cover;
     margin-bottom: 16px;
-    margin-left: calc(-50vw + 50%);
 }
 
 .news-details-content {
