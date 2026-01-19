@@ -55,12 +55,25 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
+    overflow: hidden;
 }
-/* REMOVE overlay escuro */
-.item::before {
-    display: none;
+
+/* GRADIENT OVERLAY */
+.item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    border-radius: 14px;
+    pointer-events: none;
 }
+
 
 /* TÍTULO */
 .item span {
@@ -68,11 +81,12 @@
     bottom: 10px;
     left: 10px;
     right: 10px;
-
+    font-weight: bold;
     font-size: 13px;
     font-weight: 500;
-    color: #333;
+    color: #ffffff;
     line-height: 1.2;
+    z-index: 1;
 }
 
 /* Hover leve */

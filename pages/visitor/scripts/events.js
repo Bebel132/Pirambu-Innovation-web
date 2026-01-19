@@ -24,7 +24,6 @@ export async function renderEventsList() {
       }
     }
 
-    // ✅ REDIRECIONAMENTO CORRETO
     item.onclick = () => {
       window.location.href = `pages/visitor/eventos-details.html?id=${event.id}`;
     };
