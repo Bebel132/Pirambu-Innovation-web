@@ -17,18 +17,18 @@ async function loadEventDetails() {
   const imageEl = document.getElementById("eventImage");
   const contentEl = document.getElementById("eventContent");
 
-  // 📝 TÍTULO
+  // TÍTULO
   if (titleEl) {
     titleEl.textContent = event.title || "";
   }
 
-  // 📝 TEXTO (prioriza content, senão usa description)
+  // TEXTO
   if (contentEl) {
     const text = event.content || event.description || "";
     contentEl.innerHTML = renderMarkdown(text);
   }
 
-  // 🖼️ IMAGEM
+  // IMAGEM
   if (event.hasFile && imageEl) {
     const imgRes = await api(`events/${event.id}/file`);
     if (imgRes?.ok && imgRes.data) {

@@ -21,7 +21,7 @@ async function loadNews() {
     titleEl.textContent = news.title || "";
   }
 
-  // ✅ TEXTO DA NOTÍCIA (CAMPO CORRETO)
+  // TEXTO
   if (contentEl) {
     contentEl.innerHTML = renderMarkdown(news.description || "");
   }
@@ -39,5 +39,4 @@ async function loadNews() {
   }
 }
 
-// MESMO PADRÃO DOS CURSOS
 document.addEventListener("DOMContentLoaded", loadNews);
