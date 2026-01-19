@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pirambu Innovation</title>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="pages/visitor/style/media.css">
@@ -11,22 +12,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
 <body>
+
+    <!-- LOADER -->
     <div class="loader">
-      <div class="loader-inner">
-        <div class="loader-line-wrap"><div class="loader-line"></div></div>
-        <div class="loader-line-wrap"><div class="loader-line"></div></div>
-        <div class="loader-line-wrap"><div class="loader-line"></div></div>
-        <div class="loader-line-wrap"><div class="loader-line"></div></div>
-        <div class="loader-line-wrap"><div class="loader-line"></div></div>
-        <p>Carregando...</p>
-      </div>
+        <div class="loader-inner">
+            <div class="loader-line-wrap"><div class="loader-line"></div></div>
+            <div class="loader-line-wrap"><div class="loader-line"></div></div>
+            <div class="loader-line-wrap"><div class="loader-line"></div></div>
+            <div class="loader-line-wrap"><div class="loader-line"></div></div>
+            <div class="loader-line-wrap"><div class="loader-line"></div></div>
+            <p>Carregando...</p>
+        </div>
     </div>
 
     <!-- HEADER -->
     <header class="header">
-        <a href="/index.html"><img src="assets/imgs/logo-cinza.png" alt="Pirambu Innovation" /></a>
-      
+        <a href="/index.html">
+            <img src="assets/imgs/logo-cinza.png" alt="Pirambu Innovation" />
+        </a>
+
         <nav id="navbar">
             <ul id="nav_list">
                 <li class="nav-item active"><a href="/index.html">Home</a></li>
@@ -37,124 +44,141 @@
             </ul>
         </nav>
     </header>
-        
+
+    <!-- MENU MOBILE -->
     <div class="bottomMenu">
         <ul>
-            <a href="#">
-            <li class="menu-item active">
+            <a href="#"><li class="menu-item active">
                 <img src="assets/imgs/home_icone.png" alt="Pagina inicial">
                 Home
-            </li>
-            </a>
+            </li></a>
+
             <a href="pages/visitor/novidades.html"><li class="menu-item">
                 <span class="material-symbols-outlined">newsmode</span>
                 Novidades
             </li></a>
-            <a href="pages/visitor/cursos.html">
-            <li class="menu-item">
+
+            <a href="pages/visitor/cursos.html"><li class="menu-item">
                 <span class="material-symbols-outlined">book_ribbon</span>
                 Cursos
-            </li>
-            </a>
+            </li></a>
+
             <a href="pages/visitor/apoie.html"><li class="menu-item">
                 <span class="material-symbols-outlined">handshake</span>
                 Apoie
-            </li>
-            </a>
+            </li></a>
+
             <a href="pages/visitor/sobre.html"><li class="menu-item">
                 <span class="material-symbols-outlined">diversity_4</span>
                 Sobre nós
-            </li>
-            </a>
+            </li></a>
         </ul>
     </div>
+
+    <!-- CURSOS -->
     <section class="courses-section">
         <div class="banner">
-            <img src="./assets/imgs/Foto-com-os-Alunos-do-PJ3.jpeg" alt="Foto com os alunos do PJ3">  
-
+            <img src="./assets/imgs/Foto-com-os-Alunos-do-PJ3.jpeg" alt="Foto com os alunos do PJ3">
             <div class="overlay">
                 <h2>Explore nossos Cursos</h2>
                 <a href="/pages/visitor/cursos.html" class="btn">Mais Cursos</a>
             </div>
         </div>
+
         <div class="courses-container">
             <a href="pages/visitor/cursos.html"><h1>Cursos gratuitos ❯</h1></a>
             <ul class="courses-list list"></ul>
         </div>
     </section>
+
+    <!-- EVENTOS -->
     <section class="events-section">
         <div class="events-container">
             <a href="pages/visitor/novidades.html"><h1>Eventos ❯</h1></a>
             <ul class="events-list list"></ul>
         </div>
     </section>
+
+    <!-- NOTÍCIAS -->
     <section class="news-section">
-  <a href="pages/visitor/novidades.html"><h1>Notícias ❯</h1></a>
+        <a href="pages/visitor/novidades.html"><h1>Notícias ❯</h1></a>
 
         <div class="news-slider">
             <button class="arrow left" id="newsPrev">❮</button>
-
             <ul class="news-track" id="newsTrack"></ul>
-
             <button class="arrow right" id="newsNext">❯</button>
         </div>
 
         <div class="news-dots" id="newsDots"></div>
     </section>
 
-
-
+    <!-- ===== BLOCO DESKTOP ===== -->
     <div class="desktop-wrapper">
+
+        <!-- NOS APOIE -->
         <section class="supportUs-section">
             <div class="supportUs-container">
                 <h1>Nos apoie</h1>
                 <div class="text">
                     <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
-                        <button onclick="window.open('https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
-                            <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
-                            Whatsapp
-                        </button>
+                    <button onclick="window.open('https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
+                        <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
+                        Whatsapp
+                    </button>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="aboutUs-section">
-        <h1>Sobre nós</h1>
-        <div class="aboutUs-container">
-            <img class="aboutUs-image" src="assets/imgs/logo-branca.png" alt="logo" class="logo">
-            <p class="aboutUs-text"></p>
-            <button onclick="window.location.href='/pages/visitor/sobre.html'">Saiba mais</button>
-        </div>
-    </section>
+        </section>
+
+        <!-- SOBRE NÓS -->
+        <section class="aboutUs-section">
+            <h1>Sobre nós</h1>
+            <div class="aboutUs-container">
+                <img class="aboutUs-image" src="assets/imgs/logo-branca.png" alt="logo">
+                <p class="aboutUs-text"></p>
+                <button onclick="window.location.href='/pages/visitor/sobre.html'">Saiba mais</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- CONTATOS -->
     <section class="contacts-section">
         <div class="contacts-container">
             <h1>Contatos</h1>
             <ul>
                 <li>
-                    <a href="https://www.instagram.com/pirambuinnovation.oficial/" target="_blank" rel="noopener noreferrer" class="link-contato">
+                    <a href="https://www.instagram.com/pirambuinnovation.oficial/" target="_blank" class="link-contato">
                         <img src="./assets/imgs/Instagram_logo_2016 3.png" alt="icone_instagram">
                         <p>@pirambuinnovation.oficial</p>
                     </a>
                 </li>
+
                 <li>
-                    <a href="https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?" target="_blank" rel="noopener noreferrer" class="link-contato">
-                        <img src="./assets/imgs/Group.png" alt="icone_whatsapp" class="whatsapp-icon">
+                    <a href="https://wa.me/5585997054321" target="_blank" class="link-contato">
+                        <img src="./assets/imgs/Group.png" alt="icone_whatsapp">
                         <p>(85) 99705-4321</p>
                     </a>
                 </li>
+
                 <li>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+N+Sra+das+Graças+1097,+Cristo+Redentor,+Fortaleza+CE" target="_blank" rel="noopener noreferrer" class="link-contato">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+N+Sra+das+Graças+1097,+Cristo+Redentor,+Fortaleza+CE" target="_blank" class="link-contato">
                         <img src="./assets/imgs/Frame.png" alt="icone_local">
-                        <p>Rua N Sra das Graças 1097,<br> Cristo Redentor (Pirambu), <br>Fortaleza/CE</p>
+                        <p>
+                            Rua N Sra das Graças 1097,<br>
+                            Cristo Redentor (Pirambu),<br>
+                            Fortaleza/CE
+                        </p>
                     </a>
                 </li>
             </ul>
         </div>
     </section>
+
+    <!-- SCRIPT -->
     <script type="module">
         import { initHome } from './script.js';
-
-        initHome()
+        initHome();
     </script>
+
 </body>
 </html>
