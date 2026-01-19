@@ -41,8 +41,7 @@ export async function renderEventsPage() {
         <p>${event.description ?? ""}</p>
       </div>
     `;
-
-    // ✅ REDIRECIONAMENTO CORRETO
+    
     card.addEventListener("click", () => {
       window.location.href = `./eventos-details.html?id=${event.id}`;
     });

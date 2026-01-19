@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { BASE_PATH } from "../../../assets/config.js";
+import { renderMarkdown } from "../../../assets/markdown.js";
 
 export async function renderCoursesList() {
   const coursesListContainer = document.querySelector(".courses-list");
@@ -19,28 +20,38 @@ export async function renderCoursesList() {
 
   for (const course of courses) {
     const item = document.createElement("li");
-    item.classList.add("courses_list-item", "item");
+    item.classList.add("home-card");
 
-    const titleSpan = document.createElement("span");
-    titleSpan.textContent = course.title || "";
-    item.appendChild(titleSpan);
+    let imageUrl = "";
 
     // imagem do curso
     if (course.hasFile && course.id) {
       try {
         const res = await api(`courses/${course.id}/file`);
         if (res?.ok && res.data) {
-          const blobUrl = URL.createObjectURL(res.data);
-          item.style.backgroundImage = `url("${blobUrl}")`;
+          imageUrl = URL.createObjectURL(res.data);
         }
-      } catch (err) {
+      } catch {
         console.warn(`Imagem não carregada (curso ${course.id})`);
       }
     }
 
-    // redirecionamento (FUNCIONA EM TUDO)
+    item.innerHTML = `
+      ${imageUrl ? `<img src="${imageUrl}" alt="${course.title}">` : ""}
+      <div class="home-card-content">
+        <h2>${course.title || ""}</h2>
+
+        <div class="home-card-description clamp-4">
+          ${renderMarkdown(course.description ?? "")}
+        </div>
+
+        <span class="home-card-read-more">Saiba mais</span>
+      </div>
+    `;
+
     item.addEventListener("click", () => {
-      window.location.href = `${BASE_PATH}/pages/visitor/cursos-details.html?id=${course.id}`;
+      window.location.href =
+        `${BASE_PATH}/pages/visitor/cursos-details.html?id=${course.id}`;
     });
 
     coursesListContainer.appendChild(item);
