@@ -19,6 +19,37 @@ export async function renderAboutUs() {
     );
   }
 
+  const instagram = document.querySelector("#instagram");
+  if (instagram) {
+    instagram.innerHTML = aboutUs.instagram;
+  }
+
+  const whatsapp = document.querySelector("#whatsapp");
+  const zapBtn = document.querySelector("#zapBtn");
+  const linkZap = document.querySelector("#link-contato-zap");
+  if (whatsapp && zapBtn && linkZap) {
+    whatsapp.innerHTML = aboutUs.whatsapp;
+
+    const onlyNumbers = aboutUs.whatsapp.replace(/\D/g, "");
+
+    // Mensagem do WhatsApp
+    const message = encodeURIComponent("Olá! Como posso apoiar vocês?");
+
+    // Abre o WhatsApp no formato correto
+    zapBtn.onclick = () =>
+      window.open(
+        `https://wa.me/55${onlyNumbers}?text=${message}`,
+        "_blank"
+      );
+
+    linkZap.href = `https://wa.me/${onlyNumbers}`
+  }
+
+  const endereco = document.querySelector("#endereco");
+  if (endereco) {
+    endereco.innerHTML = aboutUs.endereco
+  }
+
   /* IMAGEM ÚNICA */
   const image = document.getElementById("aboutUs-image");
   if (!image) return;

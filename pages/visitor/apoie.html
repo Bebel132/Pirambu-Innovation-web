@@ -59,13 +59,13 @@
             <div class="join-us">
                 <h2>Entre para o nosso time</h2>
                 <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
-                <a href="https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?" target="_blank" rel="noopener noreferrer">Seja colaborador</a>
+                <a class="linkZap" target="_blank" rel="noopener noreferrer">Seja colaborador</a>
             </div>
 
             <div class="other-forms">
                 <h2>Outras formas de apoio</h2>
                 <p>Sua doação ajuda a transformar sonhos em realidade. Contribua com qualquer valor e ajude-nos a levar inovação e educação gratuita para quem mais precisa.</p>
-                <a href="https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?" target="_blank" rel="noopener noreferrer">Financeiro</a>
+                <a class="linkZap" target="_blank" rel="noopener noreferrer">Financeiro</a>
             </div>
         </div>
 
@@ -103,4 +103,15 @@
         </ul>
     </div>
   </body>
+  <script type="module">
+    import { api } from "../../../assets/apiHelper.js";
+    const response = await api("biography");
+    const aboutUs = response?.data || {};
+    const linkZap = document.querySelectorAll(".linkZap");
+    const onlyNumbers = aboutUs.whatsapp.replace(/\D/g, "");
+    const message = encodeURIComponent("Olá! Como posso apoiar vocês?");
+    linkZap.forEach(a => {
+        a.href = `https://wa.me/55${onlyNumbers}?text=${message}`
+    })
+  </script>
 </html>

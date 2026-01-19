@@ -121,7 +121,7 @@
                 <h1>Nos apoie</h1>
                 <div class="text">
                     <p>Quer embarcar nessa jornada de transformação também? Então clique no botão abaixo e mande uma mensagem.</p>
-                    <button onclick="window.open('https://wa.me/5585997054321?text=Olá!%20Como%20posso%20apoiar%20vocês?', '_blank')">
+                    <button id="zapBtn">
                         <img src="assets/imgs/logo-zap.svg" alt="Whatsapp">
                         Whatsapp
                     </button>
@@ -149,21 +149,21 @@
                 <li>
                     <a href="https://www.instagram.com/pirambuinnovation.oficial/" target="_blank" class="link-contato">
                         <img src="./assets/imgs/Instagram_logo_2016 3.png" alt="icone_instagram">
-                        <p>@pirambuinnovation.oficial</p>
+                        <p id="instagram">@pirambuinnovation.oficial</p>
                     </a>
                 </li>
 
                 <li>
-                    <a href="https://wa.me/5585997054321" target="_blank" class="link-contato">
+                    <a target="_blank" class="link-contato" id="link-contato-zap">
                         <img src="./assets/imgs/Group.png" alt="icone_whatsapp">
-                        <p>(85) 99705-4321</p>
+                        <p id="whatsapp">(85) 99705-4321</p>
                     </a>
                 </li>
 
                 <li>
                     <a href="https://www.google.com/maps/search/?api=1&query=Rua+N+Sra+das+Graças+1097,+Cristo+Redentor,+Fortaleza+CE" target="_blank" class="link-contato">
                         <img src="./assets/imgs/Frame.png" alt="icone_local">
-                        <p>
+                        <p id="endereco">
                             Rua N Sra das Graças 1097,<br>
                             Cristo Redentor (Pirambu),<br>
                             Fortaleza/CE

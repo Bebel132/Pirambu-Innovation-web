@@ -44,4 +44,7 @@ export const dom = {
 
   aboutUsFilePreviewOnForm: () => document.querySelector(".aboutUsCustom-file_preview"),
   aboutUsDescInput: () => document.querySelector("#aboutUs-description"),
+  aboutUsInstagramInput: () => document.querySelector("#instagram"),
+  aboutUsWhatsappInput: () => document.querySelector("#whatsapp"),
+  aboutUsEnderecoInput: () => document.querySelector("#endereco"),
 };

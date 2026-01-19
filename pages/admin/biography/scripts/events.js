@@ -86,10 +86,23 @@ export async function saveAboutUs() {
   const formData = new FormData(dom.aboutUsForm);
 
   const description = formData.get("description")?.toString().trim() || "";
+  const instagram = formData.get("instagram")?.toString().trim() || "";
+  const whatsapp = formData.get("whatsapp")?.toString().trim() || "";
+  const endereco = formData.get("endereco")?.toString().trim() || "";
 
   await updateAboutUs({
     description,
+    instagram,
+    whatsapp,
+    endereco
   });
+
+  console.log({
+    description,
+    instagram,
+    whatsapp,
+    endereco
+  })
 
   dom.aboutUsForm.reset();
   showListScreen();
@@ -297,6 +310,33 @@ export function registerProjects({ renderProjectsLists }) {
     if(!state.isEdited) {
       state.isEdited = true;
     }
+  })
+
+  dom.aboutUsWhatsappInput().addEventListener("input", (e) => {
+    let value = e.target.value.replace(/\D/g, ""); // remove tudo que não é número
+
+    // Limita no máximo 11 dígitos
+    value = value.slice(0, 11);
+
+    if (value.length > 10) {
+      // Celular: (99) 99999-9999
+      value = value.replace(
+        /^(\d{2})(\d{5})(\d{4})$/,
+        "($1) $2-$3"
+      );
+    } else if (value.length > 6) {
+      // Fixo ou digitando: (99) 9999-9999
+      value = value.replace(
+        /^(\d{2})(\d{4})(\d{0,4})$/,
+        "($1) $2-$3"
+      );
+    } else if (value.length > 2) {
+      value = value.replace(/^(\d{2})(\d+)/, "($1) $2");
+    } else if (value.length > 0) {
+      value = value.replace(/^(\d*)/, "($1");
+    }
+
+    e.target.value = value;
   })
 
   const dontSaveBtn = dom.dontSaveBtn();

@@ -399,7 +399,8 @@ a{
     font-size: 18px;
     margin: 0;         
     color: #333;
-    line-height: 1.4; 
+    line-height: 1.4;
+    max-width: 240px;
 }
 
 .link-contato {

@@ -18,6 +18,15 @@ export function showAboutUsFormScreen() {
 export async function openAboutUsEditForm(aboutUs) {
     const desc = dom.aboutUsDescInput();
     desc.value = aboutUs?.description || "";
+
+    const instagram = dom.aboutUsInstagramInput();
+    instagram.value = aboutUs?.instagram || "";
+    
+    const whatsapp = dom.aboutUsWhatsappInput();
+    whatsapp.value = aboutUs?.whatsapp || "";
+    
+    const endereco = dom.aboutUsEnderecoInput();
+    endereco.value = aboutUs?.endereco || "";
     
     const filePrev = dom.aboutUsFilePreviewOnForm();
     

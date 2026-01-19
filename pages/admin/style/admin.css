@@ -132,12 +132,6 @@ body {
     width: 27px;
 }
 
-@media (max-width: 1360px) {
-    .menu-item_icon {
-        margin: 0 10px;
-    }
-}
-
 /*  */
 
 .admin-content_container {
@@ -259,7 +253,7 @@ body {
 
 .contentForm {
     display: none;
-    margin: 40px 0 0 40px;
+    margin: 40px;
 }
 
 .btns {
@@ -383,9 +377,20 @@ form span, form label {
     display: none;
 }
 
-.description-input, .title-input {
+.description-input, .title-input, .instagram-input, .whatsapp-input, .endereco-input {
     display: flex;
     flex-direction: column;
+}
+
+.instagram-input, .whatsapp-input {
+    border-right: 1px solid #686868;
+    padding-right: 10px;
+}
+
+.contactInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
 }
 
 #description {
