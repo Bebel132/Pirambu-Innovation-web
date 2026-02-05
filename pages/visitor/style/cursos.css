@@ -20,7 +20,7 @@
 .header-back {
   position: absolute;
   left: 16px;
-  top: 50%;
+  top: 5%;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -110,4 +110,11 @@
     .courses-list {
         justify-content: center;
     }
+}
+
+@media screen and (min-width: 850px){
+    .header .header-back {
+        display: none;
+    }
+
 }
