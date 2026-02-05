@@ -40,6 +40,12 @@
   position: relative;
 }
 
+.novidade-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.25);
+}
+
+
 /* GRADIENTE */
 .novidade-card::after {
   content: "";
@@ -66,11 +72,6 @@
   z-index: 1;
 }
 
-@media screen and (min-width: 470px) {
-  .novidade-card {
-    min-width: 400px; /* Altera a largura de 85vw para 450px fixos */
-  }
-}
 /* ===== SLIDER COM DOTS ===== */
 .novidades-slider {
   overflow: hidden;
@@ -117,6 +118,37 @@
     border-radius: 12px;
     margin-left: 20px;
   }
+
+  /*Remove as setas e adiciona o slider em baixo dos cards*/
+  .novidades-slider-wrapper button { 
+    display: none;
+  }
+
+  .novidades-dots {
+    display: none !important;
+  }
+
+  .novidades-slider {
+    overflow-x: auto;
+    width: 100%;
+    margin-left: 0;
+    padding-bottom: 10px;
+  }
+
+  .novidades-track {
+    transform: none !important;
+    width: max-content;
+    padding-right: 20px;
+  }
+
+  .novidades-slider::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .novidades-slider::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
 }
 /* ===== SLIDER WRAPPER ===== */
 .novidades-slider-wrapper {
@@ -153,11 +185,3 @@
   background: rgba(0,0,0,0.75);
 }
 
-/* MOBILE: mantém setas */
-@media (max-width: 768px) {
-  .slider-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}

@@ -72,3 +72,53 @@
 .event-details-content img, .event-details-content video {
   width: 70%;
 }
+
+@media screen and (max-width: 849px) {
+  .eventos-desktop{
+    display: none;
+  }
+  
+}
+
+@media screen and (min-width: 850px) {
+  .eventos-details-header{
+    display: none;
+  }
+  .eventos-desktop {
+        position: sticky;
+        top: 0;
+        z-index: 10000000;
+        background-color: #fff;
+    }   
+        
+    #navbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 3%;
+    }
+
+    #nav_list {
+        display: flex;
+        list-style: none;
+        gap: 50px;
+    }
+
+    .nav-item a{
+        text-decoration: none;
+        color: #1d1d1dad;
+        font-weight: 600;
+    }
+
+    .nav-item.active a{
+        color: #1d1d1dad;
+        border-bottom: 3px solid #1295C7;
+    }
+
+    .container {
+        max-width: 850px;
+        width: 100%;
+        margin: 0 auto !important;
+    }
+}
