@@ -27,14 +27,12 @@ export function popScreen() {
  * handlers = { showFormScreen, showPreviewScreen, showListScreen, renderEventsLists }
  */
 export function goBack(handlers) {
-  const previous = popScreen();
-
-  if (state.isEdited) {
-    dom.confirmationModal.style.display = "flex";
-    dom.saveBtnText.textContent =
-      state.selectedEvents?.is_draft ? "Salvar rascunho" : "Salvar";
+  if (state.isEdited && state.currentScreen === "FORM") {
+    openConfirmationModal();
     return;
   }
+
+  const previous = popScreen();
 
   switch (previous) {
     case "FORM":

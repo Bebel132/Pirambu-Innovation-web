@@ -582,14 +582,19 @@ form span, form label {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    position: relative;
+}
+
+.markdownContainer.is-fixed {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background-color: #fff;
+    padding: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
 }
 
 .markdownBtns {
     display: flex;
-    top: 0;
-    position: sticky;
-    background: #fff;
 }
 
 .markdownBtns button {

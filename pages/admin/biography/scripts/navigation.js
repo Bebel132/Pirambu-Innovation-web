@@ -28,7 +28,7 @@ export function popScreen() {
  * handlers = { showFormScreen, showPreviewScreen, showListScreen, renderProjectsLists }
  */
 export async function goBack(handlers) {
-   if (state.isEdited) {
+  if (state.isEdited && (state.currentScreen === "FORM" || state.currentScreen === "FORM ABOUT US")) {
     openConfirmationModal();
     return;
   }
