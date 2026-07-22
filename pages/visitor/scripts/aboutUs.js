@@ -2,7 +2,7 @@ import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
 
 export async function renderAboutUs() {
-  const response = await api("biography");
+  const response = await api("biography/");
   const aboutUs = response?.data || {};
 
   /* TEXTO PRINCIPAL */
