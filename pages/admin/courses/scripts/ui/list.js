@@ -57,9 +57,8 @@ async function renderCourseListUI(list, containerSelector, className, handlers) 
 
     // background (imagem/placeholder)
     if (course.hasFile) {
-      const res = await getCourseFile(course.id);
-      if (res.ok) item.style.backgroundImage = `url(${URL.createObjectURL(res.data)})`;
-      else item.style.backgroundColor = "var(--color-gray)";
+      item.style.backgroundImage =
+        `url(${API_URL}/courses/${course.id}/file)`;
     } else {
       item.style.backgroundColor = "var(--color-gray)";
     }
