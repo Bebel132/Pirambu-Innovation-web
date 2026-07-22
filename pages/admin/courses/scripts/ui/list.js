@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedCourse } from "../state.js";
 import { listCourses, getCourseFile } from "../services/courseService.js";
+import API_URL from "../../../../../assets/config.js".
 
 export async function renderCourseLists({ onEdit, onDelete }) {
   let drafts = [];
