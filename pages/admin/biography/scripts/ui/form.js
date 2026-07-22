@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedProjects } from "../state.js";
 import { getProjectsFile } from "../services/projectsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export function autoResize(el) {
   el.style.height = "auto";
@@ -43,12 +44,9 @@ export async function openEditForm(project) {
   const filePrev = dom.filePreviewOnForm();
 
   if (state.selectedProjects?.hasFile && state.selectedProjects.id) {
-    const res = await getProjectsFile(state.selectedProjects.id);
-    if (res.ok) {
-      filePrev.src = URL.createObjectURL(res.data);
-      filePrev.style.display = "block";
-      dom.customBtn.style.display = "none";
-    }
+    filePrev.src = `${API_URL}/projects/${state.selectedProjects.id}/file`;
+    filePrev.style.display = "block";
+    dom.customBtn.style.display = "none";
   } else {
     filePrev.style.display = "none";
     dom.customBtn.style.display = "flex";

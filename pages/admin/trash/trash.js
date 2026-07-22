@@ -1,4 +1,5 @@
 import { api } from '../../../assets/apiHelper.js';
+import { API_URL } from '../../../assets/config.js';
 
 const trashContainer = document.querySelector(".trash");
 const coursesContainer = document.querySelector(".coursesTrash");
@@ -130,11 +131,7 @@ async function renderCoursesList() {
         courseItem.append(titleSpan);
 
         if (course.hasFile) {
-            const res = await api(`courses/${course.id}/file`);
-            if (res.ok) {
-                const blob = res.data;
-                courseItem.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
-            }
+            courseItem.style.backgroundImage = `url(${API_URL}/courses/${course.id}/file)`;
         } else {
             courseItem.style.backgroundColor = `var(--color-gray)`;
             titleSpan.style.color = "black";
@@ -214,11 +211,7 @@ async function renderNewsList() {
         newsItem.append(titleSpan);
 
         if (news.hasFile) {
-            const res = await api(`news/${news.id}/file`);
-            if (res.ok) {
-                const blob = res.data;
-                newsItem.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
-            }
+            newsItem.style.backgroundImage = `url(${API_URL}/news/${news.id}/file)`;
         } else {
             newsItem.style.backgroundColor = `var(--color-gray)`;
             titleSpan.style.color = "black";
@@ -297,11 +290,7 @@ async function renderEventsList() {
         titleSpan.append(event.title);
         eventItem.append(titleSpan);
         if (event.hasFile) {
-            const res = await api(`events/${event.id}/file`);
-            if (res.ok) {
-                const blob = res.data;
-                eventItem.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
-            }
+            eventItem.style.backgroundImage = `url(${API_URL}/events/${event.id}/file)`;
         } else {
             eventItem.style.backgroundColor = `var(--color-gray)`;
             titleSpan.style.color = "black";
@@ -381,11 +370,7 @@ async function renderProjectsList() {
         projectItem.append(titleSpan);
 
         if (project.hasFile) {
-            const res = await api(`projects/${project.id}/file`);
-            if (res.ok) {
-                const blob = res.data;
-                projectItem.style.backgroundImage = `url(${URL.createObjectURL(blob)})`;
-            }
+            projectItem.style.backgroundImage = `url(${API_URL}/projects/${project.id}/file)`;
         } else {
             projectItem.style.backgroundColor = `var(--color-gray)`;
             titleSpan.style.color = "black";

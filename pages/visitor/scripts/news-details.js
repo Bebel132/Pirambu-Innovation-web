@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
+import { API_URL } from "../../../assets/config.js";
 
 async function loadNews() {
   const params = new URLSearchParams(window.location.search);
@@ -28,14 +29,7 @@ async function loadNews() {
 
   // IMAGEM
   if (news.hasFile && imageEl) {
-    try {
-      const imgRes = await api(`news/${id}/file`);
-      if (imgRes?.ok && imgRes.data) {
-        imageEl.src = URL.createObjectURL(imgRes.data);
-      }
-    } catch {
-      console.warn("Imagem da notícia não carregada:", id);
-    }
+    imageEl.src = `${API_URL}/news/${news.id}/file`;
   }
 }
 

@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedEvents } from "../state.js";
 import { listEvents, getEventsFile } from "../services/eventsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export async function renderEventsLists({ onEdit, onDelete }) {
   let drafts = [];
@@ -57,9 +58,8 @@ async function renderEventsListUI(list, containerSelector, className, handlers) 
 
     // background (imagem/placeholder)
     if (event.hasFile) {
-      const res = await getEventsFile(event.id);
-      if (res.ok) item.style.backgroundImage = `url(${URL.createObjectURL(res.data)})`;
-      else item.style.backgroundColor = "var(--color-gray)";
+      item.style.backgroundImage = 
+        `url(${API_URL}/events/${event.id}/file)`;
     } else {
       item.style.backgroundColor = "var(--color-gray)";
     }

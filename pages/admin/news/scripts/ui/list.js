@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedNews } from "../state.js";
 import { listNewss, getNewsFile } from "../services/newsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export async function renderNewsLists({ onEdit, onDelete }) {
   let drafts = [];
@@ -57,9 +58,8 @@ async function renderNewsListUI(list, containerSelector, className, handlers) {
 
     // background (imagem/placeholder)
     if (news.hasFile) {
-      const res = await getNewsFile(news.id);
-      if (res.ok) item.style.backgroundImage = `url(${URL.createObjectURL(res.data)})`;
-      else item.style.backgroundColor = "var(--color-gray)";
+      item.style.backgroundImage = 
+        `url(${API_URL}/news/${news.id}/file)`;
     } else {
       item.style.backgroundColor = "var(--color-gray)";
     }

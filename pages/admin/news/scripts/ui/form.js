@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedNews } from "../state.js";
 import { getNewsFile } from "../services/newsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export function autoResize(el) {
   el.style.height = "auto";
@@ -43,12 +44,9 @@ export async function openEditForm(news) {
   const filePrev = dom.filePreviewOnForm();
 
   if (state.selectedNews?.hasFile && state.selectedNews.id) {
-    const res = await getNewsFile(state.selectedNews.id);
-    if (res.ok) {
-      filePrev.src = URL.createObjectURL(res.data);
-      filePrev.style.display = "block";
-      dom.customBtn.style.display = "none";
-    }
+    filePrev.src = `${API_URL}/news/${state.selectedNews.id}/file`;
+    filePrev.style.display = "block";
+    dom.customBtn.style.display = "none";
   } else {
     filePrev.style.display = "none";
     dom.customBtn.style.display = "flex";

@@ -1,6 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
-import { BASE_PATH } from "../../../assets/config.js";
+import { BASE_PATH, API_URL } from "../../../assets/config.js";
 
 /* =====================================================
    SLIDER DE NOTÍCIAS (HOME)
@@ -30,14 +30,7 @@ export async function renderNewsList() {
     slide.appendChild(title);
 
     if (item.hasFile) {
-      try {
-        const res = await api(`news/${item.id}/file`);
-        if (res?.ok && res.data) {
-          slide.style.backgroundImage = `url("${URL.createObjectURL(res.data)}")`;
-        }
-      } catch {
-        console.warn("Imagem da notícia não carregada:", item.id);
-      }
+      slide.style.backgroundImage = `url(${API_URL}/news/${item.id}/file)`;
     }
 
     slide.addEventListener("click", () => {
@@ -117,14 +110,7 @@ export async function renderNewsPage() {
     let imageUrl = "";
 
     if (item.hasFile) {
-      try {
-        const res = await api(`news/${item.id}/file`);
-        if (res?.ok && res.data) {
-          imageUrl = URL.createObjectURL(res.data);
-        }
-      } catch {
-        console.warn("Imagem da notícia não carregada:", item.id);
-      }
+      imageUrl = `${API_URL}/news/${item.id}/file`;
     }
 
    card.innerHTML = `

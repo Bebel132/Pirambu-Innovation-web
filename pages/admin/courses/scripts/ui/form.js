@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedCourse } from "../state.js";
 import { getCourseFile } from "../services/courseService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export function autoResize(el) {
   el.style.height = "auto";
@@ -44,12 +45,9 @@ export async function openEditForm(course) {
   const filePrev = dom.filePreviewOnForm();
 
   if (state.selectedCourse?.hasFile && state.selectedCourse.id) {
-    const res = await getCourseFile(state.selectedCourse.id);
-    if (res.ok) {
-      filePrev.src = URL.createObjectURL(res.data);
-      filePrev.style.display = "block";
-      dom.customBtn.style.display = "none";
-    }
+    filePrev.src = `${API_URL}/courses/${state.selectedCourse.id}/file`;
+    filePrev.style.display = "block";
+    dom.customBtn.style.display = "none";
   } else {
     filePrev.style.display = "none";
     dom.customBtn.style.display = "flex";

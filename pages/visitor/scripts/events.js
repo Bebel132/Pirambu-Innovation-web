@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
+import { API_URL } from "../../../assets/config.js";
 
 export async function renderEventsList() {
   const eventsListContainer = document.querySelector(".events-list");
@@ -18,10 +19,7 @@ export async function renderEventsList() {
 
     if (event.hasFile) {
       try {
-        const res = await api(`events/${event.id}/file`);
-        if (res?.ok && res.data) {
-          imageUrl = URL.createObjectURL(res.data);
-        }
+        imageUrl = `${API_URL}/events/${event.id}/file`;
       } catch {
         console.warn(`Imagem não carregada (evento ${event.id})`);
       }

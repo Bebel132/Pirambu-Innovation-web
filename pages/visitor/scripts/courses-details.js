@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
+import { API_URL } from "../../../assets/config.js";
 
 async function loadCourseDetails() {
   const params = new URLSearchParams(window.location.search);
@@ -31,10 +32,7 @@ async function loadCourseDetails() {
   }
 
   if (course.hasFile && imageEl) {
-    const imgRes = await api(`courses/${course.id}/file`);
-    if (imgRes?.ok && imgRes.data) {
-      imageEl.src = URL.createObjectURL(imgRes.data);
-    }
+    imageEl.src = `${API_URL}/courses/${course.id}/file`;
   }
 }
 

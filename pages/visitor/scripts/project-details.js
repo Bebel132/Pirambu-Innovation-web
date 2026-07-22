@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
+import { API_URL } from "../../../assets/config.js";
 
 async function loadProjectDetails() {
   const params = new URLSearchParams(window.location.search);
@@ -16,11 +17,7 @@ async function loadProjectDetails() {
     renderMarkdown(project.description || "");
 
   if (project.hasFile) {
-    const imgRes = await api(`projects/${id}/file`);
-    if (imgRes?.ok && imgRes.data) {
-      document.getElementById("projectImage").src =
-        URL.createObjectURL(imgRes.data);
-    }
+    document.getElementById("projectImage").src = `${API_URL}/projects/${project.id}/file`;
   }
 }
 

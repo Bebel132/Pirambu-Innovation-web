@@ -2,6 +2,7 @@ import { dom } from "../dom.js";
 import { state } from "../state.js";
 import { renderMarkdown } from "../../../../../assets/markdown.js";
 import { getNewsFile } from "../services/newsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export async function renderPreview(news) {
   const preview_title = document.querySelector(".preview-title");
@@ -13,8 +14,7 @@ export async function renderPreview(news) {
   dom.file_preview.src = "";
 
   if (news.hasFile && news.id) {
-    const res = await getNewsFile(news.id);
-    if (res.ok) dom.file_preview.src = URL.createObjectURL(res.data);
+    dom.file_preview.src = `${API_URL}/news/${news.id}/file`;
   } else {
     if(dom.fileInput()?.files[0]) {
       dom.file_preview.src = URL.createObjectURL(dom.fileInput().files[0]);

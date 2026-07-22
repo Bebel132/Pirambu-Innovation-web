@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedEvents } from "../state.js";
 import { getEventsFile } from "../services/eventsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export function autoResize(el) {
   el.style.height = "auto";
@@ -43,12 +44,9 @@ export async function openEditForm(event) {
   const filePrev = dom.filePreviewOnForm();
 
   if (state.selectedEvents?.hasFile && state.selectedEvents.id) {
-    const res = await getEventsFile(state.selectedEvents.id);
-    if (res.ok) {
-      filePrev.src = URL.createObjectURL(res.data);
-      filePrev.style.display = "block";
-      dom.customBtn.style.display = "none";
-    }
+    filePrev.src = `${API_URL}/events/${state.selectedEvents.id}/file`;
+    filePrev.style.display = "block";
+    dom.customBtn.style.display = "none";
   } else {
     filePrev.style.display = "none";
     dom.customBtn.style.display = "flex";

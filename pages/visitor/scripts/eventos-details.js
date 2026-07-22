@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
+import { API_URL } from "../../../assets/config.js";
 
 async function loadEventDetails() {
   const params = new URLSearchParams(window.location.search);
@@ -30,10 +31,7 @@ async function loadEventDetails() {
 
   // IMAGEM
   if (event.hasFile && imageEl) {
-    const imgRes = await api(`events/${event.id}/file`);
-    if (imgRes?.ok && imgRes.data) {
-      imageEl.src = URL.createObjectURL(imgRes.data);
-    }
+    imageEl.src = `${API_URL}/events/${event.id}/file`;
   }
 }
 

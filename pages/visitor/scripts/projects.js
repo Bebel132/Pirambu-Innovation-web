@@ -1,5 +1,5 @@
 import { api } from "../../../assets/apiHelper.js";
-import { BASE_PATH } from "../../../assets/config.js";
+import { BASE_PATH, API_URL } from "../../../assets/config.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
 
 export async function renderProjects() {
@@ -25,16 +25,10 @@ export async function renderProjects() {
     /* imagem */
     const img = document.createElement("img");
     img.alt = project.title || "";
+    img.src = `${API_URL}/projects/${project.id}/file`;
 
     if (project.hasFile && project.id) {
-      try {
-        const imgRes = await api(`projects/${project.id}/file`);
-        if (imgRes?.ok && imgRes.data) {
-          img.src = URL.createObjectURL(imgRes.data);
-        }
-      } catch (err) {
-        console.warn(`Imagem não carregada (projeto ${project.id})`);
-      }
+      img.src = `${API_URL}/projects/${project.id}/file`;
     }
 
     /* conteúdo */

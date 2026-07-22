@@ -1,4 +1,5 @@
 import { api } from "../../../assets/apiHelper.js";
+import { API_URL } from "../../../assets/config.js";
 
 function initSlider(track, dotsContainer, prevBtn, nextBtn, type) {
   let index = 0;
@@ -55,10 +56,7 @@ async function renderEvents() {
     };
 
     if (event.hasFile) {
-      const img = await api(`events/${event.id}/file`);
-      if (img?.ok) {
-        card.style.backgroundImage = `url(${URL.createObjectURL(img.data)})`;
-      }
+      card.style.backgroundImage = `url(${API_URL}/events/${event.id}/file)`;
     }
 
     const title = document.createElement("span");
@@ -95,10 +93,7 @@ async function renderNews() {
 
 
     if (item.hasFile) {
-      const img = await api(`news/${item.id}/file`);
-      if (img?.ok) {
-        card.style.backgroundImage = `url(${URL.createObjectURL(img.data)})`;
-      }
+      card.style.backgroundImage = `url(${API_URL}/news/${item.id}/file)`;
     }
 
     const title = document.createElement("span");

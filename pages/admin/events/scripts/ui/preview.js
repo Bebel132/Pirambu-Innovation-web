@@ -2,6 +2,7 @@ import { dom } from "../dom.js";
 import { state } from "../state.js";
 import { renderMarkdown } from "../../../../../assets/markdown.js";
 import { getEventsFile } from "../services/eventsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export async function renderPreview(event) {
   const preview_title = document.querySelector(".preview-title");
@@ -13,8 +14,7 @@ export async function renderPreview(event) {
   dom.file_preview.src = "";
 
   if (event.hasFile && event.id) {
-    const res = await getEventsFile(event.id);
-    if (res.ok) dom.file_preview.src = URL.createObjectURL(res.data);
+    dom.file_preview.src = `${API_URL}/events/${event.id}/file`;
   } else {
     if(dom.fileInput()?.files[0]) {
       dom.file_preview.src = URL.createObjectURL(dom.fileInput().files[0]);

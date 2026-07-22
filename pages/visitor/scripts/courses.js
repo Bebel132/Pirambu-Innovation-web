@@ -1,5 +1,5 @@
 import { api } from "../../../assets/apiHelper.js";
-import { BASE_PATH } from "../../../assets/config.js";
+import { BASE_PATH, API_URL } from "../../../assets/config.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
 
 export async function renderCoursesList() {
@@ -27,10 +27,7 @@ export async function renderCoursesList() {
     // imagem do curso
     if (course.hasFile && course.id) {
       try {
-        const res = await api(`courses/${course.id}/file`);
-        if (res?.ok && res.data) {
-          imageUrl = URL.createObjectURL(res.data);
-        }
+        imageUrl = `${API_URL}/courses/${course.id}/file`;
       } catch {
         console.warn(`Imagem não carregada (curso ${course.id})`);
       }

@@ -2,6 +2,7 @@ import { dom } from "../dom.js";
 import { state } from "../state.js";
 import { renderMarkdown } from "../../../../../assets/markdown.js";
 import { getCourseFile } from "../services/courseService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export async function renderPreview(course) {
   const preview_title = document.querySelector(".preview-title");
@@ -22,8 +23,7 @@ export async function renderPreview(course) {
   dom.file_preview.src = "";
 
   if (course.hasFile && course.id) {
-    const res = await getCourseFile(course.id);
-    if (res.ok) dom.file_preview.src = URL.createObjectURL(res.data);
+    dom.file_preview.src = `${API_URL}/courses/${course.id}/file`;
   } else {
     if(dom.fileInput()?.files[0]) {
       dom.file_preview.src = URL.createObjectURL(dom.fileInput().files[0]);

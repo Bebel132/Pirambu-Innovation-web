@@ -1,4 +1,5 @@
 import { api } from "../../../assets/apiHelper.js";
+import { API_URL } from "../../../assets/config.js";
 
 export async function renderEventsPage() {
   const container = document.getElementById("eventsList");
@@ -22,10 +23,7 @@ export async function renderEventsPage() {
     let imageUrl = "";
 
     if (event.hasFile) {
-      const imgRes = await api(`events/${event.id}/file`);
-      if (imgRes?.ok && imgRes.data) {
-        imageUrl = URL.createObjectURL(imgRes.data);
-      }
+      imageUrl = `${API_URL}/events/${event.id}/file`;
     }
 
     const card = document.createElement("article");

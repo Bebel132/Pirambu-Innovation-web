@@ -1,6 +1,7 @@
 import { dom } from "../dom.js";
 import { state, setSelectedProjects } from "../state.js";
 import { listProjects, getProjectsFile } from "../services/projectsService.js";
+import { API_URL } from "../../../../../assets/config.js";
 
 export async function renderProjectsLists({ onEdit, onDelete }) {
   let drafts = [];
@@ -63,9 +64,8 @@ async function renderProjectsListUI(list, containerSelector, className, handlers
 
     // background (imagem/placeholder)
     if (project.hasFile) {
-      const res = await getProjectsFile(project.id);
-      if (res.ok) item.style.backgroundImage = `url(${URL.createObjectURL(res.data)})`;
-      else item.style.backgroundColor = "var(--color-gray)";
+      item.style.backgroundImage =
+        `url(${API_URL}/projects/${project.id}/file)`;
     } else {
       item.style.backgroundColor = "var(--color-gray)";
     }
