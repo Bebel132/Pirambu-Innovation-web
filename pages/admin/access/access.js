@@ -22,7 +22,7 @@ async function initAccess() {
 }
 
 async function render() {
-    const { data : users }  = await api("users/allowedUsers");
+    const { data : users }  = await api("users/allowedUsers/");
     allowedUsersList.innerHTML = ""
 
     users.forEach(user => {
