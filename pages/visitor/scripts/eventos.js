@@ -1,7 +1,9 @@
 import { api } from "../../../assets/apiHelper.js";
 import { API_URL } from "../../../assets/config.js";
+import { initApiUrl } from './assets/config.js';
 
 export async function renderEventsPage() {
+  await initApiUrl();
   const container = document.getElementById("eventsList");
   if (!container) return;
 

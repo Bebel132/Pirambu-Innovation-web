@@ -119,6 +119,9 @@
 
   <script type="module">
     import { initHome } from "../../script.js";
+    import { initApiUrl } from './assets/config.js';
+
+    await initApiUrl();
     initHome();
   </script>
 </body>

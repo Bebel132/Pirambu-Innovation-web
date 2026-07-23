@@ -81,6 +81,9 @@
     <script type="module">
         import { initMenu, registerAccessActionsAutoClose } from './../scripts/menu.js';
         import { initAccess } from './access.js';
+        import { initApiUrl } from './../../../assets/config.js';
+
+        await initApiUrl();
 
         const menu_items = [
             { icon: "book_ribbon", label: "Cursos", file: "../courses/courses.html" },

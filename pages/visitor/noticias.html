@@ -103,6 +103,9 @@
     </div>
     <script type="module">
       import { renderNewsPage } from "./scripts/news.js";
+      import { initApiUrl } from './assets/config.js';
+
+      await initApiUrl();
       renderNewsPage();
     </script>
   </body>

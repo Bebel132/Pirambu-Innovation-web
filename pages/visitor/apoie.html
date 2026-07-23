@@ -108,6 +108,10 @@
 </body>
 <script type="module">
     import { api } from "../../../assets/apiHelper.js";
+    import { initApiUrl } from '../../../assets/config.js';
+
+    await initApiUrl();
+
     const response = await api("biography");
     const aboutUs = response?.data || {};
     const linkZap = document.querySelectorAll(".linkZap");

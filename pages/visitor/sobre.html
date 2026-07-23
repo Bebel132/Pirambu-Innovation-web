@@ -121,6 +121,9 @@
   <script type="module">
     import { renderAboutUs } from "./scripts/aboutUs.js";
     import { renderProjects } from "./scripts/projects.js";
+    import { initApiUrl } from './../../assets/config.js';
+
+    await initApiUrl();
 
     renderAboutUs();
     renderProjects();

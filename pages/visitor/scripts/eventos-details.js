@@ -1,8 +1,10 @@
 import { api } from "../../../assets/apiHelper.js";
 import { renderMarkdown } from "../../../assets/markdown.js";
 import { API_URL } from "../../../assets/config.js";
+import { initApiUrl } from './assets/config.js';
 
 async function loadEventDetails() {
+  await initApiUrl();
   const params = new URLSearchParams(window.location.search);
   const eventId = params.get("id");
 

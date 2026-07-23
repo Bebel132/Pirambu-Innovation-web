@@ -1,5 +1,6 @@
 import { api } from "../../../assets/apiHelper.js";
 import { API_URL } from "../../../assets/config.js";
+import { initApiUrl } from '../../../assets/config.js';
 
 function initSlider(track, dotsContainer, prevBtn, nextBtn, type) {
   let index = 0;
@@ -112,7 +113,8 @@ async function renderNews() {
   );
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await initApiUrl();
   renderEvents();
   renderNews();
 });
