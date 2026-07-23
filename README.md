@@ -5,7 +5,7 @@ Frontend do **Pirambu Innovation**, desenvolvido utilizando **HTML, CSS e JavaSc
 O projeto disponibiliza uma página pública para visitantes e um painel administrativo para gerenciamento de conteúdo, consumindo uma API REST desenvolvida em Flask.
 
 ### Links
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6a893117-16cb-4ec6-82ba-0a6fd57cca39/deploy-status)](https://app.netlify.com/projects/pirambuweb/deploys)
 - 🌐 **Site:** https://pirambuweb.netlify.app/
 - 🔒 **Painel administrativo:** https://pirambuweb.netlify.app/pages/admin
 - ⚙️ **Backend:** https://github.com/Bebel132/Pirambu-Innovation-api
