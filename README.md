@@ -7,7 +7,7 @@ O projeto disponibiliza uma página pública para visitantes e um painel adminis
 **O conteúdo das páginas são ficticios e criados por IA**
 
 ### Links
-![API Status](https://img.shields.io/badge/API-checking...-yellow)
+[![Site Status](https://img.shields.io/badge/API-online-brightgreen)](https://perl-plastic-intersection-guild.trycloudflare.com)
 - 🌐 **Site:** https://pirambuweb.netlify.app/
 - 🔒 **Painel administrativo:** https://pirambuweb.netlify.app/pages/admin
 - ⚙️ **Backend:** https://github.com/Bebel132/Pirambu-Innovation-api
