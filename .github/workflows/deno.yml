@@ -41,4 +41,10 @@ jobs:
           git config user.email "github-actions@github.com"
           git add README.md
           git diff --cached --quiet || git commit -m "Update API status badge"
+
+      - name: Keepalive (evita hibernação do workflow)
+        run: |
+          if git diff --cached --quiet; then
+            git commit --allow-empty -m "chore: keepalive [skip ci]"
+          fi
           git push
