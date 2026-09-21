@@ -7,7 +7,7 @@ export async function renderProjects() {
 
   try {
     const res = await api("projects/published");
-    projects = res?.data || [];
+    projects = Array.isArray(res?.data) ? res.data : [];
   } catch (err) {
     console.error("Erro ao buscar projetos:", err);
     return;

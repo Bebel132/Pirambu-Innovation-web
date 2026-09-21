@@ -7,7 +7,7 @@ export async function renderEventsList() {
   if (!eventsListContainer) return;
 
   const response = await api("events/published");
-  const events = response?.data || [];
+  const events = Array.isArray(response?.data) ? response.data : [];
 
   eventsListContainer.innerHTML = "";
 

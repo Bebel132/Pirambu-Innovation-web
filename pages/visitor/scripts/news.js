@@ -14,7 +14,7 @@ export async function renderNewsList() {
   if (!track) return;
 
   const response = await api("news/published");
-  const news = response?.data || [];
+  const news = Array.isArray(response?.data) ? response.data : [];
 
   track.innerHTML = "";
   dotsContainer.innerHTML = "";
@@ -99,7 +99,7 @@ export async function renderNewsPage() {
   if (!container) return;
 
   const response = await api("news/published");
-  const news = response?.data || [];
+  const news = Array.isArray(response?.data) ? response.data : [];
 
   container.innerHTML = "";
 

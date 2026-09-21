@@ -12,7 +12,7 @@ export async function renderCoursesList() {
 
   try {
     const response = await api("courses/published");
-    courses = response?.data || [];
+    courses = Array.isArray(response?.data) ? response.data : [];
   } catch (err) {
     console.error("Erro ao buscar cursos:", err);
     return;

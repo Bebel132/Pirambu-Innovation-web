@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serviço temporariamente indisponível | Pirambu Innovation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #243238;
+      --muted: #68777d;
+      --accent: #1295c7;
+      --surface: #f7faf9;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--ink);
+      background: radial-gradient(circle at 20% 10%, #dff4f7 0, transparent 34%), var(--surface);
+      font-family: Inter, "Segoe UI", sans-serif;
+      text-align: center;
+    }
+
+    main { max-width: 560px; }
+
+    .code {
+      margin: 0;
+      color: var(--accent);
+      font-size: clamp(5rem, 20vw, 9rem);
+      line-height: .85;
+      letter-spacing: .04em;
+      font-weight: 800;
+    }
+
+    h1 { margin: 28px 0 12px; font-size: clamp(1.5rem, 4vw, 2.25rem); }
+    p { margin: 0 auto 28px; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+
+    a {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover { background: #0e7ea9; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="code">503</p>
+    <h1>Serviço temporariamente indisponível</h1>
+    <p>Estamos enfrentando uma instabilidade momentânea. Tente novamente em alguns minutos.</p>
+    <a href="../index.html">Voltar para a página inicial</a>
+  </main>
+</body>
+</html>

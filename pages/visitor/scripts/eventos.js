@@ -18,7 +18,7 @@ export async function renderEventsPage() {
     return;
   }
 
-  const events = response.data || [];
+  const events = Array.isArray(response?.data) ? response.data : [];
   container.innerHTML = "";
 
   for (const event of events) {

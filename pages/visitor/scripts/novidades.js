@@ -43,7 +43,7 @@ function initSlider(track, dotsContainer, prevBtn, nextBtn, type) {
 /* ===== EVENTOS ===== */
 async function renderEvents() {
   const res = await api("events/published");
-  const events = res?.data || [];
+  const events = Array.isArray(res?.data) ? res.data : [];
 
   const track = document.querySelector(".events-track");
   const dots = document.querySelector(".events-dots");
@@ -79,7 +79,7 @@ async function renderEvents() {
 /* ===== NOTÍCIAS ===== */
 async function renderNews() {
   const res = await api("news/published");
-  const news = res?.data || [];
+  const news = Array.isArray(res?.data) ? res.data : [];
 
   const track = document.querySelector(".news-track");
   const dots = document.querySelector(".news-dots");

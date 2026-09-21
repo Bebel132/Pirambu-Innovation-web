@@ -1,4 +1,4 @@
-import { API_URL } from "./config.js";
+import { API_URL, redirectToServiceUnavailable } from "./config.js";
 
 function logout() {
   // se tiver algo salvo no front
@@ -46,6 +46,15 @@ export async function api(
   try {
     const response = await fetch(url, config);
 
+        if (response.status >= 500) {
+          redirectToServiceUnavailable();
+          return {
+            ok: false,
+            status: response.status,
+            data: { error: "Service unavailable" }
+          };
+        }
+
     if (
       (response.status === 401 || response.status === 403) &&
       window.location.href.includes("pages/admin")
@@ -85,6 +94,7 @@ export async function api(
     };
 
   } catch (error) {
+    redirectToServiceUnavailable();
     return {
       ok: false,
       status: 0,

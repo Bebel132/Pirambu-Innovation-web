@@ -4,13 +4,25 @@ const GIST_URL = `https://gist.githubusercontent.com/Bebel132/${GIST_ID}/raw/pir
 
 export let API_URL = '';
 
+export function redirectToServiceUnavailable() {
+    if (window.location.pathname.endsWith('/pages/503.html')) return;
+
+    window.location.replace(new URL('../pages/503.html', import.meta.url).href);
+}
+
 export async function initApiUrl() {
     try {
-        API_URL = await fetch(`${GIST_URL}?t=${Date.now()}`).then(res => res.json()).then(data => data.api_url+"");
+        const response = await fetch(`${GIST_URL}?t=${Date.now()}`);
+        if (!response.ok) throw new Error(`Configuração da API indisponível (${response.status})`);
+
+        const data = await response.json();
+        if (!data.api_url) throw new Error('URL da API não encontrada');
+
+        API_URL = String(data.api_url).replace(/\/+$/, '');
     } catch (error) {
         console.error('Erro ao carregar API URL:', error);
-        // Fallback para desenvolvimento
-        API_URL = 'http://localhost:5000';
+        API_URL = '';
+        redirectToServiceUnavailable();
     }
 }
 
